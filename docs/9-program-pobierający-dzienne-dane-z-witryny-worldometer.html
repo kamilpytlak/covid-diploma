@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Rozdział 9 Program pobierający dzienne dane z witryny Worldometer | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Rozdział 9 Program pobierający dzienne dane z witryny Worldometer | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Rozdział 9 Program pobierający dzienne dane z witryny Worldometer | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rozdział 9 Program pobierający dzienne dane z witryny Worldometer | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="8-chapter08.html"/>
+<link rel="next" href="bibliografia.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>4.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>4.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>4.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>5.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>5.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>5.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>5.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>5.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#filtr-kalmana"><i class="fa fa-check"></i><b>5.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#epiestim"><i class="fa fa-check"></i><b>5.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-metod"><i class="fa fa-check"></i><b>5.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>6.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="6-chapter06.html"><a href="6-chapter06.html#google"><i class="fa fa-check"></i><b>6.1.1</b> Google</a></li>
+<li class="chapter" data-level="6.1.2" data-path="6-chapter06.html"><a href="6-chapter06.html#wikipedia"><i class="fa fa-check"></i><b>6.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="6.1.3" data-path="6-chapter06.html"><a href="6-chapter06.html#pubmed"><i class="fa fa-check"></i><b>6.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="6-chapter06.html"><a href="6-chapter06.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>6.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6-chapter06.html"><a href="6-chapter06.html#zarys"><i class="fa fa-check"></i><b>6.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6-chapter06.html"><a href="6-chapter06.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>6.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6-chapter06.html"><a href="6-chapter06.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>6.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6-chapter06.html"><a href="6-chapter06.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>6.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6-chapter06.html"><a href="6-chapter06.html#zarys-1"><i class="fa fa-check"></i><b>6.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6-chapter06.html"><a href="6-chapter06.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>6.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6-chapter06.html"><a href="6-chapter06.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>6.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6-chapter06.html"><a href="6-chapter06.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>6.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6-chapter06.html"><a href="6-chapter06.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>6.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter07.html"><a href="7-chapter07.html"><i class="fa fa-check"></i><b>7</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+<li class="chapter" data-level="8" data-path="8-chapter08.html"><a href="8-chapter08.html"><i class="fa fa-check"></i><b>8</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8-chapter08.html"><a href="8-chapter08.html#podsumowanie"><i class="fa fa-check"></i><b>8.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>9</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="program-pobierający-dzienne-dane-z-witryny-worldometer" class="section level1" number="9">
+<h1><span class="header-section-number">Rozdział 9</span> Program pobierający dzienne dane z witryny Worldometer</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-1" aria-hidden="true" tabindex="-1"></a>    from datetime import datetime</span>
+<span id="cb1-2"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-2" aria-hidden="true" tabindex="-1"></a>    import requests</span>
+<span id="cb1-3"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-3" aria-hidden="true" tabindex="-1"></a>    from bs4 import BeautifulSoup</span>
+<span id="cb1-4"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-4" aria-hidden="true" tabindex="-1"></a>    import pandas as pd</span>
+<span id="cb1-5"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-5" aria-hidden="true" tabindex="-1"></a>    import numpy as np</span>
+<span id="cb1-6"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-7" aria-hidden="true" tabindex="-1"></a>    today <span class="ot">=</span> <span class="fu">str</span>(<span class="fu">datetime.utcnow</span>()<span class="fu">.date</span>())</span>
+<span id="cb1-8"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-8" aria-hidden="true" tabindex="-1"></a>    URL <span class="ot">=</span> <span class="st">&#39;https://www.worldometers.info/coronavirus/&#39;</span></span>
+<span id="cb1-9"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-10"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-10" aria-hidden="true" tabindex="-1"></a>    page <span class="ot">=</span> <span class="fu">requests.get</span>(URL)</span>
+<span id="cb1-11"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-11" aria-hidden="true" tabindex="-1"></a>    soup <span class="ot">=</span> <span class="fu">BeautifulSoup</span>(page.content, <span class="st">&#39;html.parser&#39;</span>)</span>
+<span id="cb1-12"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-12" aria-hidden="true" tabindex="-1"></a>    table <span class="ot">=</span> <span class="fu">soup.find</span>(<span class="st">&#39;table&#39;</span>, <span class="at">id=</span><span class="st">&#39;main_table_countries_today&#39;</span>)</span>
+<span id="cb1-13"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-13" aria-hidden="true" tabindex="-1"></a>    header <span class="ot">=</span> <span class="fu">table.find_all</span>(<span class="st">&#39;th&#39;</span>)</span>
+<span id="cb1-14"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-14" aria-hidden="true" tabindex="-1"></a>    header_names <span class="ot">=</span> [<span class="fu">name.get_text</span>()<span class="fu">.replace</span>(u<span class="st">&#39;</span><span class="sc">\xa0</span><span class="st">&#39;</span>, u<span class="st">&#39; &#39;</span>)<span class="fu">.strip</span>() <span class="cf">for</span> name <span class="cf">in</span></span>
+<span id="cb1-15"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-15" aria-hidden="true" tabindex="-1"></a>    header]</span>
+<span id="cb1-16"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-16" aria-hidden="true" tabindex="-1"></a>    rows <span class="ot">=</span> <span class="fu">table.find_all</span>(<span class="st">&#39;tr&#39;</span>, <span class="at">class_=</span>None)[<span class="dv">1</span><span class="sc">:</span>]</span>
+<span id="cb1-17"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-17" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(<span class="at">columns=</span>header_names)</span>
+<span id="cb1-18"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-19"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-19" aria-hidden="true" tabindex="-1"></a>    final_out <span class="ot">=</span> []</span>
+<span id="cb1-20"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="cf">in</span> rows<span class="sc">:</span></span>
+<span id="cb1-21"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-21" aria-hidden="true" tabindex="-1"></a>        row_data <span class="ot">=</span> <span class="fu">row.find_all</span>(<span class="st">&#39;td&#39;</span>)</span>
+<span id="cb1-22"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-22" aria-hidden="true" tabindex="-1"></a>        row_formatted <span class="ot">=</span> [<span class="fu">tr.get_text</span>()<span class="fu">.replace</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="cf">for</span> tr <span class="cf">in</span> row_data]</span>
+<span id="cb1-23"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">final_out.append</span>(row_formatted)</span>
+<span id="cb1-24"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-25"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-25" aria-hidden="true" tabindex="-1"></a>        df <span class="ot">=</span> <span class="fu">df.append</span>(<span class="fu">pd.DataFrame</span>(final_out, <span class="at">columns=</span>df.columns))</span>
+<span id="cb1-26"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">df.insert</span>(<span class="at">loc=</span><span class="dv">0</span>, <span class="at">column=</span><span class="st">&#39;Date&#39;</span>, <span class="at">value=</span>today)</span>
+<span id="cb1-27"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-27" aria-hidden="true" tabindex="-1"></a>        del df[<span class="st">&#39;#&#39;</span>]</span>
+<span id="cb1-28"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-29"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-29" aria-hidden="true" tabindex="-1"></a>        df <span class="ot">=</span> <span class="fu">df.replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="at">regex =</span> True)</span>
+<span id="cb1-30"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-30" aria-hidden="true" tabindex="-1"></a>        df <span class="ot">=</span> <span class="fu">df.replace</span>(r<span class="st">&#39;^\s*$&#39;</span>, np.NaN, <span class="at">regex=</span>True)</span>
+<span id="cb1-31"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-31" aria-hidden="true" tabindex="-1"></a>        df.columns <span class="ot">=</span> [<span class="st">&quot;date&quot;</span>, <span class="st">&quot;country&quot;</span>, <span class="st">&quot;total_cases&quot;</span>, <span class="st">&quot;new_cases&quot;</span>,</span>
+<span id="cb1-32"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;total_deaths&quot;</span>, <span class="st">&quot;new_deaths&quot;</span>, <span class="st">&quot;total_recovered&quot;</span>, <span class="st">&quot;new_recovered&quot;</span>,</span>
+<span id="cb1-33"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;active_cases&quot;</span>, <span class="st">&quot;critical_cases&quot;</span>, <span class="st">&quot;total_cases_per_million&quot;</span>,</span>
+<span id="cb1-34"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;total_deaths_per_million&quot;</span>, <span class="st">&quot;total_tests&quot;</span>,</span>
+<span id="cb1-35"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;total_tests_per_million&quot;</span>, <span class="st">&quot;population&quot;</span>, <span class="st">&quot;continent&quot;</span>,</span>
+<span id="cb1-36"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;one_case_per_x_people&quot;</span>, <span class="st">&quot;one_death_per_x_people&quot;</span>,</span>
+<span id="cb1-37"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;one_test_per_x_people&quot;</span>,</span>
+<span id="cb1-38"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;new_cases_per_million&quot;</span>, <span class="st">&quot;new_deaths_per_million&quot;</span>,</span>
+<span id="cb1-39"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;active_cases_per_million&quot;</span>]</span>
+<span id="cb1-40"><a href="9-program-pobierający-dzienne-dane-z-witryny-worldometer.html#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">df.to_csv</span>(today <span class="sc">+</span> <span class="st">&#39;.csv&#39;</span>, <span class="at">index=</span>False)</span></code></pre></div>
+
+<!--
+The bib chunk below must go last in this document according to how R Markdown renders.  More info is at http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
+-->
+<!-- 
+If you'd like to change the name of the bibliography to something else,
+delete "References" and replace it.
+-->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="8-chapter08.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

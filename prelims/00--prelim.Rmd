@@ -1,0 +1,48 @@
+# Streszczenie {-}
+
+Epidemiologia jako nauka czerpiąca swą wiedzę z danych wymaga podjęcia
+szybkich i zdecydowanych działań celem zapobieżenia bądź minimalizacji
+skutków istniejącego już zagrożenia epidemicznego. Za sprawą nowego
+szczepu koronawirusa z roku 2019 (SARS-CoV-2), dziedzina ta ponownie
+zyskała na popularności. W niniejszej pracy przedstawiono wczesny rozwój
+sytuacji epidemicznej związanej z wirusem SARS-CoV-2 na świecie, objawy
+i sposoby zmniejszenia szansy zapadalności na chorobę COVID-19. Nacisk
+położono na analizę popularności haseł/artykułów związanych z
+koronawirusem w Internecie, analizie danych epidemicznych dla 3 krajów z
+najwyższą sumaryczną liczbą zakażeń w roku 2020, Szwecji, Polski i jej
+sąsiadów, niepożądanych odczynów poszczepiennych (NOP-ów) wśród
+mieszkańców Polski, estymacji chwilowego współczynnika reprodukcji
+wirusa $R(t)$, jak i automatyzacji procesu pobierania danych i ich
+późniejszej wizualizacji. Przebieg epidemii w krajach zweryfikowano z
+użyciem klasycznych miar epidemiologicznych, a do sprawdzenia istotnych
+różnic pomiędzy czynnikami ilościowymi wykorzystano testowanie hipotez
+statystycznych. Dodatkowo podczas analizy zbioru z NOP-ami zastosowano
+eksploracyjną analizę tekstu celem wydobycia najczęściej pojawiających
+się haseł związanych ze stanem pacjenta w zależności od danej kategorii
+objawu. Do oszacowania $R(t)$ wykorzystano dwie metody: filtr Kalmana i
+z pakietu EpiEstim w R. Zbieżność obu metod została zweryfikowana z
+użyciem korelacji $r$ Pearsona i $\tau$ Kendalla, metryki $MAE$ i
+estymatorów metody najmniejszych kwadratów. Automatyczne pobieranie
+danych z witryny Worldometer zrealizowano z użyciem własnoręcznie
+napisanego skryptu opierającego się na technice "web--scraping" w języku
+Python, którego wyniki zostały poddane wizualizacji w programie Kibana.
+Użytkownicy przejawiali postępujące w miarę zwiększania się liczb nowych
+zakażeń i zgonów zainteresowanie tematykami SARS-CoV-2/COVID-19, jak i
+zdrowiem w ogóle, ale nie dezynfekcją rąk. Rozpatrywane kraje świata
+różniły się pod względem rozwoju sytuacji epidemicznej, a istotne
+różnice występowały pomiędzy sezonem wiosenno-letnim a jesienno-zimowym,
+kiedy w części krajach nastąpił znaczny przyrost liczb nowych
+zakażeń/zgonów. Również przez znaczną część okresu letniego w niektórych
+krajach $R(t)$ był mniejszy od 1 lub proporcje nie różniły się istotnie.
+Większy odsetek pacjentów zgłaszających NOP-y stanowiły kobiety,
+aczkolwiek mężczyźni częściej niż kobiety borykali się z poważniejszymi
+powikłaniami. Rozkład wieku zmarłych pacjentów był lewoskośny, co
+potwierdza, że COVID-19 największe zagrożenie stanowi dla starszych grup
+wiekowych. Wykorzystane metody estymacji okazały się być zbieżne, a
+analiza uzyskanych z nich $R(t)$ doprowadziła do podobnych wniosków.
+Jeszcze większą zgodność uzyskano po uśrednieniu danych codziennych z
+filtra Kalmana w oknie 7-dniowym.\
+\
+**Słowa kluczowe:** koronawirus, SARS-CoV-2, COVID-19, analiza danych,
+web--scraping, współczynnik reprodukcji wirusa, filtr Kalmana, EpiEstim,
+popularność, niepożądane odczyny poszczepienne

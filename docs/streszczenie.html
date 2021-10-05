@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Streszczenie | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Streszczenie | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Streszczenie | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Streszczenie | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="introduction.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminary Content</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#preface"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="streszczenie.html"><a href="streszczenie.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html"><i class="fa fa-check"></i><b>1</b> R Markdown Basics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#lists"><i class="fa fa-check"></i><b>1.1</b> Lists</a></li>
+<li class="chapter" data-level="1.2" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#line-breaks"><i class="fa fa-check"></i><b>1.2</b> Line breaks</a></li>
+<li class="chapter" data-level="1.3" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#r-chunks"><i class="fa fa-check"></i><b>1.3</b> R chunks</a></li>
+<li class="chapter" data-level="1.4" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#inline-code"><i class="fa fa-check"></i><b>1.4</b> Inline code</a></li>
+<li class="chapter" data-level="1.5" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#including-plots"><i class="fa fa-check"></i><b>1.5</b> Including plots</a></li>
+<li class="chapter" data-level="1.6" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#loading-and-exploring-data"><i class="fa fa-check"></i><b>1.6</b> Loading and exploring data</a></li>
+<li class="chapter" data-level="1.7" data-path="1-rmd-basics.html"><a href="1-rmd-basics.html#additional-resources"><i class="fa fa-check"></i><b>1.7</b> Additional resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-math-sci.html"><a href="2-math-sci.html"><i class="fa fa-check"></i><b>2</b> Mathematics and Science</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-math-sci.html"><a href="2-math-sci.html#math"><i class="fa fa-check"></i><b>2.1</b> Math</a></li>
+<li class="chapter" data-level="2.2" data-path="2-math-sci.html"><a href="2-math-sci.html#chemistry-101-symbols"><i class="fa fa-check"></i><b>2.2</b> Chemistry 101: Symbols</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="2-math-sci.html"><a href="2-math-sci.html#typesetting-reactions"><i class="fa fa-check"></i><b>2.2.1</b> Typesetting reactions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="2-math-sci.html"><a href="2-math-sci.html#other-examples-of-reactions"><i class="fa fa-check"></i><b>2.2.2</b> Other examples of reactions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="2-math-sci.html"><a href="2-math-sci.html#physics"><i class="fa fa-check"></i><b>2.3</b> Physics</a></li>
+<li class="chapter" data-level="2.4" data-path="2-math-sci.html"><a href="2-math-sci.html#biology"><i class="fa fa-check"></i><b>2.4</b> Biology</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-ref-labels.html"><a href="3-ref-labels.html"><i class="fa fa-check"></i><b>3</b> Graphics, References, and Labels</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-ref-labels.html"><a href="3-ref-labels.html#figures"><i class="fa fa-check"></i><b>3.1</b> Figures</a></li>
+<li class="chapter" data-level="3.2" data-path="3-ref-labels.html"><a href="3-ref-labels.html#footnotes-and-endnotes"><i class="fa fa-check"></i><b>3.2</b> Footnotes and Endnotes</a></li>
+<li class="chapter" data-level="3.3" data-path="3-ref-labels.html"><a href="3-ref-labels.html#bibliographies"><i class="fa fa-check"></i><b>3.3</b> Bibliographies</a></li>
+<li class="chapter" data-level="3.4" data-path="3-ref-labels.html"><a href="3-ref-labels.html#anything-else"><i class="fa fa-check"></i><b>3.4</b> Anything else?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="A-the-first-appendix.html"><a href="A-the-first-appendix.html"><i class="fa fa-check"></i><b>A</b> The First Appendix</a></li>
+<li class="chapter" data-level="B" data-path="B-the-second-appendix-for-fun.html"><a href="B-the-second-appendix-for-fun.html"><i class="fa fa-check"></i><b>B</b> The Second Appendix, for Fun</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="streszczenie" class="section level1 unnumbered">
+<h1>Streszczenie</h1>
+<p>Epidemiologia jako nauka czerpiąca swą wiedzę z danych wymaga podjęcia
+szybkich i zdecydowanych działań celem zapobieżenia bądź minimalizacji
+skutków istniejącego już zagrożenia epidemicznego. Za sprawą nowego
+szczepu koronawirusa z roku 2019 (SARS-CoV-2), dziedzina ta ponownie
+zyskała na popularności. W niniejszej pracy przedstawiono wczesny rozwój
+sytuacji epidemicznej związanej z wirusem SARS-CoV-2 na świecie, objawy
+i sposoby zmniejszenia szansy zapadalności na chorobę COVID-19. Nacisk
+położono na analizę popularności haseł/artykułów związanych z
+koronawirusem w Internecie, analizie danych epidemicznych dla 3 krajów z
+najwyższą sumaryczną liczbą zakażeń w roku 2020, Szwecji, Polski i jej
+sąsiadów, niepożądanych odczynów poszczepiennych (NOP-ów) wśród
+mieszkańców Polski, estymacji chwilowego współczynnika reprodukcji
+wirusa <span class="math inline">\(R(t)\)</span>, jak i automatyzacji procesu pobierania danych i ich
+późniejszej wizualizacji. Przebieg epidemii w krajach zweryfikowano z
+użyciem klasycznych miar epidemiologicznych, a do sprawdzenia istotnych
+różnic pomiędzy czynnikami ilościowymi wykorzystano testowanie hipotez
+statystycznych. Dodatkowo podczas analizy zbioru z NOP-ami zastosowano
+eksploracyjną analizę tekstu celem wydobycia najczęściej pojawiających
+się haseł związanych ze stanem pacjenta w zależności od danej kategorii
+objawu. Do oszacowania <span class="math inline">\(R(t)\)</span> wykorzystano dwie metody: filtr Kalmana i
+z pakietu EpiEstim w R. Zbieżność obu metod została zweryfikowana z
+użyciem korelacji <span class="math inline">\(r\)</span> Pearsona i <span class="math inline">\(\tau\)</span> Kendalla, metryki <span class="math inline">\(MAE\)</span> i
+estymatorów metody najmniejszych kwadratów. Automatyczne pobieranie
+danych z witryny Worldometer zrealizowano z użyciem własnoręcznie
+napisanego skryptu opierającego się na technice “web–scraping” w języku
+Python, którego wyniki zostały poddane wizualizacji w programie Kibana.
+Użytkownicy przejawiali postępujące w miarę zwiększania się liczb nowych
+zakażeń i zgonów zainteresowanie tematykami SARS-CoV-2/COVID-19, jak i
+zdrowiem w ogóle, ale nie dezynfekcją rąk. Rozpatrywane kraje świata
+różniły się pod względem rozwoju sytuacji epidemicznej, a istotne
+różnice występowały pomiędzy sezonem wiosenno-letnim a jesienno-zimowym,
+kiedy w części krajach nastąpił znaczny przyrost liczb nowych
+zakażeń/zgonów. Również przez znaczną część okresu letniego w niektórych
+krajach <span class="math inline">\(R(t)\)</span> był mniejszy od 1 lub proporcje nie różniły się istotnie.
+Większy odsetek pacjentów zgłaszających NOP-y stanowiły kobiety,
+aczkolwiek mężczyźni częściej niż kobiety borykali się z poważniejszymi
+powikłaniami. Rozkład wieku zmarłych pacjentów był lewoskośny, co
+potwierdza, że COVID-19 największe zagrożenie stanowi dla starszych grup
+wiekowych. Wykorzystane metody estymacji okazały się być zbieżne, a
+analiza uzyskanych z nich <span class="math inline">\(R(t)\)</span> doprowadziła do podobnych wniosków.
+Jeszcze większą zgodność uzyskano po uśrednieniu danych codziennych z
+filtra Kalmana w oknie 7-dniowym.<br />
+<br />
+<strong>Słowa kluczowe:</strong> koronawirus, SARS-CoV-2, COVID-19, analiza danych,
+web–scraping, współczynnik reprodukcji wirusa, filtr Kalmana, EpiEstim,
+popularność, niepożądane odczyny poszczepienne</p>
+<!-- The {.unnumbered} option here means that the introduction will be 
+"Chapter 0." You can also use {-} for no numbers on chapters.
+-->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

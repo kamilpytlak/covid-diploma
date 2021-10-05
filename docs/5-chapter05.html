@@ -1,0 +1,3514 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Rozdział 5 Analiza danych związanych z COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Rozdział 5 Analiza danych związanych z COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Rozdział 5 Analiza danych związanych z COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rozdział 5 Analiza danych związanych z COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="4-chapter04.html"/>
+<link rel="next" href="6-chapter06.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter05" class="section level1" number="5">
+<h1><span class="header-section-number">Rozdział 5</span> Analiza danych związanych z COVID-19</h1>
+<div id="popularność-haseł-związanych-z-koronawirusem-w-internecie" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Popularność haseł związanych z koronawirusem w Internecie</h2>
+<div id="google" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Google</h3>
+<p>Według narzędzia Google Trends w 2019 roku wyszukiwanym w przeglądarce
+Google hasłem, które zyskało największą popularność<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> na całym świecie
+było “India vs South Africa”, natomiast w przypadku nowości/wydarzeń –
+“Copa America”. Popularność zdobyło również “Notre Dame”, które w
+kategorii “News” znalazło się na miejscu drugim, co niewątpliwie ma
+istotny związek z pożarem tejże katedry, który wybuchł 15.04.2019 r. (w
+2018 roku “Notre Dame” nie znalazło się na żadnej z dziesięciu pozycji).
+Szczyt popularności osiągnięty został we Francji (wartość popularności
+hasła równa 100), za nią natomiast figurowały Kanada i Belgia (o
+wartościach popularności hasła równych 52 i 50 odpowiednio). Z kolei w
+Polsce popularne stały się tematy związane z “Strajk nauczycieli”.
+Użytkownicy zastanawiali się, “Jak głosować w wyborach do UE?” czy “Jak
+rozliczyć PIT za 2018?”, co również ma związek z pewnymi utrwalonymi,
+ale też czasowo pojawiającymi się w kraju wydarzeniami. Mimo że
+wyszukiwania pomiędzy różnymi krajami świata znacząco różniły się od
+siebie w kwestii popularności, wskazując tym samym na niejednoznaczną i
+często unikatową specyfikę omawianych tematów/wydarzeń w danym kraju,
+rok 2020 w pewien sposób je zjednoczył, co zauważa się we wspólnych i
+charakterystycznych dla tego roku pojęciach. Wśród “Searches”, jak i
+“News” w czołówce znalazły się “Coronavirus”, “Coronavirus update” i
+“Coronavirus symptoms”. Na pierwszy plan wysunęły się przedstawienie
+ogólnej sytuacji związana z koronawirusem (zapytanie “coronavirus
+update” – wartość 100 popularności hasła) czy też dane dotyczące nowych
+zakażeń (zapytanie “coronavirus cases” – wartość 93 popularności
+hasła). Te same pojęcia również przewijały się w wyszukiwaniach wśród
+obywateli wielu krajów, m.in. Polski, Niemiec, Meksyku czy Norwegii.</p>
+<table>
+<caption>Lista najpopularniejszych wyszukiwań (“Searches”) w przeglądarce Google
+w 2020 roku dla różnych krajów świata, jak i całego świata. Źródło:
+opracowanie własne na podstawie danych dla roku 2020 z Google Trends
+<span class="citation">(<a href="#ref-google_google_2021" role="doc-biblioref">Google, 2021</a>)</span>.</caption>
+<colgroup>
+<col width="4%" />
+<col width="17%" />
+<col width="17%" />
+<col width="12%" />
+<col width="30%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>Świat</strong></th>
+<th align="center"><strong>Polska</strong></th>
+<th align="center"><strong>Niemcy</strong></th>
+<th align="center"><strong>Meksyk</strong></th>
+<th align="center"><strong>Norwegia</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Coronavirus</td>
+<td align="center">Koronawirus</td>
+<td align="center">Coronavirus</td>
+<td align="center">Coronavirus</td>
+<td align="center">Koronavirus</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Election results</td>
+<td align="center">Koronawirus w Polsce</td>
+<td align="center">US Wahl</td>
+<td align="center">Classroom</td>
+<td align="center">USA-valget</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Kobe Bryant</td>
+<td align="center">Wybory USA</td>
+<td align="center">Wetter morgen</td>
+<td align="center">Elecciones Estados Unidos</td>
+<td align="center">Joe Biden</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">Zoom</td>
+<td align="center">Koronawirus porady</td>
+<td align="center">Wirecard</td>
+<td align="center">Bienestar Azteca</td>
+<td align="center">FHI</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">IPL</td>
+<td align="center">Google Classroom</td>
+<td align="center">Biontech Aktie</td>
+<td align="center">Juegos de Doodles de Googlepopulares</td>
+<td align="center">Corona symptomer</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">India vs New Zealand</td>
+<td align="center">Microsoft Teams</td>
+<td align="center">Kobe Bryant</td>
+<td align="center">Zoom</td>
+<td align="center">Munbind</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">Coronavirus update</td>
+<td align="center">Koronawirus mapa</td>
+<td align="center">iPhone 12</td>
+<td align="center">Consejos sobre el coronavirus</td>
+<td align="center">Førstegangstjenesten</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">Coronavirus symptoms</td>
+<td align="center">365 dni</td>
+<td align="center">Disney Plus</td>
+<td align="center">Síntomas del coronavirus</td>
+<td align="center">Kobe Bryant</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">Joe Biden</td>
+<td align="center">Joe Biden</td>
+<td align="center">PS5</td>
+<td align="center">Among Us</td>
+<td align="center">iPhone 12</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">Google Classroom</td>
+<td align="center">Kobe Bryant</td>
+<td align="center">Joe Biden</td>
+<td align="center">Champions League</td>
+<td align="center">Coronavirus Norge</td>
+</tr>
+</tbody>
+</table>
+<p>W 2020 roku “Coronavirus” w kontekście wyszukiwań największą
+popularnością (100) cieszył się we Włoszech – dalej w Hiszpanii (89) i
+Katarze (80)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Użytkownicy na świecie wyszukujący to pojęcie byli
+również zainteresowani takimi tematami, jak “Włochy — kraj w Europie”
+(przede wszystkim w marcu 2020 r.), “Worldometer — witryna
+internetowa’ (głównie w marcu i kwietniu 2020 r.) i”Statystyka —
+dziedzina nauki’ (głównie w marcu 2020 r.). W Polsce natomiast pojęcie
+“koronawirus” cieszyło się dużą liczbą wyszukiwań wśród wszystkich
+województw — przede wszystkim podkarpackim (100), ale też
+świętokrzyskim (98), podlaskim, lubelskim (95), kujawsko-pomorskim (94),
+opolskim (93), warmińsko-mazurskim (92) i śląskim (92). Zarówno w
+Polsce, jak i na świecie pojęcia związane z koronawirusem
+(“Koronawirus”/“Coronavirus”, “COVID-19”, “SARS-CoV-2”) były najczęściej
+wyszukiwane w czasie ogłoszenia przez WHO pandemii, a więc w marcu 2020
+r., a w Polsce również zaobserwowano wzrost popularności w porównaniu z
+poprzednimi miesiącami pomiędzy 2 a 8 sierpnia (22) i 4 a 31
+października (22–27). W dowolnym okresie hasło
+“Koronawirus/Coronavirus” cieszyło się większą popularnością w
+zestawieniu z “COVID-19” i “SARS-CoV-2” (rysunek
+<a href="5-chapter05.html#fig:google-covid" reference-type="ref" reference="fig:google-covid">5.1</a>).</p>
+<div class="figure">
+<img src="figure/chap05/google-covid.png" id="fig:google-covid" alt="" />
+<p class="caption">Wskaźnik zainteresowania danym hasłem związanym z koronawirusem
+wyszukiwanym w wyszukiwarce Google w czasie. Zainteresowanie ujęte jest
+w skali 0-100, gdzie 100 to najwyższa popularność hasła, natomiast 0
+oznacza, że dla hasła nie zebrano wystarczającej ilości danych. Źródło:
+opracowanie własne na podstawie danych z narzędzia Google Trends
+<span class="citation">(<a href="#ref-google_google_2021" role="doc-biblioref">Google, 2021</a>)</span>.</p>
+</div>
+<p>Szczyt popularności haseł związanych z tematyką “Koronawirusy”<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> w
+wielu krajach świata (rysunek
+<a href="5-chapter05.html#fig:world-coronavirus" reference-type="ref" reference="fig:world-coronavirus">5.2</a>) przypadł w pierwszej połowie marca,
+kiedy to WHO zaklasyfikowała zagrożenie ze strony COVID-19 jako
+pandemię, co dokładniej miało miejsce 11.03.2020 r. Wysoka popularność
+tejże tematyki utrzymywała się przeważnie do pierwszej połowy kwietnia,
+a potem spadała, osiągając różne maksima w zależności od kraju świata
+będące konsekwencją charakterystycznych dla danego kraju zdarzeń
+związanych z koronawirusem — w głównej mierze jest to szybko rosnący
+wzrost dziennej liczby zakażeń.</p>
+<div class="figure">
+<img src="figure/chap05/world-coronavirus.png" id="fig:world-coronavirus" alt="" />
+<p class="caption">Wskaźnik zainteresowania (w ujęciu tydzień do tygodnia) tematyką
+“Koronawirusy” wyszukiwaną w wyszukiwarce Google w czasie dla różnych
+krajów świata. Zainteresowanie ujęte jest w skali 0–100, gdzie 100 to
+najwyższa popularność haseł z tej tematyki w danym czasie, natomiast 0
+oznacza, że dla haseł nie zebrano wystarczającej ilości danych. Źródło:
+opracowanie własne na podstawie danych z narzędzia Google Trends
+<span class="citation">(<a href="#ref-google_google_2021" role="doc-biblioref">Google, 2021</a>)</span>.</p>
+</div>
+<p>Przykładowo, pierwszy przypadek COVID-19 w Polsce zgłoszono 4.03.2020 r.
+Od tego czasu stwierdzono nagły wzrost popularności tematyką
+koronawirusa wśród użytkowników wyszukiwarki Google, która swoje
+maksimum (100) osiągnęła w pierwszym tygodniu marca, gdzie jeszcze w
+ostatnim tygodniu lutego wyniosła 28. Zainteresowanie na poziomie
+większym od 50 utrzymywało się przez kolejne 4 tygodnie, a od ok.
+pierwszej połowy kwietnia zaczęło spadać do poziomu ok. 10–25, z czego
+kolejny największy, ale tym razem lokalny wzrost zaobserwowano w drugiej
+połowie października. Wyraźne maksima dają się również dostrzec dla
+pozostałych przedstawionych na rysunku
+<a href="5-chapter05.html#fig:world-coronavirus" reference-type="ref" reference="fig:world-coronavirus">5.2</a> – dla Grecji zauważyć można wzrost
+zainteresowania w sezonie jesienno-zimowym, natomiast dla Stanów
+Zjednoczonych jeszcze w okresie letnim.</p>
+</div>
+<div id="wikipedia" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Wikipedia</h3>
+<p>W Wikipedii szczyt dziennej liczby odsłon artykułów bezpośrednio
+związanych z koronawirusem<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> przypadł na okres pomiędzy styczniem a
+marcem 2020 r. - zarówno dla Polski, jak i w ujęciu całego świata<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>,
+natomiast między grudniem 2020 r. a styczniem 2021 r. zaobserwowano
+dynamicznie postępujący wzrost zainteresowania artykułami “Koronawirusy”
+i “Coronavirus” w porównaniu z miesiącami poprzednimi (rysunek
+<a href="5-chapter05.html#fig:wikipedia-covid" reference-type="ref" reference="fig:wikipedia-covid">5.3</a>).</p>
+<div class="figure">
+<img src="figure/chap05/wikipedia-covid.png" id="fig:wikipedia-covid" alt="" />
+<p class="caption">Zależność zlogarytmowanej liczby odsłon danego artykułu związanego z
+koronawirusem na stronie internetowej Wikipedii
+(<a href="pl.wikipedia.org">pl.wikipedia.org</a> dla Polski i
+<a href="en.wikipedia.org">en.wikipedia.org</a> dla świata) od czasu (styczeń
+2018–grudzień 2020 r.). Źródło: opracowanie własne na podstawie danych
+z narzędzia Pageviews
+<span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>.</p>
+</div>
+<p>Na popularności zyskały również artykuły pośrednio<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> związane z
+koronawirusem – tyczące się zdrowia i leczenia. W latach 2018 i 2019
+dla dowolnego okresu nie zauważono gwałtownego i znacznego przyrostu
+dziennej liczby odsłon danego artykułu, jak to miało miejsce między
+styczniem a kwietniem 2020 r., przy czym przyrost ten dla artykułów
+“Dezynfekcja rąk”, “Hand washing” i “Półmaska”, “Surgical mask” był
+większy niż dla “Szczepionka”, “Vaccine”. Podobieństwo okresów, w jakich
+artykuły te zyskały na popularności, sugeruje, że najprawdopodobniej
+ustanowienie przez WHO stanu pandemii i podejmowane w tym czasie poważne
+kroki przez rządy wielu krajów świata przyczyniły się do wzrostu
+ogólnego zainteresowania ludzi tematyką związaną z SARS-CoV-2 i chorobą
+COVID-19, a więc i zjawiskami, które nawet w sposób pośredni istotnie
+się ich tyczą<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p>
+<div class="figure">
+<img src="figure/chap05/wikipedia-higiena.png" id="fig:wikipedia-higiena" alt="" />
+<p class="caption">Zależność zlogarytmowanej liczby odsłon danego artykułu związanego z
+higieną/leczeniem na stronie internetowej Wikipedii
+(<a href="pl.wikipedia.org">pl.wikipedia.org</a> dla Polski i
+<a href="en.wikipedia.org">en.wikipedia.org</a> dla świata) czasu (styczeń
+2018–grudzień 2020 r.). Źródło: opracowanie własne na podstawie danych
+z narzędzia Pageviews
+<span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>.</p>
+</div>
+<p>Artykuł “Coronavirus” w angielskiej wersji Wikipedii maksimum dziennych
+wyświetleń w 2020 r. uzyskał 27.01 (982 596), mimo że jeszcze na
+początku tego miesiąca wartość ta nie przekraczała 1 000. Liczba
+dziennych odsłon zaczęła gwałtownie zwiększać się pod koniec stycznia
+2020 r., a w marcu średnia i mediana były większe w porównaniu z
+pozostałymi miesiącami (rysunek <a href="5-chapter05.html#fig:boxplot" reference-type="ref" reference="fig:boxplot">5.5</a>).</p>
+<div class="figure">
+<img src="figure/chap05/boxplot.png" id="fig:boxplot" alt="" />
+<p class="caption">Liczba dziennych odsłon artykułu “Coronavirus” w angielskiej wersji
+Wikipedii w zależności od miesiąca (od grudnia 2019 r. do maja 2020 r.).
+Źródło: opracowanie własne na podstawie danych z narzędzia Pageviews
+<span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>.</p>
+</div>
+<p>Pomiędzy medianami dziennych miesięcznych liczb odsłon istniały
+statystycznie istotne różnice (<span class="math inline">\(\chi^2 = 125,14\)</span>; <span class="math inline">\(p &lt;.001\)</span>). Nie
+wykryto istotnych różnic w medianach pomiędzy styczniem a kwietniem 2020
+r., styczniem a majem 2020 r. i lutym a kwietniem 2020 r. Największa
+różnica była obserwowana pomiędzy grudniem 2019 r. a marcem 2020 r.,
+kiedy mediany wyniosły odpowiednio 396 i 349,52, a więc minimum i
+maksimum dziennych liczb odsłon rozpatrywanych tu miesięcy, co znaczy,
+że spośród wszystkich artykuł ten był najmniej popularny w grudniu, a
+najbardziej w marcu.</p>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median dziennych liczb dziennych odsłon artykułu
+“Coronavirus” w angielskiej wersji Wikipedii pod koniec roku 2019 i w
+pierwszej połowie roku 2020. Asterysk (*) wskazuje na istotną różnicę
+na poziomie istotności <span class="math inline">\(\alpha = 0,05\)</span>. Źródło: opracowanie własne.</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>styczeń 2020</strong></th>
+<th align="center"><strong>luty 2020</strong></th>
+<th align="center"><strong>marzec 2020</strong></th>
+<th align="center"><strong>kwiecień 2020</strong></th>
+<th align="center"><strong>maj 2020</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">grudzień 2019</td>
+<td align="center">5,58*</td>
+<td align="center">7,76*</td>
+<td align="center">10,27*</td>
+<td align="center">6,52*</td>
+<td align="center">3,7*</td>
+</tr>
+<tr class="even">
+<td align="center">styczeń 2020</td>
+<td align="center"></td>
+<td align="center">2,27*</td>
+<td align="center">4,68*</td>
+<td align="center">0,98</td>
+<td align="center">-1,88</td>
+</tr>
+<tr class="odd">
+<td align="center">luty 2020</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2,33*</td>
+<td align="center">-1,29</td>
+<td align="center">-4,12*</td>
+</tr>
+<tr class="even">
+<td align="center">marzec 2020</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-3,67*</td>
+<td align="center">-6,56*</td>
+</tr>
+<tr class="odd">
+<td align="center">kwiecień 2020</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-2,85*</td>
+</tr>
+</tbody>
+</table>
+<p>Na popularyzację danego zjawiska, mogą wpływać zdarzenia bezpośrednio z
+nim powiązane (tu: liczba nowych przypadków i zgonów z powodu COVID-19).
+Czynniki te jednak nie wyjaśniają skoków i spadków popularności w każdym
+okresie – biorąc na przykład Polskę, pierwszy oficjalnie potwierdzony
+przypadek zakażenia SARS-CoV-2 został podany do informacji publicznej 4
+marca 2020 r., a artykuły bezpośrednio i pośrednio związane z
+koronawirusem zyskiwały na popularności już w styczniu 2020 r.
+Weryfikując korelację pomiędzy liczbą nowych przypadków zakażeń/zgonów a
+popularnością wybranych artykułów<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> dla polskiej wersji Wikipedii,
+zdecydowano się uwzględnić liczbę dziennych odsłon artykułów w okresie
+1.06–31.12.2020 r., gdyż ich popularność zaczęła się stabilizować od
+maja 2020 r. Nowe dzienne przypadki zakażeń dodatnio korelowały z
+popularnością wszystkich rozpatrywanych artykułów, z wyjątkiem
+“Dezynfekcja rąk”. Przedstawiony na rysunku
+<a href="5-chapter05.html#fig:corr-PL" reference-type="ref" reference="fig:corr-PL">5.6</a>
+korelogram uwzględnia również korelację pomiędzy dziennymi liczbami
+wyświetleń danych artykułów, jak i nowych przypadków zakażeń i zgonów.
+Uwzględniając czynnik zakażeń i popularność danego artykułu,
+najsilniejsza korelacja <span class="math inline">\(\tau\)</span> Kendalla zaistniała dla pary “nowe
+zakażenia” – “SARS-CoV-2” (<span class="math inline">\(\tau = 0,53; p &lt; 0,05\)</span>), natomiast
+najmniejsza: “nowe zakażenia” – “Dezynfekcja rąk” (<span class="math inline">\(\tau = -0,08\)</span>),
+której współczynnik okazał się być nieistotny na poziomie istotności
+<span class="math inline">\(\alpha = 0,05\)</span>. Z kolei dla czynnika zgonów najsilniejszą korelację
+zaobserwowano dla pary “nowe zgony” – “Szczepionka”
+(<span class="math inline">\(\tau = 0,56; p &lt; 0,05\)</span>). Najwyższe współczynniki uzyskano dla par
+artykułów kolejno “COVID-19” – “SARS-CoV-2” (<span class="math inline">\(\tau = 0,74; p &lt; 0,05\)</span>),
+“COVID-19” – “Koronawirusy” (<span class="math inline">\(\tau = 0,72; p &lt; 0,05\)</span>) i “Koronawirusy”
+– “COVID-19” (<span class="math inline">\(\tau = 0,69, p &lt; 0,05\)</span>).</p>
+<div class="figure">
+<img src="figure/chap05/corr-PL.png" id="fig:corr-PL" alt="" />
+<p class="caption">Korelogram liczby dziennych odsłon artykułów polskiej Wikipedii
+powiązanych z tematyką koronawirusa i leczeniem (pisane wielką literą) i
+nowymi przypadkami zakażeń i zgonów z powodu COVID-19 (pisane małą
+literą) w okresie 01.06–31.12.2020 r. dla Polski. Przedstawione
+wartości stanowią współczynniki <span class="math inline">\(\tau\)</span> Kendalla. Źródło: opracowanie
+własne na podstawie danych z narzędzia Pageviews
+<span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>.</p>
+</div>
+<p>Istotnie dodatnie współczynniki korelacji potwierdzają pewną postępującą
+zależność pomiędzy nowymi przypadkami zakażeń i zgonów a artykułami w
+polskiej Wikipedii tyczącymi się SARS-CoV-2 jako wirusa i COVID-19 jako
+choroby, a także higieny osobistej (z wyłączeniem dezynfekcji rąk) czy
+szczepionki, choć nie jest to deterministyczne (rysunek
+<a href="5-chapter05.html#fig:wikipedia-PL" reference-type="ref" reference="fig:wikipedia-PL">5.7</a>), co może mieć związek z innymi czynnikami
+(np. nagłaśnianymi przez media przypadkami z innych krajów czy też
+ogłaszanymi w tym czasie postępami związanymi z opatentowaniem
+szczepionki). Użytkownicy przeglądający artykuł związany z chorobą
+COVID-19 w tym samym okresie również chętnie przeglądali ten związany z
+samym wirusem SARS-CoV-2. Najmniejsze wartości współczynników korelacji
+odkryto dla popularności artykułu “Dezynfekcja rąk” i pozostałych,
+włącznie z artykułem “Szczepionka”, nowymi przypadkami zakażeń i zgonów,
+dla których współczynniki te nie były istotnie różne od zera.</p>
+<div class="figure">
+<img src="figure/chap05/wikipedia-PL.png" id="fig:wikipedia-PL" alt="" />
+<p class="caption">Zależność liczby dziennych odsłon artykułu powiązanego z koronawirusem
+i zdrowiem w Wikipedii a liczbą nowych zakażeń na SARS-CoV-2 w okresie
+01.06–31.12.2020 r. Źródło: opracowanie własne na podstawie danych z
+narzędzia Pageviews
+<span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>.</p>
+</div>
+</div>
+<div id="pubmed" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> PubMed</h3>
+<p>W bazie PubMed popularność haseł związanych z koronawirusem/leczeniem
+również znajduje swój wydźwięk w liczbie nowo powstałych artykułów w
+roku 2020, które zawierają w swoim tytule bądź abstrakcie takie pojęcia,
+jak “face mask” (tłum. “maska na twarz”) lub “hand washing” (tłum.
+“mycie rąk”). Wzrost liczby takich artykułów można zaobserwować,
+począwszy od 1945 roku z przewagą dla hasła “hand washing” aż do roku
+ok. 1965. Gwałtowny wzrost przypadł na początek lat 80. XX wieku
+(głównie dla zawierających w treści “hand washing”). W dalszym okresie
+zauważalny jest również wzrost w pierwszych latach XXI wieku, na co
+mogła mieć wpływ ówczesna epidemia SARS-CoV w roku 2003. Trend ten rósł
+do ok. roku 2010, osiągając szczyt w roku 2009, co z kolei sugeruje
+możliwe powiązanie z pandemią świńskiej grypy, a następnie spadał, by w
+roku 2020 dla ponownie wzrosnąć — tym razem o wiele większą krotność w
+porównaniu z poprzednimi okresami, kiedy wzrost ten również był
+zauważalny (rysunek <a href="5-chapter05.html#fig:pubmed-higiena" reference-type="ref" reference="fig:pubmed-higiena">5.8</a>).</p>
+<div class="figure">
+<img src="figure/chap05/pubmed-higiena.png" id="fig:pubmed-higiena" alt="" />
+<p class="caption">Zależność liczby wyników haseł w przeliczeniu na 100 tys. związanych z
+higieną zawartych w tytule lub abstrakcie artykułów w bazie PubMed od
+roku ich publikacji. Źródło: opracowanie własne na podstawie danych z
+narzędzia PubMed by Year
+<span class="citation">(<a href="#ref-ed_sperr_mlis_pubmed_2016" role="doc-biblioref">Ed Sperr, M.L.I.S, 2016</a>)</span>.</p>
+</div>
+<p>Tematyka koronawirusa z roku 2019 skupiła na sobie wielu badaczy, na co
+wskazuje zwiększająca się liczba nowych artykułów, które w tytule bądź
+abstrakcie posiadały hasła “COVID-19” lub “SARS-CoV-2” (rysunek
+<a href="5-chapter05.html#fig:pubmed-artykuly" reference-type="ref" reference="fig:pubmed-artykuly">5.9</a>). W roku 2020 w styczniu do bazy PubMed
+napłynęło 2 209 takich artykułów, w kwietniu liczba ta była jeszcze
+większa – wynosiła 6 265 – natomiast w maju ok. 1,6-krotnie więcej niż
+w kwietniu. Szczyt osiągnięty został w lipcu, kiedy do bazy wpłynęło 13
+582 nowych artykułów, co daje średnio ok. 438 artykułów dziennie. W
+kolejnych miesiącach nie zauważono wzrostu, aczkolwiek trend w
+zainteresowaniu badaczy tą tematyką utrzymywał się na względnie tym
+samym poziomie.</p>
+<div class="figure">
+<img src="figure/chap05/pubmed-artykuly.png" id="fig:pubmed-artykuly" alt="" />
+<p class="caption">Liczba nowych artykułów w bazie PubMed, które w tytule bądź abstrakcie
+miały hasło COVID-19/SARS-CoV-2, w danym miesiąciu roku 2020. Źródło:
+opracowanie własne na podstawie danych z narzędzia PubMed by Year
+<span class="citation">(<a href="#ref-ed_sperr_mlis_pubmed_2016" role="doc-biblioref">Ed Sperr, M.L.I.S, 2016</a>)</span>.</p>
+</div>
+</div>
+</div>
+<div id="przebieg-pandemii-covid-19-w-roku-2020-na-świecie" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Przebieg pandemii COVID-19 w roku 2020 na świecie</h2>
+<div id="zarys" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Zarys</h3>
+<p>W 2020 roku wirus SARS-CoV-2 pojawił się w 189 regionach świata. Do
+31.12 nie pojawił się on m.in. na takich terenach, jak Święta Helena
+(Afryka), Tonga (Oceania) czy Wyspa Man (Europa), a więc w większości
+niezamieszkanych bądź o bardzo niskiej gęstości zaludnienia. Pod
+względem liczby zakażeń i zgonów przeważała Europa —- stanowiła ona
+28,73% ogółu przypadków zakażeń na tle wszystkich kontynentów; za nią
+zaś figurowały Ameryka Północna (27,9%), Azja (24,03%), Ameryka
+Południowa (15,96%), Afryka (3,34%) i Oceania (0,04%). Również i Europa
+znajdowała się na pierwszym miejscu wśród kontynentów o największej
+liczbie zgonów z powodu COVID-19 (29,84%); za nią natomiast Ameryka
+Północna (28,13%), Ameryka Południowa (19,89%), Azja (18,5%), Afryka
+(3,59%) i Oceania (0,05%; rysunek
+<a href="5-chapter05.html#fig:kontynenty-skumulowane" reference-type="ref" reference="fig:kontynenty-skumulowane">5.10</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kontynenty-skumulowane.png" id="fig:kontynenty-skumulowane" alt="" />
+<p class="caption">Skumulowane liczby nowych przypadków zakażeń i zgonów z powodu
+COVID-19 w okresie 01.01–31.12.2020 r. dla kontynentów świata. Źródło:
+opracowanie
+własne.</p>
+</div>
+<p>Dynamicznie postępujące przyrosty zakażeń i zgonów były obserwowane dla
+wszystkich kontynentów świata już w I kwartale roku 2020. Główne źródło
+zakażenia wynikło na kontynencie azjatyckim (w Chinach) - tam też
+najwcześniej, bo już w lutym, przyrosty te były najbardziej zauważalne
+(głównie zakażeń). W marcu, kiedy dynamika ta na kontynencie azjatyckim
+zaczęła się stabilizować, w krajach europejskich zaczęto odnotowywać
+wyższe liczby osób zakażonych i zmarłych w porównaniu z poprzednimi
+tygodniami, tak że Europa stała się aktywnym centrum pandemii COVID-19
+na tle pozostałych kontynentów. Z przyrostem dziennej liczby zakażeń na
+COVID-19 jest też z pewnym opóźnieniem powiązana liczba zgonów, gdyż
+pewna frakcja osób zakażonych umiera w pewnym czasie. Sytuacja
+pandemiczna zdawała się stabilizować w okresie letnim
+(lipiec–sierpień), a w okresie jesienno-zimowym (wrzesień–grudzień)
+głównie w Europie i Ameryce Północnej ponownie zaczęto obserwować wzrost
+liczb nowych zakażeń i zgonów w porównaniu z okresem wiosenno-letnim
+(rysunek <a href="5-chapter05.html#fig:kontynenty-log" reference-type="ref" reference="fig:kontynenty-log">5.11</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kontynenty-log.png" id="fig:kontynenty-log" alt="" />
+<p class="caption">Skumulowane zlogarytmowane liczby nowych przypadków zakażeń i zgonów z
+powodu SARS-CoV-2 w okresie 01.01–31.12.2020 dla kontynentów świata.
+Źródło: opracowanie własne.</p>
+</div>
+<p>Wśród krajów na świecie z największymi sumarycznymi liczbami przypadków
+zakażeń i zgonów w 2020 roku w przeważającej części znalazły się kraje
+europejskie. Stany Zjednoczone wyprzedziły w liczbie zakażeń niemal
+2-krotnie Indie, a w liczbie zgonów – Brazylię – figurując na
+pierwszym miejscu wśród wszystkich krajów świata. Mimo że Meksyk nie
+znalazł się wśród dziesięciu krajów z największą sumaryczną liczbą
+zakażeń, zajął czwarte miejsce jako kraj o największej liczbie zgonów –
+zaraz za Indiami, a przed Włochami (rysunek
+<a href="5-chapter05.html#fig:kraje-top-10" reference-type="ref" reference="fig:kraje-top-10">5.12</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kraje-top-10.png" id="fig:kraje-top-10" alt="" />
+<p class="caption">Skumulowane liczby nowych przypadków zakażeń (A) i zgonów (B) z powodu
+COVID-19 w okresie 01.01–31.12.2020 r. dla krajów świata. Źródło:
+opracowanie własne.</p>
+</div>
+<p>Rozbieżności w statystykach pomiędzy krajami wynikają nie tyle ze
+specyfiki zakażeń wirusa SARS-CoV-2 i szeregu czynników możliwie
+mających wpływ na jego rozprzestrzenianie się w populacji (np. położenia
+geograficznego — klimatu, temperatury, itp.), o ile z liczby ludności
+zamieszkującej dany kraj, przez co państwo o większej liczbie
+zaludnienia ma większą szansę na znalezienie się w czołówce krajów w
+porównaniu z krajem słabo zaludnionym. Normalizując statystyki pomiędzy
+krajami, tj. wyznaczając liczbę zakażeń/zgonów na 1 mln mieszkańców,
+Stany Zjednoczone znalazły się już na 6. miejscu pod kątem liczby
+zakażeń (60 722,66 na 1 mln osób), a na 1. miejscu — Andora, gdzie na
+ok. 10 mieszkańców przypadał 1 pozytywny przypadek zakażenia (tabela
+5.3).</p>
+<table>
+<caption>10 krajów świata z największą sumaryczną liczbą zakażeń w
+przeliczeniu na 1 mln mieszkańców i sumaryczną liczbą zgonów w
+przeliczeniu na 1 mln mieszkańców w 2020 roku. Źródło: opracowanie
+własne.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Kraj</th>
+<th align="center">Sumaryczna liczba zakażeń</th>
+<th align="center">Sumaryczna liczba zgonów</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="center">Andora</td>
+<td align="center">104 173,94</td>
+<td align="center">1 087,15</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="center">Czarnogóra</td>
+<td align="center">76 818,85</td>
+<td align="center">1 085,87</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="center">Luksemburg</td>
+<td align="center">74 148,23</td>
+<td align="center">790,80</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="center">San Marino</td>
+<td align="center">71 542,20</td>
+<td align="center">1 738,45</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td align="center">Czechy</td>
+<td align="center">67 108,25</td>
+<td align="center">1 081,34</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td align="center">Stany Zjednoczone</td>
+<td align="center">60 722,66</td>
+<td align="center">1 063,84</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="center">Słowenia</td>
+<td align="center">58 757,09</td>
+<td align="center">1 297,30</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="center">Panama</td>
+<td align="center">57 196,59</td>
+<td align="center">932,15</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="center">Gruzja</td>
+<td align="center">57 009,27</td>
+<td align="center">627,95</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td align="center">Liechtenstein</td>
+<td align="center">56 008,59</td>
+<td align="center">1 022,63</td>
+</tr>
+</tbody>
+</table>
+<p>Z kolei wśród krajów o największej sumarycznej liczbie zgonów w
+przeliczeniu na 1 mln mieszkańców znalazły się m.in. San Marino, Belgia,
+Słowenia (odpowiednio 1., 2. i 3. miejsce), a także Włochy (5. miejsce),
+które w 2.04 osiągnęły maksymalny współczynnik 7-dniowej średniej liczby
+zgonów w przeliczeniu na 1 mln mieszkańców w wysokości 13,47, co daje
+wzrost o 18,35% w porównaniu z 1 marca, kiedy to współczynnik ten
+wyniósł 0,07. Część krajów, jak np. Stany Zjednoczone, Indie czy
+Brazylia, nie znalazła się wśród 10 krajów z największą sumaryczną
+liczbą zgonów w przeliczeniu na 1 mln mieszkańców w roku 2020, mimo że
+stanowiły część krajów o największej sumarycznej liczbie zgonów, co
+wynika z ich dużej liczebności populacji (tabela 5.4).</p>
+<table>
+<caption>10 krajów świata z największą sumaryczną liczbą zgonów w
+przeliczeniu na 1 mln mieszkańców i sumaryczną liczbą zakażeń w
+przeliczeniu na 1 mln mieszkańców w 2020 roku. Źródło: opracowanie
+własne.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Kraj</th>
+<th align="center">Sumaryczna liczba zgonów</th>
+<th align="center">Sumaryczna liczba zakażeń</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="center">San Marino</td>
+<td align="center">1 738,45</td>
+<td align="center">71 542,20</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="center">Belgia</td>
+<td align="center">1 684,95</td>
+<td align="center">55 782,36</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="center">Słowenia</td>
+<td align="center">1 297,30</td>
+<td align="center">58 757,09</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="center">Bośnia i Hercegowina</td>
+<td align="center">1 234,46</td>
+<td align="center">33 828,48</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td align="center">Włochy</td>
+<td align="center">1 226,54</td>
+<td align="center">34 851,18</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td align="center">Macedonia Północna</td>
+<td align="center">1 201,44</td>
+<td align="center">39 997,04</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="center">Peru</td>
+<td align="center">1 142,80</td>
+<td align="center">30 787,99</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="center">Bułgaria</td>
+<td align="center">1 090,34</td>
+<td align="center">29 109,54</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="center">Hiszpania</td>
+<td align="center">1 087,31</td>
+<td align="center">41 242,09</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td align="center">Andora</td>
+<td align="center">1 087,15</td>
+<td align="center">104 173,94</td>
+</tr>
+</tbody>
+</table>
+<p>Pierwszy pozytywny przypadek zakażenia wirusem SARS-CoV-2 został w
+Polsce zarejestrowany 4.03.2020 r., natomiast pierwszy zgon – 8 dni
+później – 12.03. Najwyższą liczbę odnotowanych zakażeń stwierdzono
+24.11 (32 733), a zgonów - 25.11 (674). W krajach sąsiadujących z Polską
+również statystyki te osiągnęły swoje maksimum w sezonie
+jesienno-zimowym – w Czechach, przykładowo, najwięcej zakażeń
+zarejestrowano 31.12 (17 039), na Ukrainie 28.11 (16 585), a w Rosji
+24.12 (29 499). Przebieg pandemii COVID-19 w Polsce, jak i w innych
+krajach świata, w tym krajach sąsiadujących, można analizować w
+kontekście sezonów, tj. “fal” pandemii, czyli nagłego skoku liczby
+dziennych przypadków i zgonów, ale też 7-dniowych średnich obserwowanych
+w danym okresie. W takiej fali wyróżnić można trzy fazy: wzrostu,
+szczytu i spadku. Zasadniczo Polskę i kraje z nią sąsiadujące podzielić
+można pod względem przyrostu dziennej liczby zakażeń na kraje, które już
+w pierwszej połowie roku (sezon wiosenno-letni) borykały się z
+dynamicznie przyrastającą pierwszą falą zakażeń, i te, które pierwsze
+półrocze przebyły w dość łagodnym stopniu. Do pierwszej grupy zaliczyć
+można Białoruś, Niemcy i Rosję, a do drugiej – Czechy, Litwę, Polskę,
+Słowację i Ukrainę (rysunek
+<a href="5-chapter05.html#fig:PL-sasiedzi-2020-zakazenia" reference-type="ref" reference="fig:PL-sasiedzi-2020-zakazenia">5.13</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-sasiedzi-2020-zakazenia.png" id="fig:PL-sasiedzi-2020-zakazenia" alt="" />
+<p class="caption">Dzienne liczby nowych przypadków zakażeń na COVID-19 w roku 2020 dla
+Polski i krajów z nią sąsiadujących. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Zauważalne regularne i cyklicznie powtarzające się wzrosty i spadki
+dziennych liczb nowych zakażeń dla Polski i krajów z nią sąsiadujących
+wynikają z daty ich zgłaszania, co ma związek z wykonywaniem przez
+państwowe placówki mniej testów w dni wolne od pracy. Ponadto podawane
+do publicznej wiadomości statystyki nie dotyczyły dnia ich zgłaszania, a
+poprzedniego bądź nawet nanosiły korektę do okresów wcześniejszych.
+Liczba zgłaszanych w poniedziałek testów w kierunku COVID-19 dotyczyła
+zatem stanu sprzed kilku dni, często weekendów (niedzieli), dlatego też
+dla części krajów, m.in. Polski czy Ukrainy, spadek ten jest zauważalny
+w poniedziałek, a w przypadku innych, m.in. Czech czy Litwy, w niedzielę
+(rysunek <a href="5-chapter05.html#fig:PL-sasiedzi-2020-testy" reference-type="ref" reference="fig:PL-sasiedzi-2020-testy">5.14</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-sasiedzi-2020-testy.png" id="fig:PL-sasiedzi-2020-testy" alt="" />
+<p class="caption">Zgłaszane testy w kierunku COVID-19 w roku 2020 dla Polski i krajów z
+nią sąsiadujących na przestrzeni dni tygodnia. Źródło: opracowanie
+własne.</p>
+</div>
+<p>W Polsce pomiędzy poniedziałkiem a pozostałymi dniami tygodnia (oprócz
+niedzieli) istniały istotne różnice w medianach zgłaszanych testów
+(<span class="math inline">\(p &lt; 0,05\)</span>), a pomiędzy niedzielą a poniedziałkiem, wtorkiem i sobotą
+brak było istotnych różnic na poziomie istotności <span class="math inline">\(\alpha = 0,05\)</span>.
+Mediany nie były również istotnie różne pomiędzy parami dni w środku
+tygodnia, tzn. od wtorku do piątku.</p>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median zgłaszanych w Polsce testów pomiędzy
+dniami tygodnia w roku 2020. Statystycznie istotne różnice na poziomie
+istotności <span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem (*).</caption>
+<thead>
+<tr class="header">
+<th align="center">****</th>
+<th align="center"><strong>poniedziałek</strong></th>
+<th align="center"><strong>wtorek</strong></th>
+<th align="center"><strong>środa</strong></th>
+<th align="center"><strong>czwartek</strong></th>
+<th align="center"><strong>piątek</strong></th>
+<th align="center"><strong>sobota</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">niedziela</td>
+<td align="center">-1,76</td>
+<td align="center">1,26</td>
+<td align="center">3,24*</td>
+<td align="center">3,1*</td>
+<td align="center">2,98*</td>
+<td align="center">2,62</td>
+</tr>
+<tr class="even">
+<td align="center">poniedziałek</td>
+<td align="center"></td>
+<td align="center">3,03*</td>
+<td align="center">5,02*</td>
+<td align="center">4,88*</td>
+<td align="center">4,74*</td>
+<td align="center">4,39*</td>
+</tr>
+<tr class="odd">
+<td align="center">wtorek</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">1,98</td>
+<td align="center">1,84</td>
+<td align="center">1,72</td>
+<td align="center">1,37</td>
+</tr>
+<tr class="even">
+<td align="center">środa</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,14</td>
+<td align="center">-0,25</td>
+<td align="center">-0,61</td>
+</tr>
+<tr class="odd">
+<td align="center">czwartek</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,11</td>
+<td align="center">-0,47</td>
+</tr>
+<tr class="even">
+<td align="center">piątek</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,36</td>
+</tr>
+</tbody>
+</table>
+<p>Najniższa średnia median zgłaszanych testów dla Polski i krajów z nią
+sąsiadujących przypadała na niedzielę; krajem o najwyższej średniej
+median (2,79) zgłaszanych testów w przeliczeniu na 1 000 mieszkańców
+były Czechy, a za nimi Rosja (2); Polska zaś figurowała na 3 miejscu od
+końca (0,56) - przed Słowacją i Ukrainą, dla których średnie median w
+obrębie wszystkich dni tygodnia były najniższe (0,52 dla Słowacji i 0,38
+dla Ukrainy). Mniej testów zgłaszano również w poniedziałek – w Polsce
+mediana dla poniedziałku była jeszcze niższa niż dla niedzieli.
+Wszystkie kraje natomiast najwięcej testów zgłaszały w środku tygodnia:
+od wtorku do piątku, ale przeważnie w środę i w czwartek.</p>
+<p>Niejednorodności w liczbie wykonywanych, a zgłaszanych z pewnym
+opóźnieniem dziennych testów, bezpośrednio wpływają na liczbę równolegle
+zgłaszanych tego samego dnia nowych zakażeń, ponieważ im większy jest
+odsetek wykonanych testów, tym więcej nowych zakażeń się identyfiuje, co
+potwierdza dodatnia korelacja pomiędzy liczbą wykonywanych testów a
+zgłaszanymi przypadkami zakażeń dla Polski (<span class="math inline">\(\tau = 0,6, p &lt;.001)\)</span>, ale
+też krajów z nią sąsiadujących: Czech (<span class="math inline">\(\tau = 0,56, p &lt;.001\)</span>), Litwy
+(<span class="math inline">\(\tau = 0,41, p &lt;.001\)</span>), Rosji (<span class="math inline">\(\tau = 0,55, p &lt;.001\)</span>), Słowacji
+(<span class="math inline">\(\tau = 0,58, p &lt;.001\)</span>) i Ukrainy (<span class="math inline">\(\tau = 0,75, p &lt;.001\)</span>; rysunek
+<a href="5-chapter05.html#fig:PL-sasiedzi-2020-testy-zakazenia" reference-type="ref" reference="fig:PL-sasiedzi-2020-testy-zakazenia">5.15</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-sasiedzi-2020-testy-zakazenia.png" id="fig:PL-sasiedzi-2020-testy-zakazenia" alt="" />
+<p class="caption">Zależność między liczbami zgłoszonych testów na COVID-19 a zakażeń dla
+Polski i krajów z nią sąsiadujących w roku 2020. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Niejednorodności te z kolei przekładają się na ogólną krzywą nowych
+przypadków zakażeń, zaburzając jej regularny bieg ze względu na
+dynamicznie postępujące po sobie skoki i spadki dziennych liczb
+zgłaszanych zakażeń, co w pewnym stopniu utrudnia analizę rozwoju
+epidemii. Uśredniając wyniki z uwzględnieniem 7-dniowego okna, uzyskuje
+się bardziej klarowny obraz sytuacji epidemicznej. W przypadku Polski
+nagły i dynamiczny wzrost zachorowań następował od 19.09, kiedy to
+liczba zgłoszonych przypadków przekroczyła 1 000 - 1 002 przypadki.
+21.10 przekroczono 10 000 przypadków zakażeń, a 29.10 – 20,000. Szczyt
+osiągnięty został 24.11, kiedy liczba ta wyniosła 32 733. Najwięcej
+zgonów również obserwowano w sezonie jesienno-zimowym – szczyt przypadł
+na 25.11 z liczbą równą 674 (rysunek
+<a href="5-chapter05.html#fig:PL-zakazenia-zgony-2020" reference-type="ref" reference="fig:PL-zakazenia-zgony-2020">5.16</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-zakazenia-zgony-2020.png" id="fig:PL-zakazenia-zgony-2020" alt="" />
+<p class="caption">Liczba nowych zakażeń (A), zlogarytmowana liczba nowych zakażeń (B),
+liczba nowych zgonów (C) i zlogarytmowana liczba nowych zgonów (D) w
+czasie dla Polski w roku 2020. Źródło: opracowanie
+własne.</p>
+</div>
+<p>W Polsce wyższy odsetek zmarłych z powodu COVID-19 w okresie
+12.03-18.11.2020 stanowili mężczyźni (6 573 zgony – 57,5% ogółu) niż
+kobiety (4 858 zgony – 42,5% ogółu). Średnia wieku osób zmarłych
+wynosiła 75,35 lat, natomiast mediana - 77 lat; w przypadku kobiet
+średnia wynosiła 77,84 lat, a mediana – 80 lat – i były większe niż
+mężczyzn, dla których statystyki te wyniosły odpowiednio 73,51 lat i 74
+lat. Najmłodsza zmarła osoba miała 16 dni, a najstarsza - 107 lat.
+Najwyższą umieralnością odznaczała się grupa wiekowa 80–89, która
+stanowiła 32% ogółu osób zmarłych. 6 136 (54% ogółu) zmarłych miało wiek
+wyższy od ogólnej średniej wiekowej, natomiast 10 350 (91% ogółu) -
+wyższy bądź równy 60. Najmniejszą umieralność obserwowano wśród
+najmłodszych grup wiekowych (tabela 5.7). Rozkłady umieralności kobiet i
+mężczyzn dla wszystkich grup wiekowych były lewoskośne (<span class="math inline">\(A_S = -1,04\)</span>
+dla kobiet i <span class="math inline">\(A_S = -0,76\)</span> dla mężczyzn), co potwierdza, że najwyższy
+odsetek zmarłych w Polsce stanowiły osoby starsze, a im dana osoba była
+młodsza, tym szansa, że znajdzie się w grupie osób zmarłych, malała
+(rysunek <a href="5-chapter05.html#fig:PL-zgony-plec-2020" reference-type="ref" reference="fig:PL-zgony-plec-2020">5.17</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-zgony-plec-2020.png" id="fig:PL-zgony-plec-2020" alt="" />
+<p class="caption">Graficzny rozkład zgonów na COVID-19 wśród kobiet i mężczyzn różnych
+grup wiekowych w Polsce w okresie 12.03–18.11.2020. Źródło: opracowanie
+własne.</p>
+</div>
+</div>
+<div id="sezon-wiosenno-letni-do-22.09.2020-r." class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Sezon wiosenno-letni (do 22.09.2020 r.)</h3>
+<p>Stany Zjednoczone, Indie i Brazylia, czyli 3 kraje o największej
+sumarycznej liczbie zakażeń w roku 2020, a także Szwecja, która w
+przeciwieństwie do pozostałych krajów nie zastosowała podejścia opartego
+na ograniczeniu kontaktów społecznych, przekroczyły sumaryczną liczbę
+zakażeń w wysokości 100 w podobnym czasie: Brazylia 13.03, Indie 14.03,
+Stany Zjednoczone 4.03, a Szwecja 06.03.2020 r. Pomimo podobnego okresu
+pierwszego intensywnego przyrostu dziennych nowych liczb zakażeń, w
+późniejszych okresach kraje te nie podążały tą samą dynamiką. Indie w
+okresie wiosenno-letnim zachowały regularnie przystającą z dnia na dzień
+7-dniową średnią dzienną liczbę zakażeń, tak że kształt krzywej epidemii
+zbliżał się do postaci wykładniczej – dopiero od połowy września
+zauważalny był spadek. Z kolei w przypadku Stanów Zjednoczonych w tym
+okresie wyróżnić można dwie fale, z czego pierwsza osiągnęła swoje
+maksimum 09.04 (35 942 zgłoszonych przypadków tego dnia), a druga 24.07
+(73 319 zgłoszonych przypadków). Pomiędzy majem a lipcem 7-dniowa
+średnia liczba zakażeń pozostawała stabilna (<span class="math inline">\(CV = 0,23\)</span>). Również i
+ostatniego dnia lata, tj. 22.09.2020 r. Stany Zjednoczone figurowały na
+pierwszym miejscu pod względem sumarycznej liczby nowych zakażeń (6 902
+696), następnie Indie (5 646 010) i Brazylia (4 591 364; rysunek
+<a href="5-chapter05.html#fig:5.2.2-top3-zakazenia" reference-type="ref" reference="fig:5.2.2-top3-zakazenia">5.18</a>).</p>
+<div class="figure">
+<img src="figure/chap05/5.2.2-top3-zakazenia.png" id="fig:5.2.2-top3-zakazenia" alt="" />
+<p class="caption">Liczba nowych zakażeń dla 3 krajów z największą sumaryczną liczbą
+zakażeń w roku 2020 (Stany Zjednoczone, Brazylia, Indie) i Szwecji w
+okresie od początku zgłoszenia pierwszego zakażenia w danym kraju do
+22.09.2020 r. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Uwzględniając liczebność populacji rozpatrywanych krajów, największy
+przyrost i maksimum 7-dniowych średnich dziennych liczb zakażeń w
+przeliczeniu na 1 mln mieszkańców obserwowane były dla Stanów
+Zjednoczonych i Brazylii, pomiędzy którymi nie było istotnych różnic w
+medianach, które wyniosły odpowiednio 124,13 i 127,29
+(<span class="math inline">\(D = 1,49; p = 0,07\)</span>). Mediana była ponadto większa w Szwecji (28,8)
+niż w Indiach (5,13). W Stanach Zjednoczonych drugi ilościowo większy od
+pierwszego przyrost dziennej liczby zakażeń przypadł na okres letni,
+kiedy w Szwecji pozostawał na dość stabilnych poziomie. Od końca
+sierpnia obserwowano mniej zakażeń aż do końca sezonu wiosenno-letniego
+(rysunek <a href="5-chapter05.html#fig:5.2.2-top3-zakazenia-1mln" reference-type="ref" reference="fig:5.2.2-top3-zakazenia-1mln">5.19</a>).</p>
+<div class="figure">
+<img src="figure/chap05/5.2.2-top3-zakazenia-1mln.png" id="fig:5.2.2-top3-zakazenia-1mln" alt="" />
+<p class="caption">7-dniowa średnia liczba nowych zakażeń w przeliczeniu na 1 mln osób
+dla 3 krajów z największą sumaryczną liczbą zakażeń w roku 2020 (Stany
+Zjednoczone, Brazylia, Indie) i Szwecji w okresie od początku zgłoszenia
+pierwszego zakażenia w danym kraju do 22.09.2020 r. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Pierwsze tygodnie epidemii w części krajach sąsiadujących z Polską
+(Litwa, Słowacja, Ukraina) nie były dostatecznie kontrolowane pod
+względem współczynnika pozytywnych testów. Na Litwie jednak już po kilku
+dniach (29.03) spadł on poniżej 5% i utrzymywał się na tym poziomie
+przez cały okres wiosenno-letni ze wzrostem od połowy sierpnia. Podobna
+sytuacja miała miejsce w Słowacji – początkowo <span class="math inline">\(PR\)</span> wzrósł do poziomu
+7,3% 17.03, po czym od 24.03 (4,8%) nie przekraczał już minimalnego
+poziomu krytycznego ustalonego przez WHO aż do końca lata. Jego przyrost
+zaczęto obserwować od końca lipca, a 22.09 przekroczył on 5% (5,10%).
+Największa liczba dni, podczas których <span class="math inline">\(PR\)</span> przekraczał 5% występowała
+na Ukrainie – na 204 dni epidemii w sezonie wiosenno-letnim przypadało
+193 dni (94,6%), kiedy wykrywano 1 bądź więcej nowych zakażeń na 20
+wykonanych testów (rysunek
+<a href="5-chapter05.html#fig:sasiedzi-PCR-2020-wiosna" reference-type="ref" reference="fig:sasiedzi-PCR-2020-wiosna">5.20</a>).</p>
+<div class="figure">
+<img src="figure/chap05/sasiedzi-PCR-2020-wiosna.png" id="fig:sasiedzi-PCR-2020-wiosna" alt="" />
+<p class="caption">7-dniowa średnia dziennego odsetka pozytywnych testów w kierunku
+COVID-19 (wyrażony w %) w części krajów sąsiadujących z Polską w okresie
+od początku epidemii w danym kraju do 22.09.2020. Źródło: opracowanie
+własne.</p>
+</div>
+<p>W Polsce do 31 marca potwierdzono w sumie 2 311 przypadków zakażeń i 33
+zgony. Do 5 kwietnia 7-dniowa średnia dziennych liczb zakażeń wzrosła do
+320 i utrzymywała się na poziomie 200–400 do końca lipca (rysunek 5.18,
+A). Możliwe, że wprowadzone restrykcje w postaci ograniczenia
+przemieszczania się i minimalizacji kontaktów z innymi ludźmi
+ustabilizowały dynamicznie przyrastające liczby nowych zakażeń w marcu,
+kiedy to 7-dniowa średnia na dzień 31 marca była niemal 100-krotnie
+wyższa niż 9 marca (rysunek 5.18, B).</p>
+<div class="figure">
+<img src="figure/chap05/PL-zakazenia-zgony-wiosna-lato.png" id="fig:PL-zakazenia-zgony-wiosna-lato" alt="" />
+<p class="caption">Liczba nowych zakażeń (A), zlogarytmowana liczba nowych zakażeń (B),
+liczba nowych zgonów (C) i zlogarytmowana liczba nowych zgonów (D) w
+czasie dla Polski do 22.09.2020. Źródło: opracowanie
+własne.</p>
+</div>
+<p>W sezonie wiosenno-letnim największa średnia liczba zgonów przypadała na
+kwiecień, a od maja do lipca nie zauważano jej przyrostu aż do sierpnia,
+kiedy to wraz ze średnią liczbą zakażeń zaczęły rosnąć. Spadek liczby
+zgonów zaczęto obserwować od maja, natomiast 7-dniowa średnia liczba
+zakażeń od kwietnia do lipca pozostawała na względnie tym samym poziomie
+(współczynnik zmienności <span class="math inline">\(CV = 15,46\)</span>). W sierpniu 7-dniowa średnia
+liczba zakażeń była niemal 2-krotnie wyższa niż w lipcu; we wrześniu
+natomiast - o 15% mniejsza niż w sierpniu, aczkolwiek niemal 1,8 razy
+większa niż w lipcu.</p>
+<table>
+<caption>Średnie, odchylenia standardowe i mediany 7-dniowych liczb zakażeń i
+zgonów w Polsce w okresie wiosenno-letnim (do 22.09.2020 r.). Źródło:
+opracowanie własne.</caption>
+<colgroup>
+<col width="4%" />
+<col width="14%" />
+<col width="19%" />
+<col width="14%" />
+<col width="13%" />
+<col width="19%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Miesiąc</strong></th>
+<th align="center"><strong>Średnia (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Odchylenie standardowe (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Mediana (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Średnia (7-dniowa liczba zgonów)</strong></th>
+<th align="center"><strong>Odchylenie standardowe (7-dniowa liczba zgonów)</strong></th>
+<th align="center"><strong>Mediana (7-dniowa liczba zgonów)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">marzec</td>
+<td align="center">71,4</td>
+<td align="center">65,1</td>
+<td align="center">51</td>
+<td align="center">0,93</td>
+<td align="center">0,95</td>
+<td align="center">0,57</td>
+</tr>
+<tr class="even">
+<td align="center">kwiecień</td>
+<td align="center">342</td>
+<td align="center">39,7</td>
+<td align="center">350</td>
+<td align="center">18,2</td>
+<td align="center">6,39</td>
+<td align="center">195</td>
+</tr>
+<tr class="odd">
+<td align="center">maj</td>
+<td align="center">351</td>
+<td align="center">32</td>
+<td align="center">361</td>
+<td align="center">15,2</td>
+<td align="center">3,97</td>
+<td align="center">16,1</td>
+</tr>
+<tr class="even">
+<td align="center">czerwiec</td>
+<td align="center">362</td>
+<td align="center">57,50</td>
+<td align="center">362</td>
+<td align="center">13,1</td>
+<td align="center">1,58</td>
+<td align="center">12,9</td>
+</tr>
+<tr class="odd">
+<td align="center">lipiec</td>
+<td align="center">335</td>
+<td align="center">73,9</td>
+<td align="center">300</td>
+<td align="center">8,27</td>
+<td align="center">1,66</td>
+<td align="center">7,71</td>
+</tr>
+<tr class="even">
+<td align="center">sierpień</td>
+<td align="center">688</td>
+<td align="center">56,1</td>
+<td align="center">703</td>
+<td align="center">10,6</td>
+<td align="center">1,21</td>
+<td align="center">10,9</td>
+</tr>
+<tr class="odd">
+<td align="center">wrzesień</td>
+<td align="center">587</td>
+<td align="center">102</td>
+<td align="center">577</td>
+<td align="center">12</td>
+<td align="center">1,6</td>
+<td align="center">11,9</td>
+</tr>
+</tbody>
+</table>
+<p>Przyrost liczb zakażeń i zgonów w sierpniu i wrześniu wyjaśnić można
+procesem luzowania obostrzeń w kraju postępującym od 20 kwietnia, kiedy
+to w zwiększony został limit osób przebywających w sklepach, a także
+zniesiony został zakaz przemieszczania się w celach rekreacyjnych.
+Finalny etap zniesienia obostrzeń miał miejsce 6 czerwca - od tej pory
+przywrócona została działalność placówek publicznych, m.in. salonów
+fryzjerskich, sklepów niespożywczych w centrach handlowych czy placówek
+rekreacyjnych (kina, teatry, kluby fitness, itp.). Między sierpniem a
+wrześniem nie było istotnych różnic w medianach 7-dniowej średniej
+liczby zakażeń (<span class="math inline">\(Z = -1,05; p = .18\)</span> i zgonów (<span class="math inline">\(D = 1,63; p = 0,06\)</span>);
+takie różnice zaobserwowano jednak między sierpniem i wrześniem a
+pozostałymi miesiącami okresu wiosenno-letniego (marzec–lipiec).
+Mediany 7-dniowej średniej liczby zgonów we wrześniu i maju, a także
+wrześniu i czerwcu nie różniły się od siebie istotnie, co może mieć
+związek z przechodzeniem choroby COVID-19 u osób z pozytywnym wynikiem w
+sposób bezobjawowy w czasie, kiedy następował dynamiczny przyrost
+zakażeń, czyli u końca okresu wiosenno-letniego.</p>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median 7-dniowej średniej liczby zgłaszanych w
+Polsce nowych zakażeń pomiędzy miesiącami sezonu wiosenno-letniego roku
+2020. Statystycznie istotne różnice na poziomie istotności
+<span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem (*).</caption>
+<thead>
+<tr class="header">
+<th align="center">****</th>
+<th align="center"><strong>kwiecień</strong></th>
+<th align="center"><strong>maj</strong></th>
+<th align="center"><strong>czerwiec</strong></th>
+<th align="center"><strong>lipiec</strong></th>
+<th align="center"><strong>sierpień</strong></th>
+<th align="center"><strong>wrzesień</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">marzec</td>
+<td align="center">4,61*</td>
+<td align="center">4,92*</td>
+<td align="center">5,14*</td>
+<td align="center">3,71*</td>
+<td align="center">10,57*</td>
+<td align="center">8,77*</td>
+</tr>
+<tr class="even">
+<td align="center">kwiecień</td>
+<td align="center"></td>
+<td align="center">0,3</td>
+<td align="center">0,28</td>
+<td align="center">-1</td>
+<td align="center">6,37*</td>
+<td align="center">4,77*</td>
+</tr>
+<tr class="odd">
+<td align="center">maj</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">0,28</td>
+<td align="center">-1,31</td>
+<td align="center">6,13*</td>
+<td align="center">4,53*</td>
+</tr>
+<tr class="even">
+<td align="center">czerwiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-1,58</td>
+<td align="center">5,8*</td>
+<td align="center">4,24*</td>
+</tr>
+<tr class="odd">
+<td align="center">lipiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">7,44*</td>
+<td align="center">5,72*</td>
+</tr>
+<tr class="even">
+<td align="center">sierpień</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-1,05</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median 7-dniowej średniej liczby zgłaszanych w
+Polsce nowych zgonów pomiędzy miesiącami sezonu wiosenno-letniego roku
+2020. Statystycznie istotne różnice na poziomie istotności
+<span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem (*).</caption>
+<thead>
+<tr class="header">
+<th align="center">****</th>
+<th align="center"><strong>kwiecień</strong></th>
+<th align="center"><strong>maj</strong></th>
+<th align="center"><strong>czerwiec</strong></th>
+<th align="center"><strong>lipiec</strong></th>
+<th align="center"><strong>sierpień</strong></th>
+<th align="center"><strong>wrzesień</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">marzec</td>
+<td align="center">9,01*</td>
+<td align="center">7,92*</td>
+<td align="center">7,39*</td>
+<td align="center">2,43*</td>
+<td align="center">4,64*</td>
+<td align="center">5,81*</td>
+</tr>
+<tr class="even">
+<td align="center">kwiecień</td>
+<td align="center"></td>
+<td align="center">-1,24</td>
+<td align="center">-1,75</td>
+<td align="center">-7,14*</td>
+<td align="center">-4,77*</td>
+<td align="center">-2,73*</td>
+</tr>
+<tr class="odd">
+<td align="center">maj</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,52</td>
+<td align="center">-5,95*</td>
+<td align="center">-3,56*</td>
+<td align="center">-1,61</td>
+</tr>
+<tr class="even">
+<td align="center">czerwiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-5,38*</td>
+<td align="center">-3,01*</td>
+<td align="center">-1,13</td>
+</tr>
+<tr class="odd">
+<td align="center">lipiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2,39*</td>
+<td align="center">3,81*</td>
+</tr>
+<tr class="even">
+<td align="center">sierpień</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">1,63</td>
+</tr>
+</tbody>
+</table>
+<p>Przez większość miesięcy okresu wiosenno-letniego Polska utrzymywała
+odsetek pozytywnych testów w kierunku COVID-19 na poziomie mniejszym niż
+5%, w związku z czym potrzeba było wykonać więcej niż 20 testów, aby
+jednostkowo stwierdzić pozytywny przypadek zakażenia. Próg ten w Polsce
+przekroczony został 2 kwietnia, kiedy to 7-dniowa średnia wyniosła
+5,69%, czyli pozytywny wynik był uzyskiwany po wykonaniu ok. 18 testów.
+Na poziomie większym od 5% utrzymywał się do 11 kwietnia, po czym zaczął
+spadać, sugerując stabilizację dziennego przyrostu nowych zakażeń.
+Kolejny dynamiczny przyrost odsetka przypadł na środek lata, kiedy to od
+poziomu 1,73% 1 lipca wzrósł do 3,28% 30 sierpnia ze spadkiem na
+początku września do minimalnego poziomu równego 2,46% 9 września, po
+czym nastąpił jego ponowny wzrost, a 22 września był blisko granicy 5% -
+wynosił 4,41%, co ma związek z rozpoczynającą się w tamtym czasie
+kolejną falą. Patrząc pod kątem <span class="math inline">\(PR\)</span> na tle sąsiadów, Polska w
+zadowalającym stopniu radziła sobie z epidemią w sezonie wiosenno-letnim
+– na 199 dni epidemii tylko podczas 9 <span class="math inline">\(PR\)</span> był większy bądź równy 5%, a
+więc przez 4,52% sezonu (rysunek
+<a href="5-chapter05.html#fig:PL-testy-PR-2020-wiosna" reference-type="ref" reference="fig:PL-testy-PR-2020-wiosna">5.22</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-testy-PR-2020-wiosna.png" id="fig:PL-testy-PR-2020-wiosna" alt="" />
+<p class="caption">7-dniowa średnia dziennego odsetka pozytywnych testów w kierunku
+COVID-19 (wyrażony w %) w Polsce w okresie 08.03–22.09.2020. Źródło:
+opracowanie
+własne.</p>
+</div>
+<p>Niektóre polskie województwa miały znaczny wkład w przyrost odsetka
+pozytywnych testów, z czego w niektórych z nich sytuacja epidemiczna
+wydawała się być opanowana, na ogół osiągając 7-dniowy średni odsetek na
+poziomie mniejszym niż 5%. Od 11 maja do 21 września w odstępie
+tygodniowym województwa dolnośląskie, mazowieckie i zachodniopomorskie
+nie osiągnęły poziomu odsetka w wysokości 5%, natomiast w województwach
+opolskim, podkarpackim i śląskim utrzymywał się on na poziomie większym
+bądź bliskim 5% (rysunek
+<a href="5-chapter05.html#fig:PL-testy-PC-wojewodztwa-2020" reference-type="ref" reference="fig:PL-testy-PC-wojewodztwa-2020">5.23</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-testy-PC-wojewodztwa-2020.png" id="fig:PL-testy-PC-wojewodztwa-2020" alt="" />
+<p class="caption">7-dniowe średnie dziennych liczb zakażeń w przeliczeniu na 1,00
+mieszkańców dla województw Polski w okresie 04.03–22.09.2020. Źródło:
+opracowanie
+własne.</p>
+</div>
+<p>Największy przyrost nowych zakażeń zaobserwowano w województwie śląskim,
+kiedy pojawiły się masowe zakażenia pracujących w kopalniach na Górnym
+Śląsku górników. Mimo że w pozostałych województwach w okresie
+wiosenno-letnim, a przede wszystkim w lecie przyrost nie wykazywał
+postępującej dynamiki, dało się zauważyć postępujący wzrost liczby
+nowych zakażeń od połowy września, czyli wraz ze zbliżającym się okresem
+jesienno-zimowym (rysunek
+<a href="5-chapter05.html#fig:PL-zakazenia-wojewodztwa-2020-wiosna" reference-type="ref" reference="fig:PL-zakazenia-wojewodztwa-2020-wiosna">5.24</a>).</p>
+<div class="figure">
+<img src="PL-zakazenia-wojewodztwa-2020-wiosna.png" id="fig:PL-zakazenia-wojewodztwa-2020-wiosna" alt="" />
+<p class="caption">7-dniowe średnie dziennych liczb zakażeń w przeliczeniu na 100 000
+mieszkańców dla województw Polski w okresie 04.03–22.09.2020. Źródło:
+opracowanie
+własne.</p>
+</div>
+</div>
+<div id="sezon-jesienno-zimowy-23.0931.12.2020-r." class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</h3>
+<p>Postępujący pod koniec sezonu wiosenno-letniego przyrost dziennej liczby
+nowych zakażeń w Stanach Zjednoczonych i Szwecji swoje apogeum osiągnął
+w połowie grudnia. Pomiędzy Stanami Zjednoczony a Szwecją istniały
+istotne różnice w medianach 7-dniowej średniej liczby nowych zakażeń w
+przeliczeniu na 1 mln mieszkańców – większa ona była w Stanach
+Zjednoczonych (<span class="math inline">\(W = 74 771; p &lt;.001\)</span>). W porównaniu z okresem
+poprzednim, w sezonie jesienno-zimowym (rysunek
+<a href="5-chapter05.html#fig:top3-zakazenia-jesien" reference-type="ref" reference="fig:top3-zakazenia-jesien">5.25</a>). Mimo że wszystkie kraje różniły
+się od siebie pod względem mediany tego czynnika, największa różnica
+zaistniała pomiędzy Stanami Zjednoczonymi a Indiami (tabela 5.11).
+Umiarkowanie stabilna sytuacja epidemiczna miała miejsce również w
+Brazylii – mediana 7-dniowej średniej liczby nowych zakażeń była
+mniejsza od odpowiadających dla Stanów Zjednoczonych i Szwecji, a <span class="math inline">\(CV\)</span>
+był najmniejszy ze wszystkich rozpatrywanych krajów: wynosił 0,3 (dla
+Indii z kolei 0,39).</p>
+<div class="figure">
+<img src="figure/chap05/top3-zakazenia-jesien.png" id="fig:top3-zakazenia-jesien" alt="" />
+<p class="caption">7-dniowa średnia liczba nowych zakażeń w przeliczeniu na 1 mln osób
+dla 3 krajów z największą sumaryczną liczbą zakażeń w roku 2020 (Stany
+Zjednoczone, Brazylia, Indie) i Szwecji w sezonie jesienno-zimowym
+(23.09–31.12.2020 r.) Źródło: opracowanie
+własne.</p>
+</div>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median 7-dniowej średniej liczby nowych zakażeń
+dla 3 krajów z największą sumaryczną liczbą zakażeń w roku 2020 (Stany
+Zjednoczone, Brazylia, Indie) i Szwecji w sezonie jesienno-zimowym
+(23.09–31.12.2020 r.). Statystycznie istotne różnice na poziomie
+istotności <span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem (*).</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>Brazylia</strong></th>
+<th align="center"><strong>Indie</strong></th>
+<th align="center"><strong>Stany Zjednoczone</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Szwecja</td>
+<td align="center">-3,19*</td>
+<td align="center">-11,93*</td>
+<td align="center">2,96*</td>
+</tr>
+<tr class="even">
+<td align="center">Brazylia</td>
+<td align="center"></td>
+<td align="center">-8,73*</td>
+<td align="center">6,14*</td>
+</tr>
+<tr class="odd">
+<td align="center">Indie</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-14,88*</td>
+</tr>
+</tbody>
+</table>
+<p>Podobny trend utrzymał się również wśród krajów graniczących z Polską.
+Największy przyrost 7-dniowej średniej liczby nowych zakażeń w
+przeliczeniu na 1 mln osób zaobserwowano dla Czech, które swoje maksimum
+pod względem tego czynnika osiągnęły 27.10, a 31.12 liczba nowych
+zakażeń w sezonie jesienno-zimowym była największa (17 039). Tylko Litwa
+i Słowacja nie różniły się w medianach 7-dniowych średnich liczb nowych
+zakażeń w przeliczeniu na 1 mln osób (<span class="math inline">\(D = -0,22; p = .41\)</span>), a
+największa różnica zaistniała pomiędzy Czechami a Białorusią
+(<span class="math inline">\(D = -13,61; p &lt;.001\)</span>; rysunek
+<a href="5-chapter05.html#fig:sasiedzi-jesien-zima" reference-type="ref" reference="fig:sasiedzi-jesien-zima">5.26</a>).</p>
+<div class="figure">
+<img src="figure/chap05/sasiedzi-jesien-zima.png" id="fig:sasiedzi-jesien-zima" alt="" />
+<p class="caption">7-dniowa średnia liczba nowych zakażeń w przeliczeniu na 1 mln osób
+dla części krajów graniczących z Polską w sezonie jesienno-zimowym
+(23.09–31.12.2020 r.) Źródło: opracowanie
+własne.</p>
+</div>
+<p>W sezonie jesienno-zimowym Polska dotkliwie zniosła drugą “falę”
+pandemii, o czym świadczą utrzymujące się na poziomie większym niż 1 000
+7-dniowe średnie liczby zakażeń dla końca września, października,
+listopada i grudnia – dla porównania, w sezonie wiosenno-letnim
+najwyższa średnia wartość została osiągnięta w sierpniu (688). Najwyższe
+średnia (21 727,76) i mediana (21 903,29) przypadały na listopad, na co
+wpływ mieć mogły czynniki pogodowe, jak i organizowanie wówczas na
+terenie kraju protesty. W grudniu średnia (10 065,79) była już 2-krotnie
+większa, choć nadal niemal 10-krotnie wyższa niż pod koniec września. Z
+kolei największa 7-dniowa średnia liczba zgonów przypadała na grudzień
+(370,52) i była bardzo zbliżona do tej z listopada (368,7), niemniej jej
+utrzymywanie się na poziomie niemal 20-krotnie wyższym niż we wrześniu
+może sugerować przerwę czasową pomiędzy momentem zakażenia a śmiercią
+(tabela 5.12). Liczby nowych zakażeń i zgonów zaczęły się stopniowo
+stabilizować pod koniec listopada, sukcesywnie spadając aż do końca roku
+2020 (rysunek <a href="5-chapter05.html#fig:PL-zakazenia-jesien-zima" reference-type="ref" reference="fig:PL-zakazenia-jesien-zima">5.27</a>).</p>
+<table>
+<caption>Średnie, odchylenia standardowe i mediany 7-dniowych średnich liczb
+zakażeń i zgonów w Polsce w okresie jesienno-zimowym (23.09–31.12.2020
+r.). Źródło: opracowanie własne.</caption>
+<colgroup>
+<col width="4%" />
+<col width="14%" />
+<col width="19%" />
+<col width="14%" />
+<col width="13%" />
+<col width="19%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Miesiąc</strong></th>
+<th align="center"><strong>Średnia (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Odchylenie standardowe (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Mediana (7-dniowa liczba zakażeń)</strong></th>
+<th align="center"><strong>Średnia (7-dniowa liczba zgonów)</strong></th>
+<th align="center"><strong>Odchylenie standardowe (7-dniowa liczba zgonów)</strong></th>
+<th align="center"><strong>Mediana (7-dniowa liczba zgonów)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">wrzesień</td>
+<td align="center">1 120,34</td>
+<td align="center">198,81</td>
+<td align="center">1 124,29</td>
+<td align="center">19,84</td>
+<td align="center">3,26</td>
+<td align="center">20,07</td>
+</tr>
+<tr class="even">
+<td align="center">październik</td>
+<td align="center">6 954,09</td>
+<td align="center">4 716,2</td>
+<td align="center">5 895,71</td>
+<td align="center">80,44</td>
+<td align="center">45,15</td>
+<td align="center">74,43</td>
+</tr>
+<tr class="odd">
+<td align="center">listopad</td>
+<td align="center">21 727,76</td>
+<td align="center">2 431,36</td>
+<td align="center">21 903,29</td>
+<td align="center">368,7</td>
+<td align="center">102,04</td>
+<td align="center">351,36</td>
+</tr>
+<tr class="even">
+<td align="center">grudzień</td>
+<td align="center">10 065,79</td>
+<td align="center">1 430,32</td>
+<td align="center">10 180,86</td>
+<td align="center">370,52</td>
+<td align="center">71,84</td>
+<td align="center">388,14</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="figure/chap05/PL-zakazenia-jesien-zima.png" id="fig:PL-zakazenia-jesien-zima" alt="" />
+<p class="caption">7-dniowa średnia liczba nowych zakażeń (A), zlogarytmowana 7-dniowa
+średnia liczba nowych zakażeń (B), 7-dniowa średnia liczba nowych zgonów
+(C) i zlogarytmowana 7-dniowa średnia liczba nowych zgonów (D) w czasie
+dla Polski w sezonie jesienno-zimowym (23.09–31.12.2020 r.). Źródło:
+opracowanie
+własne.</p>
+</div>
+<p>Pomiędzy październikiem a grudniem nie było istotnych różnic w medianach
+7-dniowych średnich liczb nowych zakażeń (tabela 5.13). Październik i
+grudzień jako miesiące “otulające” apogeum epidemii w Polsce, które
+przypadło w listopadzie, różniły się jednak w przebiegu krzywej epidemii
+– w październiku liczby zakażeń zaczęły przyrastać od minimalnego
+poziomu we wrześniu, natomiast w grudniu nastąpił ich wyraźny spadek,
+ale z maksymalnego poziomu w listopadzie.</p>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla median 7-dniowej średniej liczby zgłaszanych w
+Polsce nowych zakażeń pomiędzy miesiącami sezonu jesienno-zimowego roku
+2020. Statystycznie istotne różnice na poziomie istotności
+<span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem (*).</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>październik</strong></th>
+<th align="center"><strong>listopad</strong></th>
+<th align="center"><strong>grudzień</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">wrzesień</td>
+<td align="center">2,43*</td>
+<td align="center">7,01*</td>
+<td align="center">3,66*</td>
+</tr>
+<tr class="even">
+<td align="center">październik</td>
+<td align="center"></td>
+<td align="center">7,14*</td>
+<td align="center">1,93</td>
+</tr>
+<tr class="odd">
+<td align="center">listopad</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-5,23*</td>
+</tr>
+</tbody>
+</table>
+<p>Dynamiczne przyrosty nowych zakażeń dotknęły wszystkie województwa
+Polski, w podobnym czasie, tj. w połowie listopada, osiągnęły również
+maksimum. Jako pierwsze najwcześniej przyrost ten był zauważalny w
+województwie kujawsko-pomorskim, lubelskim, łódzkim i mazowieckim, które
+szczyt liczby nowych zakażeń osiągnęły już na początku listopada
+(rysunek <a href="5-chapter05.html#fig:PL-jesien-woj" reference-type="ref" reference="fig:PL-jesien-woj">5.28</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-jesien-woj.png" id="fig:PL-jesien-woj" alt="" />
+<p class="caption">7-dniowe średnie dziennych liczb zakażeń w przeliczeniu na 100 tys.
+mieszkańców dla województw Polski w sezonie jesienno-zimowym
+(23.09–31.12.2020 r.). Źródło: opracowanie
+własne.</p>
+</div>
+</div>
+</div>
+<div id="szczepienia-w-kierunku-covid-19" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Szczepienia w kierunku COVID-19</h2>
+<div id="zarys-1" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Zarys</h3>
+<p>Pierwsze szczepienie w kierunku COVID-19 zostało przeprowadzone
+8.12.2020 r. – zaszczepiona została 90-letnia emerytowana pielęgniarka
+w Wielkiej Brytanii. Wkrótce za Wielką Brytanią podążyły pozostałe kraje
+świata, tak że do 31.12.2020 r. w sumie na świecie wykonano 279 932
+szczepienia, a do 31.03.2021 r. – 16 363 968. W Europie, Azji i Ameryce
+Północnej największy przyrost 7-dniowej średniej liczby wykonanych
+szczepień zaczęto obserwować od stycznia 2021 roku, natomiast dla
+pozostałych kontynentów – Afryki, Ameryki Południowej i Oceanii –
+znacznie później: kiedy Europa, Azja i Ameryka Północna przekroczyły
+liczbę 10 000 osób zaszczepionych kolejno 23.12, 16.12 i 21.12.2020 r.,
+Afryka przekroczyła dopiero 29.01.2021 r., Ameryka Południowa –
+30.12.2020 r. – a Oceania – 11.03.2020 r. (rysunek
+<a href="5-chapter05.html#fig:nowe-szczepienia-kontynenty" reference-type="ref" reference="fig:nowe-szczepienia-kontynenty">5.29</a>).</p>
+<div class="figure">
+<img src="figure/chap05/nowe-szczepienia-kontynenty.png" id="fig:nowe-szczepienia-kontynenty" alt="" />
+<p class="caption">7-dniowa liczba nowych szczepień w przeliczeniu na 1 mln osób dla
+kontynentów świata od 04.12.2020 r. do 31.03.2021 r. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Krajem o najwyższej intensywności wykonywanych dziennie szczepień był
+Izrael – na 31.12.2020 r. łącznie wykonano tam 11,44 szczepień w
+przeliczeniu na 100 osób, czyli niemal 2 razy więcej w porównaniu z
+pozostałymi 9 krajami razem wziętymi, które znalazły się wśród 10 krajów
+o największej sumarycznej liczbie wykonanych szczepień w przeliczeniu na
+100 osób na 31.12 (rysunek
+<a href="5-chapter05.html#fig:suma-szczepien-na-100-top-10" reference-type="ref" reference="fig:suma-szczepien-na-100-top-10">5.30</a>).</p>
+<div class="figure">
+<img src="figure/chap05/suma-szczepien-na-100-top-10.png" id="fig:suma-szczepien-na-100-top-10" alt="" />
+<p class="caption">10 krajów z największą suma wykonanych szczepień w przeliczeniu na 100
+osób na 31.12.2020 r.. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Na 31.03.2021 r. tylko 3 kraje na świecie zaszczepiły więcej niż połowę
+populacji: Gibraltar (94,2% zaszczepionych 1 z 2 dawek i 84,7%
+zaszczepionych 2 dawkami), Izrael (60,6% zaszczepionych 1 z 2 dawek i
+55,4% zaszczepionych 2 dawkami) i Bhutan (51,2% zaszczepionych 1 z 2
+dawek i 0% zaszczepionych 2 dawkami), z czego Izrael miał najmniejszą
+różnicę frakcji osób zaszczepionych 1 z 2 dawek a 2 dawkami. Duża
+procentowa liczba osób zaszczepionych w Gibraltarze, Bhutanie czy na
+Wyspie Man wynika nie tyle z intensywności przebiegu szczepień, ile
+raczej z liczby ludności je zamieszkujących (rysunek
+<a href="5-chapter05.html#fig:procent-zaszczepionych-top-10" reference-type="ref" reference="fig:procent-zaszczepionych-top-10">5.31</a>).</p>
+<div class="figure">
+<img src="figure/chap05/procent-zaszczepionych-top-10.png" id="fig:procent-zaszczepionych-top-10" alt="" />
+<p class="caption">10 krajów z największym procentem zaszczepionych osób w populacji 1 z
+2 dawek w porównaniu z 2 dawkami na 31.03.2021 r. Czarną, przerywaną
+linią zaznaczono granicę wskazującą na połowę liczebności populacji
+kraju. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Program szczepień w Polsce, jak i w krajach z nią sąsiadujących
+rozpoczął się już w grudniu 2020 r.; na początku w Rosji, w której 15.12
+zaszczepiono 28 500 osób, a następnie w Czechach, Niemczech i na Litwie
+27.12, gdzie zaszczepiono kolejno 1 252, 24 087 i 2 454 osób. Pod koniec
+grudnia do akcji wkroczyła Polska - 28.12 zaszczepiono 2 000 osób - a na
+początku 2021 roku, tj. 5.01, Słowacja z łączną liczbą zaszczepionych
+osób równą 425. Szczepienia w Białorusi rozpoczęły się dość późno,
+mianowicie 18.02.2021 r. - zaszczepiono 20 944 osób. Jako ostatnia
+włączyła się Ukraina - 24.02 do pierwszego szczepienia przystąpiło 159
+osób. 31.12 najwięcej szczepień w przeliczeniu na 100 osób wykonywała
+Litwa (0,36), za nią zaś figurowały Niemcy (0,25), Polska (0,13) i
+Czechy (0,11). Do 31.03.2021 r. Litwa w dalszym ciągu figurowała na 1.
+miejscu w największej sumarycznej liczbie szczepień w przeliczeniu na
+100 osób (19,09 i 12,93 osób zaszczepionych), Niemcy zostały wyparte
+przez Słowację (18,27 i 13,45 osób zaszczepionych), a same zajęły 3.
+miejsce (16,93 i 11,88 osób zaszczepionych). Polska natomiast doganiała
+Niemcy (16,57 i 11,18 osób zaszczepionych). Największy przyrost
+7-dniowej liczby szczepień w przeliczeniu na 1 mln mieszkańców dla
+większości krajów zaczęto obserwować od początku 2021 roku (rysunek
+<a href="5-chapter05.html#fig:PL-sasiedzi-zaszczepieni" reference-type="ref" reference="fig:PL-sasiedzi-zaszczepieni">5.32</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-sasiedzi-zaszczepieni.png" id="fig:PL-sasiedzi-zaszczepieni" alt="" />
+<p class="caption">7-dniowa średnia liczba osób zaszczepionych w przeliczeniu na 1 mln
+mieszkańców dla Polski i krajów sąsiadujących od daty zgłoszenia
+pierwszego szczepienia do 31.03.2021. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Do 31.03.2021 akcja szczepień była efektywnie przeprowadzana w Polsce,
+Czechach, Słowacji, Niemczech i na Litwie - pomiędzy każdą z par tych
+krajów nie było istotnych różnic w medianach 7-dniowych średnich liczb
+osób zaszczepionych w przeliczeniu na 1 mln mieszkańców. Różnic również
+nie było pomiędzy Białorusią a Ukrainą - krajami, które do 31.03
+zaszczepiły mniej niż 1% populacji.</p>
+<table>
+<caption>Wartości statystyk testu Dunneta z poprawką Benjamini-Hochberga dla
+różnic w medianach 7-dniowych średnich osób zaszczepionych w
+przeliczeniu na 1 mln mieszkańców dla Polski i jej sąsiadów w okresie od
+daty pierwszego szczepienia w danym kraju do 31.03.2021. Statystycznie
+istotne różnice na poziomie istotności <span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone
+asteryskiem (*). Źródło: opracowanie własne.</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>Czechy</strong></th>
+<th align="center"><strong>Litwa</strong></th>
+<th align="center"><strong>Niemcy</strong></th>
+<th align="center"><strong>Polska</strong></th>
+<th align="center"><strong>Słowacja</strong></th>
+<th align="center"><strong>Rosja</strong></th>
+<th align="center"><strong>Ukraina</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Białoruś</td>
+<td align="center">12,79*</td>
+<td align="center">14,62*</td>
+<td align="center">13,95*</td>
+<td align="center">13,60*</td>
+<td align="center">14,14*</td>
+<td align="center">6,1*</td>
+<td align="center">-0,169</td>
+</tr>
+<tr class="even">
+<td align="center">Czechy</td>
+<td align="center"></td>
+<td align="center">1,89</td>
+<td align="center">1,21</td>
+<td align="center">0,87</td>
+<td align="center">1,56</td>
+<td align="center">-7,12*</td>
+<td align="center">-11,45*</td>
+</tr>
+<tr class="odd">
+<td align="center">Litwa</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,67</td>
+<td align="center">-1,01</td>
+<td align="center">-0,29</td>
+<td align="center">-9,03*</td>
+<td align="center">-13,07*</td>
+</tr>
+<tr class="even">
+<td align="center">Niemcy</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-0,33</td>
+<td align="center">0,37</td>
+<td align="center">-8,33*</td>
+<td align="center">-12,47*</td>
+</tr>
+<tr class="odd">
+<td align="center">Polska</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">0,70</td>
+<td align="center">-7,97*</td>
+<td align="center">-12,17*</td>
+</tr>
+<tr class="even">
+<td align="center">Słowacja</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-8,59*</td>
+<td align="center">12,67*</td>
+</tr>
+<tr class="odd">
+<td align="center">Rosja</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-5,53*</td>
+</tr>
+</tbody>
+</table>
+<p>Do 31.03.2021 jednak Polska i żaden kraj z nią graniczący nie osiągnęli
+optymalnego odsetka zaszczepionych osób, by można było mówić o udziale
+odporności stadnej w zahamowaniu transmisji wirusa. Krajem, który
+zaszczepił największą część populacji, była Słowacja (13,4% osób
+zaszczepionych 1 z 2 dawek i 4,8% 2 dawkami), a za nią Litwa (12,9% osób
+zaszczepionych 1 z 2 dawek i 6,2% 2 dawkami). Niemcy, Czechy i Polska
+zaszczepiły podobną część populacji 1 z 2 dawek - odpowiednio 11.9%,
+11,3% i 11,3%. Rosja i Ukraina do 31.03 zaszczepiły tylko kolejno 4,8% i
+0,6% populacji, z czego Ukraina nie rozpoczęła jeszcze szczepień drugą
+dawką. W porównaniu z krajami przeprowadzającymi akcję szczepień w
+efektywnym tempie osoby w pełni zaszczepione (tj. 2 dawkami szczepionki)
+stanową więcej niż połowę osób zaszczepionych tylko 1 z 2 dawek (rysunek
+<a href="5-chapter05.html#fig:PL-sasiedzi-pr-zaszcz" reference-type="ref" reference="fig:PL-sasiedzi-pr-zaszcz">5.33</a>).</p>
+<div class="figure">
+<img src="figure/chap05/PL-sasiedzi-pr-zaszcz.png" id="fig:PL-sasiedzi-pr-zaszcz" alt="" />
+<p class="caption">Procent populacji zaszczepionej 1 z 2 dawek szczepionki i 2 dawkami w
+Polsce i krajach z nią sąsiadujących na 31.03.2021. Źródło: opracowanie
+własne.</p>
+</div>
+</div>
+<div id="niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</h3>
+<p>Pierwsze przypadki niepożądanych odczynów poszczepiennych (NOP-ów) w
+Polsce zostały zgłoszone 31.12.2020 r. Do 30.03.2021 zaszczepionych
+minimum 1 dawką szczepionki zostało 6 081 824 osób, z czego ok. 3 899
+000 stanowiły kobiety (64,1%), a ok. 2 176 000 mężczyźni (35,8%)<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
+Zarejestrowano w sumie 5 751 zgłoszeń dotyczących NOP-ów pośród
+zaszczepionych osób, co stanowi ok. 0,09% NOP-ów wśród sumy wykonanych
+szczepień do tego dnia, a więc 1 NOP na ok. 1 111 wykonanych szczepień.
+Najczęściej występowały one u kobiet (4 936 – 85,8%) niż u mężczyzn
+(815 – 14,2%); kobiety też częściej niż mężczyźni borykały się z NOP na
+tle ogółu osób zaszczepionych w obrębie płci
+<span class="math inline">\((\chi^2 = 1173,4, p &lt;.001)\)</span>. Wyróżniono cztery typy objawów
+poszczepiennych: lekki, poważny, ciężki i zgon. 86,1% osób (4 951)
+borykało się z lekkimi odczynami, do których należały ból czy
+zaczerwienienie w miejscu ukłucia. 10,7% osób (614) zgłaszało odczyny
+poważne niewymagające hospitalizacji, jak np. drętwienie kończyn czy
+podwyższona temperatura, 2,4% ciężkie (136) wymagające hospitalizacji,
+jak np. padaczka czy nagłe zatrzymanie akcji serca, a 0,9% (50) zmarło w
+przeciągu 4 tygodni od aplikacji szczepionki (rysunek
+<a href="5-chapter05.html#fig:NOP-PL-plec-klasyfikacja" reference-type="ref" reference="fig:NOP-PL-plec-klasyfikacja">5.34</a>).</p>
+<div class="figure">
+<img src="figure/chap05/NOP-PL-plec-klasyfikacja.png" id="fig:NOP-PL-plec-klasyfikacja" alt="" />
+<p class="caption">Rozkład częstości wystąpienia niepożądanych objawów poszczepiennych
+wśród mieszkańców Polski w zależności od płci (stan na 31.03.2021).
+Klasyfikacja: C - ciężki; L - lekki; P - poważny; Z - zgon. Źródło:
+opracowanie
+własne.</p>
+</div>
+<p>Mimo że kobiety częściej niż mężczyźni zmagały się z NOP-ami, proporcje
+osób z odczynami klasyfikowanymi do stanu ciężkiego i zmarłych były
+wyższe w grupie mężczyzn (<span class="math inline">\(\chi^2 = 29,2, p &lt;.001\)</span> i
+<span class="math inline">\(\chi^2 = 53,23, p &lt;.001\)</span> odpowiednio). Z kolei proporcje osób z
+odczynami poważnymi były jednorodne pomiędzy grupami kobiet i mężczyzn i
+wynosiły 10,7% (<span class="math inline">\(\chi^2 = 0, p = .99\)</span>). W porównaniu z mężczyznami
+kobiety częściej zmagały się z odczynami lekkimi
+(<span class="math inline">\(\chi^2 = 18,7, p &lt;.001\)</span>).</p>
+<table style="width:100%;">
+<caption>Porównanie mężczyzn i kobiet w Polsce pod względem klasyfikacji
+niepożądanych odczynów poszczepiennych (stan na 31.03.2021). Wartości
+<span class="math inline">\(\chi^2\)</span> i <span class="math inline">\(p\)</span> zostały obliczone z użyciem testu dla proporcji.</caption>
+<colgroup>
+<col width="15%" />
+<col width="16%" />
+<col width="5%" />
+<col width="17%" />
+<col width="5%" />
+<col width="15%" />
+<col width="5%" />
+<col width="8%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Klasyfikacja objawu</strong></th>
+<th align="center"><strong>Liczebność (kobiety)</strong></th>
+<th align="center"><strong>%</strong></th>
+<th align="center"><strong>Liczebność (mężczyźni)</strong></th>
+<th align="center"><strong>%</strong></th>
+<th align="center"><strong>Liczebność (ogółem)</strong></th>
+<th align="center"><strong>%</strong></th>
+<th align="center"><strong><span class="math inline">\(\chi^2\)</span></strong></th>
+<th align="center"><strong>Wartość <span class="math inline">\(p\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">95</td>
+<td align="center">1,9</td>
+<td align="center">41</td>
+<td align="center">5</td>
+<td align="center">136</td>
+<td align="center">2,4</td>
+<td align="center">29,2</td>
+<td align="center">.001*</td>
+</tr>
+<tr class="even">
+<td align="center">L</td>
+<td align="center">4 289</td>
+<td align="center">86,9</td>
+<td align="center">662</td>
+<td align="center">81,2</td>
+<td align="center">4 951</td>
+<td align="center">86,1</td>
+<td align="center">18,7</td>
+<td align="center">.001*</td>
+</tr>
+<tr class="odd">
+<td align="center">P</td>
+<td align="center">527</td>
+<td align="center">10,7</td>
+<td align="center">87</td>
+<td align="center">10,7</td>
+<td align="center">614</td>
+<td align="center">10,7</td>
+<td align="center">0</td>
+<td align="center">.99</td>
+</tr>
+<tr class="even">
+<td align="center">Z</td>
+<td align="center">25</td>
+<td align="center">0,5</td>
+<td align="center">25</td>
+<td align="center">3,1</td>
+<td align="center">50</td>
+<td align="center">0,9</td>
+<td align="center">53,23</td>
+<td align="center">.001*</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Suma</strong></td>
+<td align="center">4 936</td>
+<td align="center">100</td>
+<td align="center">815</td>
+<td align="center">100</td>
+<td align="center">5 751</td>
+<td align="center">100</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+<p>Do zaklasyfikowanego objawu każdego pacjenta dodawano notkę informacyjną
+o jego stanie. Najczęściej pojawiającą się informacją było
+“zaczerwienienie i krótkotrwała bolesność w miejscu wkłucia” – pojawiła
+się ona w 4 948 notkach i była przypisywana pacjentom z odczynami
+lekkimi; stanowiła 99,94% zawartości notek pacjentów z tej grupy. Wśród
+słów najczęściej występujących w notkach w przypadku objawów poważnych
+na 1. miejscu znalazło się “gorączka” (3,4%). Odczyny poważne zatem
+najczęściej wiązały się z gorączką, “bóle” (2,8%) i “głowy” (2,8%),
+czyli bólem głowy, ale też “osłabienie” (1,8%) i “mięśni” (1,4%), co ma
+związek z ogólnym osłabieniem, jak i dolegliwościami ze strony układu
+mięśniowego. Z kolei część pacjentów z odczynami ciężkimi wymagała
+leczenia w szpitalnym oddziale ratunkowym (24 notek zawierających “sor”
+na 136 - 17,6%). Przyczyną zgonu części zmarłych pacjentów była
+niewydolność krążeniowa - “krążenia” (1,5%, ciąg “krążeni”: 7 na 50
+notek - 14%) - czemu wcześnie towarzyszyła “duszność” (0,8%, ciąg
+“duszno”: 6 na 50 notek - 12%). Wśród wyrażeń w notkach
+zaklasyfikowanych do pacjentów zmarłych nie zidentyfikowano jednak
+regularności - niektóre z nich zawierały wyłącznie informację “zgon” (7
+na 50 notek - 14%), podczas gdy inne tylko nieistotnie ją uzupełniały,
+np. “zgon w 11 dobie po szczepieniu.”.</p>
+<table>
+<caption>10 najczęściej występujących słów w notkach zawierających informacje o
+stanie pacjentów w Polsce, których objawy zostały zaklasyfikowane do
+jednej z kategorii spośród P (poważne), C (ciężkie) i Z (zgon), dla
+danego typu objawu (stan na 31.03.2021). Źródło: opracowanie własne.</caption>
+<colgroup>
+<col width="4%" />
+<col width="5%" />
+<col width="8%" />
+<col width="17%" />
+<col width="5%" />
+<col width="8%" />
+<col width="17%" />
+<col width="5%" />
+<col width="8%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Pozycja</strong></th>
+<th align="center"><strong>Wyraz (P)</strong></th>
+<th align="center"><strong>Liczba wystąpień (P)</strong></th>
+<th align="center"><strong>Częstość wystąpienia słowa w objawie P (w %)</strong></th>
+<th align="center"><strong>Wyraz (C)</strong></th>
+<th align="center"><strong>Liczba wystąpień (C)</strong></th>
+<th align="center"><strong>Częstość wystąpienia słowa w objawie C (w %)</strong></th>
+<th align="center"><strong>Wyraz (Z)</strong></th>
+<th align="center"><strong>Liczba wystąpień (Z)</strong></th>
+<th align="center"><strong>Częstość wystąpienia słowa w objawie Z (w %)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">gorączka</td>
+<td align="center">249</td>
+<td align="center">3,4</td>
+<td align="center">hospitalizacja</td>
+<td align="center">31</td>
+<td align="center">1,4</td>
+<td align="center">zgon</td>
+<td align="center">50</td>
+<td align="center">8,2</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">hospitalizacji</td>
+<td align="center">223</td>
+<td align="center">3</td>
+<td align="center">pacjentka</td>
+<td align="center">30</td>
+<td align="center">1,3</td>
+<td align="center">dniu</td>
+<td align="center">13</td>
+<td align="center">2,1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">głowy</td>
+<td align="center">210</td>
+<td align="center">2,8</td>
+<td align="center">sor</td>
+<td align="center">29</td>
+<td align="center">1,3</td>
+<td align="center">szczepieniu</td>
+<td align="center">11</td>
+<td align="center">1,8</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">bóle</td>
+<td align="center">205</td>
+<td align="center">2,8</td>
+<td align="center">hospitalizowana</td>
+<td align="center">19</td>
+<td align="center">0,8</td>
+<td align="center">krążenia</td>
+<td align="center">9</td>
+<td align="center">1,5</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">ból</td>
+<td align="center">199</td>
+<td align="center">2,7</td>
+<td align="center">przytomności</td>
+<td align="center">19</td>
+<td align="center">0,8</td>
+<td align="center">pacjentka</td>
+<td align="center">9</td>
+<td align="center">1,5</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">wymaga</td>
+<td align="center">167</td>
+<td align="center">2,3</td>
+<td align="center">głowy</td>
+<td align="center">18</td>
+<td align="center">0,8</td>
+<td align="center">pacjent</td>
+<td align="center">7</td>
+<td align="center">1,2</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">osłabienie</td>
+<td align="center">132</td>
+<td align="center">1,8</td>
+<td align="center">gorączka</td>
+<td align="center">18</td>
+<td align="center">0,8</td>
+<td align="center">dobie</td>
+<td align="center">6</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">miejscu</td>
+<td align="center">118</td>
+<td align="center">1,6</td>
+<td align="center">pacjent</td>
+<td align="center">18</td>
+<td align="center">0,8</td>
+<td align="center">godz</td>
+<td align="center">6</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">mięśni</td>
+<td align="center">105</td>
+<td align="center">1,4</td>
+<td align="center">szczepieniu</td>
+<td align="center">18</td>
+<td align="center">0,8</td>
+<td align="center">zgonu</td>
+<td align="center">6</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">odczyn</td>
+<td align="center">104</td>
+<td align="center">1,4</td>
+<td align="center">hospitalizowany</td>
+<td align="center">17</td>
+<td align="center">0,7</td>
+<td align="center">duszność</td>
+<td align="center">5</td>
+<td align="center">0,8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="estymacja-współczynnika-reprodukcji-wirusa-r" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Estymacja współczynnika reprodukcji wirusa (R)</h2>
+<p>Wyestymowany z użyciem filtra Kalmana współczynnik <span class="math inline">\(R(t)\)</span> dla Polski w
+pierwszych dniach po przekroczeniu sumarycznej liczby zakażeń w
+wysokości 100 początkowo zakładał intensywny rozwój epidemii. Średnia
+współczynnika w okresie 16.03-23.03.2020 r. wynosiła 2,5 z odchyleniem
+standardowym równym 1,19, a mediana 2,35. Współczynnik zmienności <span class="math inline">\(CV\)</span>
+wynosił 0,47, co świadczy o silnym zróżnicowaniu <span class="math inline">\(R(t)\)</span> na przestrzeni
+rozpatrywanego okresu.</p>
+<table>
+<caption>Dane rzeczywiste i uzyskane z modelu <span class="math inline">\(SIR\)</span> dla dziennych liczb nowych
+zakażeń w Polsce w okresie 14.03–23.03.2020 r. wraz z wyestymowanym
+chwilowym współczynnikiem reprodukcji wirusa <span class="math inline">\(R(t)\)</span>.</caption>
+<colgroup>
+<col width="6%" />
+<col width="23%" />
+<col width="18%" />
+<col width="23%" />
+<col width="23%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Data</strong></th>
+<th align="center"><strong>Liczba nowych zakażeń (dane rzeczywiste)</strong></th>
+<th align="center"><strong>Suma zakażeń (dane rzeczywiste)</strong></th>
+<th align="center"><strong>Liczba nowych zakażeń (dane z modelu SIR)</strong></th>
+<th align="center"><strong>Współczynnik wzrostu (dane z modelu SIR)</strong></th>
+<th align="center"><strong><span class="math inline">\(R(t)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">14.03.2020</td>
+<td align="center">35</td>
+<td align="center">103</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center">15.03.2020</td>
+<td align="center">16</td>
+<td align="center">119</td>
+<td align="center">104,271</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center">16.03.2020</td>
+<td align="center">58</td>
+<td align="center">177</td>
+<td align="center">147,36</td>
+<td align="center">0,413</td>
+<td align="center">3,89</td>
+</tr>
+<tr class="even">
+<td align="center">17.03.2020</td>
+<td align="center">61</td>
+<td align="center">238</td>
+<td align="center">187,288</td>
+<td align="center">0,271</td>
+<td align="center">2,9</td>
+</tr>
+<tr class="odd">
+<td align="center">18.03.2020</td>
+<td align="center">13</td>
+<td align="center">251</td>
+<td align="center">173,506</td>
+<td align="center">-0,074</td>
+<td align="center">0,48</td>
+</tr>
+<tr class="even">
+<td align="center">19.03.2020</td>
+<td align="center">104</td>
+<td align="center">355</td>
+<td align="center">252,695</td>
+<td align="center">0,456</td>
+<td align="center">4,19</td>
+</tr>
+<tr class="odd">
+<td align="center">20.03.2020</td>
+<td align="center">70</td>
+<td align="center">425</td>
+<td align="center">286,56</td>
+<td align="center">0,134</td>
+<td align="center">1,94</td>
+</tr>
+<tr class="even">
+<td align="center">21.03.2020</td>
+<td align="center">111</td>
+<td align="center">536</td>
+<td align="center">356,582</td>
+<td align="center">0,244</td>
+<td align="center">2,71</td>
+</tr>
+<tr class="odd">
+<td align="center">22.03.2020</td>
+<td align="center">98</td>
+<td align="center">634</td>
+<td align="center">403,591</td>
+<td align="center">0,132</td>
+<td align="center">1,92</td>
+</tr>
+<tr class="even">
+<td align="center">23.03.2020</td>
+<td align="center">115</td>
+<td align="center">749</td>
+<td align="center">460,877</td>
+<td align="center">0,142</td>
+<td align="center">1,99</td>
+</tr>
+</tbody>
+</table>
+<p>Podobne wyniki dla tego okresu zostały uzyskane z użyciem metody z
+pakietu EpiEstim w R. Tu średnia wyniosła 2,38 z odchyleniem
+standardowym równym 0,44 a mediana 2,19; <span class="math inline">\(CV\)</span> natomiast był mniejszy w
+porównaniu z odpowiadającym dla filtra Kalmana (0,18), aczkolwiek
+utrzymujące się chwilowe współczynniki na poziomie większym od 2 w
+siedmiu na osiem dni wskazują na równie intensywny rozwój epidemii, co
+zaznaczył też filtr Kalmana.</p>
+<table>
+<caption>Współczynniki <span class="math inline">\(R(t)\)</span> wyestymowane z użyciem pakietu EpiEstim w R dla
+Polski w okresie 16.03-23.03.2020 r. Źródło: opracowanie własne.</caption>
+<thead>
+<tr class="header">
+<th align="center"><strong>Data</strong></th>
+<th align="center"><strong><span class="math inline">\(R(t)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">16.03.2020</td>
+<td align="center">3,14</td>
+</tr>
+<tr class="even">
+<td align="center">17.03.2020</td>
+<td align="center">2,97</td>
+</tr>
+<tr class="odd">
+<td align="center">18.03.2020</td>
+<td align="center">2,16</td>
+</tr>
+<tr class="even">
+<td align="center">19.03.2020</td>
+<td align="center">2,41</td>
+</tr>
+<tr class="odd">
+<td align="center">20.03.2020</td>
+<td align="center">2,22</td>
+</tr>
+<tr class="even">
+<td align="center">21.03.2020</td>
+<td align="center">2,15</td>
+</tr>
+<tr class="odd">
+<td align="center">22.03.2020</td>
+<td align="center">2,08</td>
+</tr>
+<tr class="even">
+<td align="center">23.03.2020</td>
+<td align="center">1,9</td>
+</tr>
+</tbody>
+</table>
+<p>W przypadku 3 krajów z największą sumaryczną liczbą zakażeń w roku 2020
+(Stany Zjednoczone, Brazylia, Indie) i Szwecji, jak i pozostałych krajów
+świata, w pierwszych tygodniach od przekroczenia całkowitej liczby
+zakażeń w wysokości 100 współczynnik <span class="math inline">\(R(t)\)</span> był znacznie większy od 1.
+Przykładowo, dla Stanów Zjednoczonych wynosił on 4 07.03, dla Brazylii
+3,22 19.03, dla Indii 2,53 21.03, a dla Szwecji 3,07 09.03 wg szacunków
+EpiEstim. W sezonie wiosenno-letnim dla części krajów, m.in. Brazylii,
+Stanów Zjednoczonych i Szwecji zmiana współczynnika <span class="math inline">\(R(t)\)</span> na
+przestrzeni okresów nie była jednostajna, jak w Indiach, dla których w
+tym czasie współczynnik <span class="math inline">\(CV\)</span> wynosił 0,24, co wskazuje na jego
+przeciętne zróżnicowanie (dla Brazylii: 0,33; dla Stanów Zjednoczonych:
+0,47; dla Szwecji: 0,34). Przez ten czas w Brazylii <span class="math inline">\(R(t)\)</span> w 147 dniach
+na 191 było większych bądź równych 1 (76,96% dni epidemii). Pomimo
+słabego zróżnicowania współczynnika w tym okresie w Indiach, przez
+znaczną większość czasu (189 na 199 dni – 99,47%) był on większy bądź
+równy 1. W przypadku Stanów Zjednoczonych proporcje dni ze
+współczynnikiem <span class="math inline">\(R(t)\)</span> większym bądź równym 1 i mniejszym niż 1 nie
+różniły się istotnie (<span class="math inline">\(\chi^2 = 0,49; p = 0,48\)</span>) – wynosiły odpowiednio
+52% i 48%. Podobnie jak w Brazylii i Indiach, również w Szwecji
+przeważała wartość większa od 1 (128 na 198 dni – 64,64%. W sezonie
+jesienno-zimowym zmniejszający się <span class="math inline">\(R(t)\)</span> od okresu letniego utrzymywał
+się na poziomie mniejszym od 1 w przeważającej części okresu (6 na 101
+dni – 5,94%). Sytuacja epidemiczna związana z transmisją wirusa
+pogorszyła się jednak w Stanach Zjednoczonych, dla których proporcje te
+nie były już równe: dla <span class="math inline">\(R(t)\)</span> większego bądź równego 1 i mniejszego od
+1 równały się kolejno 82,18% i 17,82% (83 na 101 dni). Spośród
+rozpatrywanych krajów największą liczbą dni, dla których współczynnik
+ten wynosił nie mniej niż 1, odznaczała się Szwecja – na 101 dni w 96
+(95,05%) transmisja wirusa przybierała na sile (rysunek
+<a href="5-chapter05.html#fig:Rt-all-porownanie-top3" reference-type="ref" reference="fig:Rt-all-porownanie-top3">5.35</a>).</p>
+<div class="figure">
+<img src="figure/chap05/Rt-all-porownanie-top3.png" id="fig:Rt-all-porownanie-top3" alt="" />
+<p class="caption">Zależność współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem pakietu
+EpiEstim w R i filtra Kalmana (średnia 7-dniowa) w czasie dla 3 krajów z
+największą sumaryczną liczbą zakażeń w roku 2020 (Stany Zjednoczone,
+Brazylia, Indie) i Szwecji. Pionową, czerwoną linią oznaczono dzień
+22.09.2020 r. – koniec sezonu wiosenno-letniego. Źródło: opracowanie
+własne.</p>
+</div>
+<p>W okresie letnim tj. 21.06–22.09.2020 r. <span class="math inline">\(R(t)\)</span> pozostawał na stabilnym
+poziomie wśród sąsiadów Polski: <span class="math inline">\(CV\)</span> dla Białorusi był równy 0,17; dla
+Czech 0,19, dla Litwy 0,2, dla Niemiec 0,12, dla Rosji 0,04, dla
+Słowacji 0,16, a dla Ukrainy 0,06). W Niemczech, kiedy współczynnik
+<span class="math inline">\(R(t)\)</span> w sezonie wiosenno-letnim spadł poniżej 1 07.04 (0,99), kolejny
+przyrost liczby zakażeń w liczbie większej niż 5 000 zaobserwowano w
+październiku, na początku sezonu jesienno-zimowego. Wzrost <span class="math inline">\(R(t)\)</span>
+powyżej 1 przypadał również między czerwcem a lipcem. Przyrost
+współczynnika od początku ostatniego kwartału roku 2020 przypadał także
+dla innych krajów, m.in. Czech, Litwy, Rosji i Słowacji – przede
+wszystkim w październiku, ale też w listopadzie, ze spadkiem na początku
+grudnia.</p>
+<div class="figure">
+<img src="figure/chap05/Rt-all-sasiedzi.png" id="fig:Rt-all-sasiedzi" alt="" />
+<p class="caption">Zależność współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem pakietu
+EpiEstim w R i filtra Kalmana (średnia 7-dniowa) w czasie dla krajów
+graniczących z Polską. Pionową, czerwoną linią oznaczono dzień
+22.09.2020 r. – koniec sezonu wiosenno-letniego – a czarną, przerywaną
+granicę oznaczającą przekroczenie współczynnika <span class="math inline">\(R(t)\)</span> równego 1.
+Źródło: opracowanie własne.</p>
+</div>
+<p>Zbliżający się sezon jesienno-zimowy w Polsce skutkował nagłym i
+dynamicznym przyspieszeniem rozprzestrzeniania się wirusa od poziomu
+<span class="math inline">\(R(t)\)</span> równego 0,82 10.09 do 1,58 10.10<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>. Współczynnik ten na
+poziomie większym niż 1 utrzymywał się począwszy od 15.09 (1,01) do
+16.11 (1,01), a więc przez 57 dni, co stanowi większość (56,44%) sezonu
+jesienno-zimowego. Regularny spadek odnotowywano aż do 07.12 (0,79), po
+czym <span class="math inline">\(R(t)\)</span> zaczął ponownie przyrastać, nie przekraczając wartości 1, do
+ostatniego dnia roku 2020 (rysunek
+<a href="5-chapter05.html#fig:Rt-all-PL" reference-type="ref" reference="fig:Rt-all-PL">5.38</a>).</p>
+<div class="figure">
+<img src="figure/chap05/Rt-all-PL.png" id="fig:Rt-all-PL" alt="" />
+<p class="caption">Zależność współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem pakietu
+EpiEstim w R i filtra Kalmana (średnia 7-dniowa) w czasie dla Polski.
+Pionową, czerwoną linią oznaczono dzień 22.09.2020 r. – koniec sezonu
+wiosenno-letniego – a czarną, przerywaną granicę oznaczającą
+przekroczenie współczynnika <span class="math inline">\(R(t)\)</span> równego 1. Źródło: opracowanie
+własne.</p>
+</div>
+<p>Rozpoczynająca się w Polsce epidemia w marcu odznaczała się względnie
+wysokim współczynnikiem <span class="math inline">\(R(t)\)</span>, którego mediana istotnie różniła się w
+zestawieniu z pozostałymi miesiącami z wyłączeniem października.
+Najmniejsza różnica była pomiędzy marcem a kwietniem, co sugeruje
+zmniejszenie średniej transmisji przekazywania wirusa przez jedną osobę
+w kwietniu, ale zbliżony <span class="math inline">\(R(t)\)</span> do odpowiadającego marcu, biorąc pod
+uwagę pozostałe miesiące roku 2020. W okresie letnim tzn. pomiędzy
+lipcem a sierpniem i sierpniem a wrześniem nie zaobserwowano różnic w
+medianach. W październiku mediana <span class="math inline">\(R(t)\)</span> nie różniła się istotnie od
+odpowiadającej w marcu, również pomiędzy październikiem a listopadem i
+październikiem a grudniem istniały statystycznie istotnie różnice w
+medianach – największe pomiędzy październikiem a grudniem. Kierując się
+interpretacją współczynnika, epidemia wydawała się silnie wygasać w
+grudniu – pomiędzy grudniem a pozostałymi miesiącami roku 2020 istniały
+różnice w medianach współczynników.</p>
+<table>
+<caption>Wartości statystyk testu porównań wielokrotnych Dunneta z poprawką
+Benjamini-Hochberga dla różnic w medianach współczynników <span class="math inline">\(R(t)\)</span> dla
+Polski w zależności od miesięcy roku 2020. Statystycznie istotne różnice
+na poziomie istotności <span class="math inline">\(\alpha = 0,05\)</span> zostały oznaczone asteryskiem
+(*). Źródło: opracowanie własne.</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><strong>kwiecień</strong></th>
+<th align="center"><strong>maj</strong></th>
+<th align="center"><strong>czerwiec</strong></th>
+<th align="center"><strong>lipiec</strong></th>
+<th align="center"><strong>sierpień</strong></th>
+<th align="center"><strong>wrzesień</strong></th>
+<th align="center"><strong>październik</strong></th>
+<th align="center"><strong>listopad</strong></th>
+<th align="center"><strong>grudzień</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">marzec</td>
+<td align="center">-4,36*</td>
+<td align="center">-6,17*</td>
+<td align="center">-7,53*</td>
+<td align="center">5,42*</td>
+<td align="center">-4,76*</td>
+<td align="center">-5,84*</td>
+<td align="center">-1,44</td>
+<td align="center">-5,56*</td>
+<td align="center">-9,47*</td>
+</tr>
+<tr class="even">
+<td align="center">kwiecień</td>
+<td align="center"></td>
+<td align="center">2,14</td>
+<td align="center">-3,8*</td>
+<td align="center">-1,24</td>
+<td align="center">-0,44</td>
+<td align="center">-1,76</td>
+<td align="center">3,9*</td>
+<td align="center">-1,43</td>
+<td align="center">-6,11*</td>
+</tr>
+<tr class="odd">
+<td align="center">maj</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-1,68</td>
+<td align="center">0,91</td>
+<td align="center">1,71</td>
+<td align="center">0,36</td>
+<td align="center">6,09*</td>
+<td align="center">0,7</td>
+<td align="center">-4*</td>
+</tr>
+<tr class="even">
+<td align="center">czerwiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2,59*</td>
+<td align="center">3,39*</td>
+<td align="center">2,03</td>
+<td align="center">7,73*</td>
+<td align="center">2,36*</td>
+<td align="center">-2,28*</td>
+</tr>
+<tr class="odd">
+<td align="center">lipiec</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">0,8</td>
+<td align="center">0,54</td>
+<td align="center">5,18*</td>
+<td align="center">-0,21</td>
+<td align="center">-4,91*</td>
+</tr>
+<tr class="even">
+<td align="center">sierpień</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-1,34</td>
+<td align="center">4,38*</td>
+<td align="center">-1</td>
+<td align="center">-5,71*</td>
+</tr>
+<tr class="odd">
+<td align="center">wrzesień</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">5,68*</td>
+<td align="center">0,33</td>
+<td align="center">-4,33*</td>
+</tr>
+<tr class="even">
+<td align="center">październik</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-5,34*</td>
+<td align="center">-10,09*</td>
+</tr>
+<tr class="odd">
+<td align="center">listopad</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-4,66*</td>
+</tr>
+</tbody>
+</table>
+<div id="porównanie-współczynników-rt-pomiędzy-krajami" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</h3>
+<p>W sezonie wiosenno-letnim zarówno Polska, jak i kraje z nią graniczące
+(<span class="math inline">\(\chi^2 = 34,78, p &lt;.001\)</span>), a także 3 kraje z największą sumaryczną
+liczbą zakażeń w roku 2020 (Stany Zjednoczone, Brazylia, Indie) i
+Szwecja (<span class="math inline">\(\chi^2 = 93,74, p &lt;.001\)</span>) różniły się istotnie pod względem
+median współczynników <span class="math inline">\(R(t)\)</span>. Również i w sezonie jesienno-zimowym
+mediany te dla Polski i jej sąsiadów (<span class="math inline">\(\chi^2 = 42,79, p &lt;.001\)</span>), jak i
+wspomnianych pozostałych krajów (<span class="math inline">\(\chi^2 = 180,46, p &lt;.001\)</span>) nie były
+jednorodne. Najniższa średnia <span class="math inline">\(R(t)\)</span> w sezonie wiosenno-letnim była
+obserwowana dla Litwy (1,07), a najwyższa – Indii (1,27). Większość
+krajów (Brazylia, Czechy, Indie, Litwa, Polska, Rosja, Słowacja,
+Szwecja, Ukraina) wykazywała przeciętne zróżnicowanie współczynników
+<span class="math inline">\(R(t)\)</span> w pierwszych trzech kwartałach roku, z czego niektóre z nich
+(Białoruś, Niemcy, Stany Zjednoczone) przeciwnie. Z kolei w sezonie
+jesienno-zimowym pozostawał on na stabilnym poziomie we wszystkich
+krajach, chociaż dla części z nich (Litwa, Polska, Słowacja, Szwecja)
+jego średnia była wyższa niż w okresie poprzedzającym (tabela 5.17).</p>
+<p>Mediany współczynników <span class="math inline">\(R(t)\)</span> w sezonie wiosenno-letnim były mniejsze
+niż w sezonie jesienno-zimowym dla większości krajów (Białoruś, Czechy,
+Litwa, Niemcy, Polska, Rosja, Szwecja) i na ogół przekraczały 1. W
+sezonie jesienno-zimowym na tle krajów wyróżniały się Indie – 25%
+<span class="math inline">\(R(t)\)</span> było mniejszych od 0,89 i większych od 0,96, a najwyższa wartość
+współczynnika osiągnięta przez ten kraj wyniosła 1,06, a więc znacznie
+mniej w porównaniu ze Szwecją, dla której był on równy 1,61, a tylko 25%
+wartości było mniejszych od 1,07 (rysunek 5.34).</p>
+<div class="figure">
+<img src="figure/chap05/Rt-EE-boxplot.png" id="fig:Rt-all-PL" alt="" />
+<p class="caption">Rozkłady współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem pakietu
+EpiEstim w R dla 3 krajów z największą sumaryczną liczbą zakażeń w roku
+2020 (Stany Zjednoczone, Brazylia, Indie), Szwecji, Polski i krajów z
+nią graniczących dla sezonów wiosenno-letniego i jesienno-zimowego roku
+2020. Źródło: opracowanie własne.</p>
+</div>
+<p>Stany Zjednoczone, Brazylia i Indie w roku 2020 różniły się pod względem
+median współczynników <span class="math inline">\(R(t)\)</span> (tabela 5.19). W porównaniu z sezonem
+jesienno-zimowym, w sezonie wiosenno-letnim spośród tych trzech krajów
+względnie niska transmisja wirusa była obserwowana dla Stanów
+Zjednoczonych, dla których mediana <span class="math inline">\(R(t)\)</span> wyniosła 1, a tylko 25%
+wartości było większych od 1,16 (dla Brazylii, przykładowo, trzeci
+kwartyl wyniósł 1,29; dla Indii natomiast 1,27; tabela 5.18), dlatego
+też Stany Zjednoczone i Indie cechowały największa różnica w medianach
+na poziomie istotności <span class="math inline">\(\alpha = 0,05\)</span> (tabela 5.19). W kolejnym sezonie
+mediany <span class="math inline">\(R(t)\)</span> dla Indii i Brazylii były mniejsze w porównaniu z
+poprzednim okresem – odpowiednio 1,02 i 0,92. Dla Stanów Zjednoczonych
+odwrotnie – pierwszy kwartyl (1,01) był bliski medianie (1,09). Z kolei
+Polska i jej sąsiedzi w sezonie jesienno-zimowym gorzej radziły sobie z
+zahamowaniem transmisji wirusa – w większości krajach (Białoruś,
+Czechy, Litwa, Niemcy, Polska, Rosja) mediana <span class="math inline">\(R(t)\)</span> w sezonie
+jesienno-zimowym przewyższała odpowiadającą z sezonu wiosenno-letniego.
+Na przestrzeni całego roku 2020 jednak Polska w zestawieniu z
+Białorusią, Czechami, Litwą, Niemcami, Rosją i Słowacją nie różniły się
+istotnie pod względem median <span class="math inline">\(R(t)\)</span>, a różnica ta była najmniejsza
+pomiędzy Polską a Rosją.</p>
+<p>W rozpatrywanych krajach sumaryczna liczba zakażeń w wysokości 100
+została przekroczona w podobnym czasie. Mimo to niektóre kraje różniły
+się pod względem odsetka dni ze współczynnikiem <span class="math inline">\(R(t)\)</span> większym bądź
+równym 1. Najdłuższy okres rozwoju epidemii przypadł w Ukrainie, gdzie
+na 280 dni w 218 <span class="math inline">\(R(t)\)</span> był większy bądź równy 1 (tabela 5.20).
+Statystycznie istotne różnice nie zostały zaobserwowane jednak pomiędzy
+Ukrainą, Litwą i Szwecją, co sugeruje podobny ilościowo przebieg
+transmisji wirusa w tych krajach. Polska wraz z Białorusią, Brazylią,
+Czechami, Indiami, Niemcami, Rosją, Słowacją i Stanami Zjednoczonymi
+zachowała podobny odsetek dni, dla których <span class="math inline">\(R(t)\)</span> był większy bądź równy
+1.</p>
+<p>W sezonie letni,, pomimo znoszenia restrykcji, nie we wszystkich krajach
+epidemia poziom transmisji wirusa w populacji pozostawał na stabilnym,
+niesprzyjającym dalszemu rozwoju poziomie. W Stanach Zjednoczonych,
+Brazylii i Szwecji nie zauważono w tym czasie różnicy pomiędzy odsetkami
+<span class="math inline">\(R(t)\)</span> większym bądź równym 1 a mniejszym od 1. W niektórych krajach z
+kolei w przeważającej części sezonu proces przekazywania wirusa został
+znacząco zminimalizowany, m.in. na Białorusi czy w Rosji. W Polsce
+proporcje nieistotnie różniły się od siebie, a w Czechach, Indiach,
+Słowacji, na Litwie i Ukrainie w większości dniach <span class="math inline">\(R(t)\)</span> był większy od
+1.</p>
+</div>
+<div id="zbieżność-metod-estymacji" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Zbieżność metod estymacji</h3>
+<p>Uwzględniając kraje<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>, dla których oszacowano współczynnik <span class="math inline">\(R(t)\)</span>
+począwszy od dnia przekroczenia sumy zakażeń w liczbie 100, w sumie
+zebrano 3 482 współczynników <span class="math inline">\(R(t)\)</span> dla metod filtra Kalmana i z pakietu
+EpiEstim w R. W przypadku danych codziennych dla filtra Kalmana tzn.
+takich, których współczynnik <span class="math inline">\(R(t)\)</span> dla danego dnia wynikał z obliczeń
+modelowych, nie zaś z uśrednień tygodniowych, najniższa bezwzględna
+wartość reszty wynosiła 0, co wskazuje taką samą wartość pomiaru z obu
+metod, natomiast najwyższa - 8,83. 25% wartości (pierwszy kwartyl) było
+mniejszych od 0,06, a 25% (drugi kwartyl) większych od 0,37; mediana
+wynosiła 0,17, a średnia 0,31. Rozkład tych wartości był silnie
+prawoskośny <span class="math inline">\(A_S = 6,87\)</span>, co znaczy, że najwięcej wartości skupiało się
+w dolnych granicach przedziału osi <span class="math inline">\(X\)</span> (pomniżej średniej), przede
+wszystkim w przedziale <span class="math inline">\([0, 1]\)</span>, w którym znalazło się 95% reszt, a 67%
+było mniejszych od 0,3. Po uśrednieniu współczynników <span class="math inline">\(R(t)\)</span> uzyskanych
+metodą filtra Kalmana w oknie 7-dniowym, powstały rozkład bezwzględnych
+wartości reszt również jest prawoskośnie asymetryczny, aczkolwiek
+słabiej niż w przypadku danych codziennych (<span class="math inline">\(A_S = 3,90\)</span>). Mimo to tak
+uśrednione dane wydają się lepiej dopasowywać do metody z pakietu
+EpiEstim w R niż dane codzienne, gdyż 95% reszt nie przekraczało 0,3, a
+więc więcej o 28 punktów procentowych w porównaniu z poprzednią
+metodyką. Niemal wszystkie wartości (97,9%) były mniejsze od 0,5, a
+mediana i średnia wynosiły odpowiednio 0,04 i 0,08, natomiast 25%
+(pierwszy kwartyl) reszt nie przekraczało 0,02, a 25% (trzeci kwartyl)
+było większych od 0,09 (rysunek
+<a href="5-chapter05.html#fig:Rt-Kalman-EE-reszty-bezw" reference-type="ref" reference="fig:Rt-Kalman-EE-reszty-bezw">5.39</a>).</p>
+<div class="figure">
+<img src="figure/chap05/Rt-Kalman-EE-reszty-bezw.png" id="fig:Rt-Kalman-EE-reszty-bezw" alt="" />
+<p class="caption">Rozkład bezwzględnych różnic (reszt) wartości współczynników <span class="math inline">\(R(t)\)</span>
+uzyskanych z użyciem filtra Kalmana i pakietu EpiEstim w R dla danych
+codziennych i filtra Kalmana z danych uśrednionych w oknie 7-dniowym.
+Źródło: opracowanie
+własne.</p>
+</div>
+<p>Bazująca na 7-dniowym oknie metoda wyznaczania współczynników <span class="math inline">\(R(t)\)</span> z
+pakietu EpiEstim w R różni się od metodyki filtra Kalmana, która
+uwzględnia zmianę dziennych liczb zakażeń, bazując na serii modelowej.
+Stąd też dla większości analizowanych tu krajów metody te wydają się być
+porównywalne: współczynniki korelacji liniowej <span class="math inline">\(R\)</span> Pearsona na ogół
+wahają się pomiędzy 0,7 a 0,9, co wskazuje na silną, liniową zbieżność,
+a wysokie współczynniki <span class="math inline">\(\tau\)</span> Kendalla potwierdzają istotną
+monotoniczność. Średni bezwzględny błąd (MAE) dla znacznej części krajów
+był mniejszy od 0,5, co świadczy o mniejszej niż 0,5 średniej odległości
+uzyskanych z obu metod współczynników. Również wyestymowane
+współczynniki z użyciem metody najmniejszych kwadratów (MNK) klasycznej
+regresji liniowej wskazują na dobre, liniowe dopasowanie zmiennych –
+współczynniki <span class="math inline">\(\hat{\beta_1}\)</span> są istotnie różne od 0 i względnie bliskie
+jedności, natomiast współczynniki <span class="math inline">\(\hat{\beta_0}\)</span> dla niektórych krajów
+(Białoruś, Czechy, Litwa, Szwecja i Ukraina) są nieistotnie różne od 0;
+dla pozostałych zaś istotnie, ale nie przekraczają jedności. W przypadku
+Szwecji metody te nie wydają się być silnie zbieżne (<span class="math inline">\(r = 0,32\)</span>,
+<span class="math inline">\(\tau = 0,3\)</span>, <span class="math inline">\(MAE = 0,73\)</span>).</p>
+<table>
+<caption>Porównanie współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem filtra Kalmana
+(dane codzienne) i pakietu EpiEstim w R na podstawie współczynników
+korelacji <span class="math inline">\(R\)</span> Pearsona, <span class="math inline">\(\tau\)</span> Kendalla, średniego błędu bezwzględnego
+(MAE, ang. <em>mean absolute error</em>) i wartości estymatorów MNK modelu
+regresji liniowej. Źródło: opracowanie własne.</caption>
+<colgroup>
+<col width="10%" />
+<col width="16%" />
+<col width="17%" />
+<col width="5%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Kraj</strong></th>
+<th align="center"><strong>Wsp. kor. <span class="math inline">\(r\)</span> Pearsona</strong></th>
+<th align="center"><strong>Wsp. kor. <span class="math inline">\(\tau\)</span> Kendalla</strong></th>
+<th align="center"><strong><span class="math inline">\(MAE\)</span></strong></th>
+<th align="center"><strong>Wartość estymatora MNK <span class="math inline">\(\hat{\beta_1}\)</span></strong></th>
+<th align="center"><strong>Wartość estymatora MNK <span class="math inline">\(\hat{\beta_0}\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Białoruś</td>
+<td align="center">0,84*</td>
+<td align="center">0,76*</td>
+<td align="center">0,13</td>
+<td align="center">1,04*</td>
+<td align="center">-0,03</td>
+</tr>
+<tr class="even">
+<td align="center">Brazylia</td>
+<td align="center">0,7*</td>
+<td align="center">0,38*</td>
+<td align="center">0,37</td>
+<td align="center">1,41*</td>
+<td align="center">-0,41*</td>
+</tr>
+<tr class="odd">
+<td align="center">Czechy</td>
+<td align="center">0,66*</td>
+<td align="center">0,44*</td>
+<td align="center">0,37</td>
+<td align="center">1,2*</td>
+<td align="center">-0,18</td>
+</tr>
+<tr class="even">
+<td align="center">Indie</td>
+<td align="center">0,75*</td>
+<td align="center">0,69*</td>
+<td align="center">0,16</td>
+<td align="center">1,34*</td>
+<td align="center">-0,35*</td>
+</tr>
+<tr class="odd">
+<td align="center">Litwa</td>
+<td align="center">0,56*</td>
+<td align="center">0,45*</td>
+<td align="center">0,34</td>
+<td align="center">1,17*</td>
+<td align="center">-0,16</td>
+</tr>
+<tr class="even">
+<td align="center">Niemcy</td>
+<td align="center">0,74*</td>
+<td align="center">0,47*</td>
+<td align="center">0,36</td>
+<td align="center">1,42*</td>
+<td align="center">-0,42*</td>
+</tr>
+<tr class="odd">
+<td align="center">Polska</td>
+<td align="center">0,8*</td>
+<td align="center">0,55*</td>
+<td align="center">0,21</td>
+<td align="center">1,21*</td>
+<td align="center">-0,2*</td>
+</tr>
+<tr class="even">
+<td align="center">Rosja</td>
+<td align="center">0,93*</td>
+<td align="center">0,85*</td>
+<td align="center">0,08</td>
+<td align="center">1,21*</td>
+<td align="center">-0,21*</td>
+</tr>
+<tr class="odd">
+<td align="center">Słowacja</td>
+<td align="center">0,5*</td>
+<td align="center">0,33*</td>
+<td align="center">0,58</td>
+<td align="center">1,45*</td>
+<td align="center">-0,44*</td>
+</tr>
+<tr class="even">
+<td align="center">Stany Zjednoczone</td>
+<td align="center">0,9*</td>
+<td align="center">0,57*</td>
+<td align="center">0,17</td>
+<td align="center">1,28*</td>
+<td align="center">-0,28*</td>
+</tr>
+<tr class="odd">
+<td align="center">Szwecja</td>
+<td align="center">0,32*</td>
+<td align="center">0,3*</td>
+<td align="center">0,73</td>
+<td align="center">1,48*</td>
+<td align="center">-0,41</td>
+</tr>
+<tr class="even">
+<td align="center">Ukraina</td>
+<td align="center">0,75*</td>
+<td align="center">0,44*</td>
+<td align="center">0,17</td>
+<td align="center">1,09*</td>
+<td align="center">-0,07</td>
+</tr>
+</tbody>
+</table>
+<p>Po uśrednieniu współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem filtra
+Kalmana w oknie 7-dniowym, <span class="math inline">\(MAE\)</span> zostaje zminimalizowany dla większości
+krajów do części setnych, a współczynniki korelacji liniowej <span class="math inline">\(R\)</span>
+Pearsona i <span class="math inline">\(\tau\)</span> Kendalla wynoszą nie mniej niż 0,93 (<span class="math inline">\(r\)</span> Pearsona) i
+0,80 (<span class="math inline">\(\tau\)</span> Kendalla). Silna zbieżność metod wynikła również dla
+Szwecji, w przypadku której dla danych codziennych z filtra Kalmana nie
+zaobserwowano silnej korelacji. Ponadto mediany
+współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem filtra Kalmana (zarówno
+dla danych codziennych, jak i uśrednionych w oknie 7-dniowym) i pakietu
+EpiEstim w R nie różnią się istotnie dla znacznej większości krajów.</p>
+<table>
+<caption>Porównanie współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem filtra Kalmana
+(pomiary uśrednione w oknie 7-dniowym) i pakietu EpiEstim w R na
+podstawie współczynników korelacji <span class="math inline">\(r\)</span> Pearsona, <span class="math inline">\(\tau\)</span> Kendalla,
+średniego błędu bezwzględnego (MAE, ang. <em>mean absolute error</em>) i
+wartości estymatorów MNK modelu regresji liniowej. Źródło: opracowanie
+własne.</caption>
+<colgroup>
+<col width="10%" />
+<col width="16%" />
+<col width="17%" />
+<col width="5%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Kraj</strong></th>
+<th align="center"><strong>Wsp. kor. <span class="math inline">\(r\)</span> Pearsona</strong></th>
+<th align="center"><strong>Wsp. kor. $ au$ Kendalla</strong></th>
+<th align="center"><strong>MAE</strong></th>
+<th align="center"><strong>Wartość estymatora MNK <span class="math inline">\(\hat{\beta_1}\)</span></strong></th>
+<th align="center"><strong>Wartość estymatora MNK <span class="math inline">\(\hat{\beta_0}\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Białoruś</td>
+<td align="center">0,98*</td>
+<td align="center">0,96*</td>
+<td align="center">0,06</td>
+<td align="center">1,33*</td>
+<td align="center">-0,32*</td>
+</tr>
+<tr class="even">
+<td align="center">Brazylia</td>
+<td align="center">0,98*</td>
+<td align="center">0,94*</td>
+<td align="center">0,08</td>
+<td align="center">1,46*</td>
+<td align="center">-0,44*</td>
+</tr>
+<tr class="odd">
+<td align="center">Czechy</td>
+<td align="center">0,98*</td>
+<td align="center">0,92*</td>
+<td align="center">0,08</td>
+<td align="center">1,32*</td>
+<td align="center">-0,30*</td>
+</tr>
+<tr class="even">
+<td align="center">Indie</td>
+<td align="center">0,97*</td>
+<td align="center">0,97*</td>
+<td align="center">0,08</td>
+<td align="center">1,32*</td>
+<td align="center">-0,31*</td>
+</tr>
+<tr class="odd">
+<td align="center">Litwa</td>
+<td align="center">0,98*</td>
+<td align="center">0,91*</td>
+<td align="center">0,08</td>
+<td align="center">1,28*</td>
+<td align="center">-0,26*</td>
+</tr>
+<tr class="even">
+<td align="center">Niemcy</td>
+<td align="center">0,99*</td>
+<td align="center">0,94*</td>
+<td align="center">0,10</td>
+<td align="center">1,47*</td>
+<td align="center">-0,45*</td>
+</tr>
+<tr class="odd">
+<td align="center">Polska</td>
+<td align="center">0,99*</td>
+<td align="center">0,94*</td>
+<td align="center">0,07</td>
+<td align="center">1,37*</td>
+<td align="center">-0,36*</td>
+</tr>
+<tr class="even">
+<td align="center">Rosja</td>
+<td align="center">0,99*</td>
+<td align="center">0,96*</td>
+<td align="center">0,06</td>
+<td align="center">1,37*</td>
+<td align="center">-0,37*</td>
+</tr>
+<tr class="odd">
+<td align="center">Słowacja</td>
+<td align="center">0,97*</td>
+<td align="center">0,87*</td>
+<td align="center">0,11</td>
+<td align="center">1,27*</td>
+<td align="center">-0,23*</td>
+</tr>
+<tr class="even">
+<td align="center">Stany Zjednoczone</td>
+<td align="center">0,99*</td>
+<td align="center">0,95*</td>
+<td align="center">0,08</td>
+<td align="center">1,43*</td>
+<td align="center">-0,43*</td>
+</tr>
+<tr class="odd">
+<td align="center">Szwecja</td>
+<td align="center">0,93*</td>
+<td align="center">0,80*</td>
+<td align="center">0,15</td>
+<td align="center">1,52*</td>
+<td align="center">-0,43*</td>
+</tr>
+<tr class="even">
+<td align="center">Ukraina</td>
+<td align="center">0,99*</td>
+<td align="center">0,94*</td>
+<td align="center">0,05</td>
+<td align="center">1,38*</td>
+<td align="center">-0,38*</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Porównanie współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem filtra Kalmana
+(pomiary uśrednione w oknie 7-dniowym) i pakietu EpiEstim w R na
+podstawie testu sumy rang Wilcoxona dla każdego kraju. Źródło:
+opracowanie własne.</caption>
+<colgroup>
+<col width="6%" />
+<col width="17%" />
+<col width="7%" />
+<col width="14%" />
+<col width="14%" />
+<col width="19%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Kraj</strong></th>
+<th align="center"><strong>Liczba dni z wyestymowanym współczynnikiem <span class="math inline">\(R(t)\)</span></strong></th>
+<th align="center"><strong>Mediana - EpiEstim</strong></th>
+<th align="center"><strong>Mediana - filtr Kalmana (dane codzienne)</strong></th>
+<th align="center"><strong>Mediana - filtr Kalmana (dane uśrednione)</strong></th>
+<th align="center"><strong>Statystyka <span class="math inline">\(W\)</span> - EpiEstim/filtr Kalmana (dane codzienne)</strong></th>
+<th align="center"><strong>Statystyka <span class="math inline">\(W\)</span> - EpiEstim/filtr Kalmana (dane uśrednione)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Białoruś</td>
+<td align="center">274</td>
+<td align="center">1,06</td>
+<td align="center">1,07</td>
+<td align="center">1,09</td>
+<td align="center">36 744</td>
+<td align="center">34 804</td>
+</tr>
+<tr class="even">
+<td align="center">Brazylia</td>
+<td align="center">292</td>
+<td align="center">1,07</td>
+<td align="center">1,18</td>
+<td align="center">1,09</td>
+<td align="center">37 975*</td>
+<td align="center">38 597</td>
+</tr>
+<tr class="odd">
+<td align="center">Czechy</td>
+<td align="center">292</td>
+<td align="center">1,08</td>
+<td align="center">1,04</td>
+<td align="center">1,13</td>
+<td align="center">43 703</td>
+<td align="center">39 751</td>
+</tr>
+<tr class="even">
+<td align="center">Indie</td>
+<td align="center">291</td>
+<td align="center">1,09</td>
+<td align="center">1,12</td>
+<td align="center">1,13</td>
+<td align="center">41 641</td>
+<td align="center">38 931</td>
+</tr>
+<tr class="odd">
+<td align="center">Litwa</td>
+<td align="center">283</td>
+<td align="center">1,12</td>
+<td align="center">1,08</td>
+<td align="center">1,17</td>
+<td align="center">41 361</td>
+<td align="center">35 869</td>
+</tr>
+<tr class="even">
+<td align="center">Niemcy</td>
+<td align="center">304</td>
+<td align="center">1,06</td>
+<td align="center">1,07</td>
+<td align="center">1,09</td>
+<td align="center">46 715</td>
+<td align="center">43 592</td>
+</tr>
+<tr class="odd">
+<td align="center">Polska</td>
+<td align="center">291</td>
+<td align="center">1,04</td>
+<td align="center">1,09</td>
+<td align="center">1,06</td>
+<td align="center">41 814</td>
+<td align="center">40 395</td>
+</tr>
+<tr class="even">
+<td align="center">Rosja</td>
+<td align="center">288</td>
+<td align="center">1,04</td>
+<td align="center">1,05</td>
+<td align="center">1,05</td>
+<td align="center">41 712</td>
+<td align="center">40 581</td>
+</tr>
+<tr class="odd">
+<td align="center">Słowacja</td>
+<td align="center">287</td>
+<td align="center">1,15</td>
+<td align="center">1,08</td>
+<td align="center">1,25</td>
+<td align="center">42 906</td>
+<td align="center">34 780*</td>
+</tr>
+<tr class="even">
+<td align="center">Stany Zjednoczone</td>
+<td align="center">301</td>
+<td align="center">1,04</td>
+<td align="center">1,07</td>
+<td align="center">1,05</td>
+<td align="center">43 934</td>
+<td align="center">43 079</td>
+</tr>
+<tr class="odd">
+<td align="center">Szwecja</td>
+<td align="center">299</td>
+<td align="center">1,09</td>
+<td align="center">1,02</td>
+<td align="center">1,21</td>
+<td align="center">48 370</td>
+<td align="center">33 973*</td>
+</tr>
+<tr class="even">
+<td align="center">Ukraina</td>
+<td align="center">280</td>
+<td align="center">1,1</td>
+<td align="center">1,12</td>
+<td align="center">1,13</td>
+<td align="center">35 646</td>
+<td align="center">31 819*</td>
+</tr>
+</tbody>
+</table>
+<p>Uśrednione w oknie 7-dniowym dla metody filtra Kalmana współczynniki
+<span class="math inline">\(R(t)\)</span> tworzą wraz z odpowiadającymi z EpiEstim ścisły układ liniowy
+(<span class="math inline">\(R = 0,98, p &lt;.001\)</span>), jednocześnie odznaczając się mniejszą różnicą
+pomiędzy danymi parami w porównaniu z danymi codziennymi z filtra
+Kalmana (<span class="math inline">\(R = 0,61, p &lt; .001\)</span>; rysunek
+<a href="5-chapter05.html#fig:Rt-EpiEstim-Kalman-all" reference-type="ref" reference="fig:Rt-EpiEstim-Kalman-all">5.40</a>). Monotoniczność dla ogółu
+danych potwierdza również wysoki współczynnik <span class="math inline">\(\tau\)</span> Kendalla, który w
+przypadku danych codziennych filtra Kalmana i uśrednionych w oknie
+7-dniowym wyniósł kolejno 0,47 (<span class="math inline">\(p &lt; .001\)</span>) i 0,92 (<span class="math inline">\(p &lt; .001\)</span>).</p>
+<div class="figure">
+<img src="figure/chap05/Rt-EpiEstim-Kalman-all.png" id="fig:Rt-EpiEstim-Kalman-all" alt="" />
+<p class="caption">Zależność pomiędzy współczynnikami <span class="math inline">\(R(t)\)</span> wyestymowanymi z użyciem
+pakietu EpiEstim w R i filtra Kalmana dla danych codziennych (A) i
+uśrednionych w oknie 7-dniowym (B). Dodatkowo naniesiono informacje o
+współczynniku korelacji <span class="math inline">\(R\)</span> Pearsona i wartości <span class="math inline">\(p\)</span> dla współczynnika
+korelacji. Niebieska prosta została dopasowana do danych metodą
+najmniejszych kwadratów, a czerwona została opisana równaniem <span class="math inline">\(y = x\)</span>.
+Źródło: opracowanie
+własne.</p>
+</div>
+<p>Pod kątem interpretacji<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> współczynników <span class="math inline">\(R(t)\)</span> średnia dla
+uwzględnianych krajów dla danych codziennych z filtra Kalmana wyniosła
+76,76%, a więc ok. 8 na 10 par <span class="math inline">\(k_i\)</span> i <span class="math inline">\(b_i\)</span> było mniejszych od 1 bądź
+większych lub równych 1. Największą zgodność zaobserwowano dla Białorusi
+(93,43%), a najmniejszą – Szwecji (64,54%). Jeszcze większe
+podobieństwo uzyskano, uśredniając wyestymowane z filtra Kalmana <span class="math inline">\(R(t)\)</span>
+w oknie 7-dniowym. Żaden z krajów nie przekraczał progu równego 90%, co
+odpowiada 9 zgodnym parom na 10.</p>
+<table>
+<caption>Procent współczynników <span class="math inline">\(R(t)\)</span> wyestymowanych z użyciem metod filtra
+Kalmana (dane codzienne i uśrednione w oknie 7-dniowym) i pakietu
+EpiEstim w R spełniających warunek
+<span class="math inline">\((k_i \wedge b_i &lt; 1) \vee (k_i \wedge b_i \geqslant 1)\)</span>.</caption>
+<colgroup>
+<col width="13%" />
+<col width="30%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Kraj</strong></th>
+<th align="center"><strong>% równolicznych <span class="math inline">\(R(t)\)</span> codziennych</strong></th>
+<th align="center"><strong>% równolicznych <span class="math inline">\(R(t)\)</span> uśrednionych w oknie 7-dniowym (filtr Kalmana)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Białoruś</td>
+<td align="center">93,43</td>
+<td align="center">95,62</td>
+</tr>
+<tr class="even">
+<td align="center">Brazylia</td>
+<td align="center">70,89</td>
+<td align="center">92,81</td>
+</tr>
+<tr class="odd">
+<td align="center">Czechy</td>
+<td align="center">72,26</td>
+<td align="center">94,18</td>
+</tr>
+<tr class="even">
+<td align="center">Indie</td>
+<td align="center">90,03</td>
+<td align="center">97,59</td>
+</tr>
+<tr class="odd">
+<td align="center">Litwa</td>
+<td align="center">71,73</td>
+<td align="center">94,35</td>
+</tr>
+<tr class="even">
+<td align="center">Niemcy</td>
+<td align="center">75,33</td>
+<td align="center">92,76</td>
+</tr>
+<tr class="odd">
+<td align="center">Polska</td>
+<td align="center">76,63</td>
+<td align="center">95,19</td>
+</tr>
+<tr class="even">
+<td align="center">Rosja</td>
+<td align="center">91,67</td>
+<td align="center">94,10</td>
+</tr>
+<tr class="odd">
+<td align="center">Słowacja</td>
+<td align="center">66,55</td>
+<td align="center">95,47</td>
+</tr>
+<tr class="even">
+<td align="center">Stany Zjednoczone</td>
+<td align="center">76,08</td>
+<td align="center">93,02</td>
+</tr>
+<tr class="odd">
+<td align="center">Szwecja</td>
+<td align="center">62,54</td>
+<td align="center">96,32</td>
+</tr>
+<tr class="even">
+<td align="center">Ukraina</td>
+<td align="center">73,93</td>
+<td align="center">96,79</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Średnia</strong></td>
+<td align="center">76,76</td>
+<td align="center">94,85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="wizualizacja-dziennych-danych-w-programie-kibana" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Wizualizacja dziennych danych w programie Kibana</h2>
+<p>Epidemia jako zjawisko nieustannie się zmieniające i ściśle zależne od
+czasu powinna być na bieżąco kontrolowana, aby w odpowiednim czasie
+podejmować właściwe decyzje w krajach, które najbardziej ich w danym
+momencie potrzebują. Na czas pandemii COVID-19 w Internecie istnieje
+wiele codziennie aktualizowanych i konserwowanych zbiorów danych
+poświęconych danym związanym z COVID-19. Jedną z takich witryn jest
+<em>Worldometer</em>, która dane dotyczące COVID-19 dla każdego kraju zbiera w
+formie tabeli, w której zawarte są takie informacje, jak liczby nowych
+zakażeń, zgonów, ozdrowieńców, wykonanych testów i inne.</p>
+<p>Dostarczone programowi Kibana pozyskane ręcznie dane z użyciem metody
+“web-scraping” w języku Python dane mogą być analizowane i wizualizowane.
+Analiza opiera się na narzędziu Discover, które umożliwia ogląd
+zgromadzonych danych (zbioru danych) z możliwością ich filtracji.
+Rysunek <a href="5-chapter05.html#fig:kibana-discover-full" reference-type="ref" reference="fig:kibana-discover-full">5.41</a> przedstawia główne okno narzędzia
+Discover po przefiltrowaniu plików z danymi, których nazwa rozpoczyna
+się od ciągu <em>coronavirus</em>, z datą nie większą od 30 dni. Narzędzie
+zwraca wynik w postaci wykresu słupkowego, który obrazuje liczbę wierszy
+(oś Y – “Count”) pliku w zależności od daty związanej z aktualnością
+informacji w nim zawartymi (oś X – “date per day”. W przypadku zbioru
+danych dotyczących COVID-19 narzędzie Discover wyświetla 8 słupków na
+wykresie, co oznacza, że programowi Kibana dostarczonych zostało 8
+plików z dziennymi danymi pobranymi z witryny Worldometer – od
+10.05.2021 r. do 17.05.2021 r. Wysokości wszystkich słupków są równe,
+zatem każdy z dostarczonych plików posiada tę samą liczbę wierszy – 222
+– a więc liczba krajów na przestrzeni tych 8 dni się nie zmieniała.
+Ramka danych pod wykresem w każdym wierszu odpowiada każdemu wierszu
+połączonego już zbioru danych ze wszystkich dostarczonych plików
+domyślnie sortowane w kolejności malejącej względem daty (kolumny
+“Time”). Nazwy zmiennych i jej zawartości składowane są w kolumnie
+“Document” – przykładowo, na 17.05.2021 dla Stanów Zjednoczonych
+(“USA”) znajdujących się w Ameryce Północnej (“North America”)
+odnotowano 7,849 przypadków krytycznych.</p>
+<div class="figure">
+<img src="figure/chap05/kibana-discover-full.PNG" id="fig:kibana-discover-full" alt="" />
+<p class="caption">Główne okno narzędzia Discover programu Kibana na podstawie danych
+związanych z COVID-19 z witryny Worldometer. Źródło: opracowanie własne
+z interfejsu
+Kibana.</p>
+</div>
+<p>Kibana wizualizację umożliwia z wykorzystaniem wielu narzędzi – oprócz
+różnych rodzajów wykresów (jak np. wykres słupkowy, liniowy, kołowy,
+mapa cieplna), możliwe jest też przedstawienie zbioru danych w postaci
+stabelaryzowanej. Taką formę analizy można zastosować w przypadku zbioru
+danych dotyczących COVID-19, który zawiera wiele bezpośrednio
+niepowiązanych ze sobą zmiennych. W 19 tygodniu roku 2021 (10–16.05)
+witryna Worldometer zgromadziła dane o 4 599 791 nowych zakażeniach na
+całym świecie, z czego większość wynikła w Indiach (2 297 276),
+następnie w Brazylii (442 685) i Stanach Zjednoczonych (211 902). Na
+koniec tygodnia, tj. 16.05, na świecie zarejestrowano ponad 163 000 000
+zakażeń i 3 000 000 zgonów (rysunek
+<a href="5-chapter05.html#fig:kibana-dashboard-table" reference-type="ref" reference="fig:kibana-dashboard-table">5.42</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kibana-dashboard-table.PNG" id="fig:kibana-dashboard-table" alt="" />
+<p class="caption">Skumulowane statystyki informacji dotyczących COVID-19 pobrane z
+witryny Worldometer dla okresu 10–16.05.2021 posortowane malejąco
+względem kolumny <em>Nowe zakażenia</em>. Źródło: opracowanie własne z
+interfejsu
+Kibana.</p>
+</div>
+<p>Ogólne podsumowanie zgromadzonych danych względem danego czynnika i
+statystyki zapewniają metryki. Pośród kontynentów świata na pierwszym
+miejscu z największą sumaryczną liczbą zakażeń (w przeliczeniu na 1 mln
+osób) w 19. tygodniu roku 2021 znalazła się Azja (41 387,16), na drugim
+zaś Europa (34 012), a trzecim – Afryka (21 396,01; rysunek
+<a href="5-chapter05.html#fig:kibana-metric-continent" reference-type="ref" reference="fig:kibana-metric-continent">5.43</a>). Stabilna sytuacja wydawała
+się panować w Australii/Oceanii, gdzie liczba ta nie przekroczyła
+tysiąca w porównaniu do pozostałych kontynentów, a wynosiła 199,98,
+czyli ok. 57 razy mniej niż dla Ameryki Północnej (rysunek
+<a href="5-chapter05.html#fig:kibana-metric-continent" reference-type="ref" reference="fig:kibana-metric-continent">5.43</a>). Pomimo wysokiej liczby
+zakażeń na kontynencie azjatyckim w tamtym czasie, Azja znalazła się na
+trzecim miejscu pod względem sumarycznej liczby zgonów w przeliczeniu na
+1 mln osób – liczbowo niemal dwukrotnie figurowała za Europą, która
+znalazła się na 1. miejscu (rysunek
+<a href="5-chapter05.html#fig:kibana-metric-continent-deaths" reference-type="ref" reference="fig:kibana-metric-continent-deaths">5.44</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kibana-metric-continent.PNG" id="fig:kibana-metric-continent" alt="" />
+<p class="caption">Sumaryczna liczba nowych zakażeń na kontynentach świata w okresie
+10.–16.05.2021. Źródło: opracowanie własne z interfejsu
+Kibana.</p>
+</div>
+<div class="figure">
+<img src="figure/chap05/kibana-metic-continent-deaths.PNG" id="fig:kibana-metric-continent-deaths" alt="" />
+<p class="caption">Sumaryczna liczba nowych zgonów na kontynentach świata w okresie
+10.–16.05.2021. Źródło: opracowanie własne z interfejsu
+Kibana.</p>
+</div>
+<p>Od 10. do 16.05.2021 Azja w każdym dniu przewyższała pozostałe
+kontynenty pod względem liczby nowych zakażeń. Wszystkie kontynenty
+szczyt liczby zakażeń osiągnęły w połowie tygodnia – przykładowo,
+znajdująca się na 1. miejscu Azja 12.05 (449,125), a znajdująca się na
+2. miejscu Ameryka Południowa 13.05 (144,656; ponad 3-krotnie mniej niż
+Azja). W większości kontynentach m.in. Azji, Ameryki Południowej, Europy
+i Ameryki Północnej liczba nowych zakażeń zaczęła przyrastać od 10.05
+(poniedziałek), a następnie zmniejszać się pod koniec tygodnia (rysunek
+<a href="5-chapter05.html#fig:kibana-zakazenia" reference-type="ref" reference="fig:kibana-zakazenia">5.45</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kibana-zakazenia.png" id="fig:kibana-zakazenia" alt="" />
+<p class="caption">Liczba nowych zakażeń na kontynentach świata w okresie
+10.–16.05.2021. Źródło: opracowanie własne z interfejsu
+Kibana.</p>
+</div>
+<p>Za niestabilną sytuację epidemiologiczną w Azji w rozpatrywanym tygodniu
+wpływ w głównej mierze miały Indie, które stanowiły 79.91% (2 297 276)
+wszystkich przypadków na tym kontynencie. Zaraz za Indiami figurowały
+Iran (3,35%, 96 355) i Turcja (2,99%, 86 042), a pozostałe kraje
+stanowiły 13,75% (395 229) wszystkich przypadków. Ta niejednorodność
+również wynikła w Ameryce Południowej, gdzie Brazylia stanowiła
+większość przypadków zakażeń (54,19%, 442 685). Z kolei na kontynencie
+europejskim pomiędzy znajdującymi się w czołówce krajami nie było
+znaczących różnic, jak w przypadku Azji i Ameryki Południowej – na 1.
+miejscu pod względem najwyższej skumulowanej tygodniowej liczby zakażeń
+znalazła się Francja (18,3%, 100 700), a za nią Niemcy (13,7%, 75 399) i
+Rosja (10,9%, 59 983). Pozostałe kraje składały się na więcej niż połowę
+nowych zakażeń (57,11%, 314 324; rysunek
+<a href="5-chapter05.html#fig:kibana-kontynenty-top3" reference-type="ref" reference="fig:kibana-kontynenty-top3">5.46</a>).</p>
+<div class="figure">
+<img src="figure/chap05/kibana-kontynenty-top3.png" id="fig:kibana-kontynenty-top3" alt="" />
+<p class="caption">3 kontynenty i 3 kraje na każdym kontynencie z najwyższą sumaryczną
+liczbą nowych zakażeń w okresie 10.–16.05.2021. Źródło: opracowanie
+własne z interfejsu
+Kibana.</p>
+</div>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-ed_sperr_mlis_pubmed_2016" class="csl-entry">
+Ed Sperr, M.L.I.S. (2016). <em><span>PubMed</span> by <span>Year</span></em>. <a href="https://esperr.github.io/pubmed-by-year/">https://esperr.github.io/pubmed-by-year/</a>
+</div>
+<div id="ref-google_google_2021" class="csl-entry">
+Google. (2021). Google <span>Trends</span>. In <em>Google Trends</em>. <a href="https://trends.google.com/trends/">https://trends.google.com/trends/</a>
+</div>
+<div id="ref-musikanimal_pageviews_2021" class="csl-entry">
+MusikAnimal, Kaldari, &amp; Marcel Ruinz Forns. (2021). <em>Pageviews</em>. <a href="https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog">https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog</a>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Jak zaznacza Google, listy najbardziej popularnych haseł
+konstruowane są na podstawie miernika popularności, czyli
+popularności hasła w aktualnym roku w stosunku do roku ubiegłego.
+Liczba wyświetleń hasła w danym punkcie czasu dzielona jest przez
+całkowitą liczbę wyświetleń, a wyniki są normalizowane na skali
+0–100, gdzie 0 oznacza znikomą popularność hasła, natomiast 100 –
+najwyższe zainteresowanie.<a href="5-chapter05.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Jak zaznacza Google, podane wyniki stanowią wyższy odsetek
+zapytań, a nie większą bezwzględną liczbę zapytań.<a href="5-chapter05.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Tematyka “Koronawirusy” uwzględnia wyszukiwane w wyszukiwarce
+Google hasła związane z kategorią “Wirusy” jako charakterystyczne
+dla “Koronawirusy” w ujęciu danego oficjalnego języka obowiązującego
+w analizowanym kraju.<a href="5-chapter05.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Artykuły: “COVID-19”, “Koronawirusy”/“Coronavirus”, “SARS-CoV-2”.<a href="5-chapter05.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>W tym przypadku analizowano Wikipedię w języku angielskim.<a href="5-chapter05.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Artykuły: “Dezynfekcja rąk”/“Hand washing”, “Półmaska”/“Surgical
+mask”, “Szczepionka”/“Vaccine”.<a href="5-chapter05.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>Przykładowo, stan zagrożenia epidemicznego w Polsce wprowadzony
+został 12.03.2020 r., a począwszy od 16.04.2020 r. przez polski rząd
+nałożony został nakaz zakrywania ust i nosa w przestrzeni
+publicznej, np. z użyciem półmaski.<a href="5-chapter05.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>Wybrane zostały artykuły bezpośrednio związane z pandemią
+COVID-19 (“Koronawirusy”, “COVID-19”, “SARS-CoV-2”) i pośrednio
+(“Higiena osobista”, “Szczepionka”, “Dezynfekcja rąk”).<a href="5-chapter05.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>6 659 zaszczepionym osobom (0,1%) nie przypisano płci.<a href="5-chapter05.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Wg danych uzyskanych z pakietu EpiEstim w R.<a href="5-chapter05.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>12 krajów: Białoruś, Brazylia, Czechy, Indie, Litwa, Niemcy,
+Polska, Rosja, Słowacja, Stany Zjednoczone, Szwecja i Ukraina.<a href="5-chapter05.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Tj. zgodności wyrażenia
+<span class="math inline">\((k_i \wedge b_i &lt; 1) \vee (k_i \wedge b_i \geqslant 1)\)</span>, które jest
+prawdziwe, jeśli wyestymowany z użyciem filtra Kalmana <span class="math inline">\(R(t)\)</span> jako
+<span class="math inline">\(k_i\)</span> jest mniejszy bądź większy od jedności z odpowiadającym z
+pakietu EpiEstim w R jako <span class="math inline">\(b_i\)</span>.<a href="5-chapter05.html#fnref15" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="4-chapter04.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="6-chapter06.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

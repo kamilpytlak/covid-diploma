@@ -1,0 +1,194 @@
+# Epidemiologia jako nauka o przyczynowości zdarzeń {#chapter02}
+
+
+## "Epidemia" i "pandemia"" - nieodłączne terminy epidemiologii
+
+Według słownika języka polskiego PWN "epidemiologia" jest definiowana
+jako "nauka zajmująca się badaniem czynników i warunków związanych z
+powstawaniem i szerzeniem się epidemii" [@pwn_slownik_2021]. Z kolei
+pojęcie "epidemia" opisuje "pojawienie się wśród ludności danego terenu
+dużej liczby zachorowań na określoną chorobę", ale też "nagminne
+występowanie, rozpowszechnianie się czegoś" [@pwn_slownik_2021-1]. Można
+zatem mówić o epidemii dżumy czy ospy prawdziwej, ale też rozszerzyć ten
+zakres o dzieła kultury, np. *Contagion --- Epidemia strachu* czy też
+*Epidemia miłości*; epidemią nazwać też można przemoc czy kryzys
+finansowy [@kucharski_prawa_2020]. Z kolei o wspólnym członie "-demia" z
+"epidemią" "pandemia" jest rozszerzeniem klasycznej definicji epidemii
+(i epidemii *per se* jako zjawiska) o zasięg globalny, jak to również
+ujmuje PWN: "epidemia obejmująca swym zasięgiem bardzo duże obszary"
+[@pwn_slownik_2021-2]. Jako "przyczynę" ten sam słownik określa "czynnik
+lub zespół warunków wywołujący jakieś zjawisko jako swój skutek"
+[@pwn_slownik_2021-3]. Można więc mówić o przyczynie choroby, czyli
+czynniku bądź czynnikach decydujących, które ją wywołały, np. palenie
+papierosów zwiększa ryzyko zachorowania na raka płuc czy krtani.
+Składając zatem klasyczne, słownikowe definicje epidemii i przyczyny,
+otrzymuje się czynniki możliwie zmieniające się w czasie, a na pewno
+rozprzestrzeniające się pośród obiektów, które są na nie narażone, w
+efekcie wywołując skutek. Beaglehole i in. podają cztery różne typy
+takich czynników. Ze względu na wiek czy płeć danego osobnika, czynnik
+taki można zaklasyfikować do predysponującego. Z drugiej strony, jeśli
+istnieje pewien podzbiór determinant, których wpływ i natężenie są w
+pewien sposób kontrolowane przez osobnika, można mówić o czynnikach
+umożliwiających, takich jak niewłaściwa dieta czy niedogodne warunki
+bytowe; przyspieszających, które przyczyniają się do powstania nowej
+choroby, jak i wzmacniających, czyli potęgujących efekt istniejącej już
+choroby [@beaglehole_podstawy_2002].
+
+Każda pandemia rozpoczyna się od epidemii, natomiast nie każda epidemia
+ewoluuje w pandemię. I tak mówi się o epidemii dżumy, epidemii SARS,
+pandemii grypy hiszpanki, jak i pandemii COVID-19[^1]. Naturalną
+konsekwencją próby przystosowania się do warunków środowiska jest zmiana
+materiału genetycznego organizmu, tj. mutacja, którą obserwuje się
+również u bakterii i wirusów --- patogenów będących inicjatorami
+epidemii. Mimo że epidemiologii jako nauce zaczęto poświęcać uwagę
+dopiero od XIX wieku, już ponad 2 000 lat temu Hipokrates stwierdził, że
+za rozprzestrzeniania się chorób przeważający wpływ ma środowisko.
+Współczesna epidemiologia bazuje nie tylko na pojawiających się w czasie
+w danym obszarze nieprzewidzianych ognisk nowej bądź znanej już choroby,
+ale też rozszerza swe metody o choroby przewlekłe czy też przenoszone
+drogą płciową. Wychodząc od przyczyny, uprzednio ją opisując,
+epidemiologia rozpatruje choroby w odniesieniu historycznym co do
+chwilowego stanu zdrowia osobnika, kolejno zmian przekształcających stan
+ten w patologię (chorobę) w rezultat w postaci wyzdrowienia bądź
+śmierci. Ujmując rzecz w ogóle, stany takie można scharakteryzować w
+przełożeniu na całą populację, co usprawnia nie tylko proces poznania
+czynnika chorobotwórczego, ale też jego wpływ na środowisko i zmienność
+w czasie. Finalnie, epidemiologia pozyskaną wiedzę teoretyczną stosuje
+do ewaluacji działań związanych z zapobieganiem, leczeniem i ogólną
+ochroną zdrowia (rysunek
+[2.1](#fig:epidemiologia-czynniki){reference-type="ref"
+reference="fig:epidemiologia-czynniki"}). Dąży ku temu poprzez
+szczegółową analizę pozyskanych danych epidemicznych i wdrożeniem metod
+mających na celu poprawienie jakości życia i ogólnego stanu zdrowia na
+obszarach, na których zaistniały warunki wystąpienia epidemii bądź
+rozprzestrzeniania się aktualnie trwającej [@beaglehole_podstawy_2002].
+
+![Zastosowania epidemiologii. Źródło: Beaglehole i in.
+[@beaglehole_podstawy_2002].](figure/chap02/epidemiologia-czynniki.png){#fig:epidemiologia-czynniki
+width="\\columnwidth"}
+
+
+## Miary epidemiologiczne
+
+Proces poznania nowej choroby bądź scharakteryzowania istniejącego już
+czynnika chorobotwórczego rozpoczyna się od zebrania informacji, które
+zwyczajowo agreguje się w zbiór danych złożony z wierszy i kolumn. W
+wierszach najczęściej przechowywane są informacje o danej jednostce
+badanej -- może to być pacjent szpitala, któremu został przypisany
+unikatowy numer ID, bądź też dany dzień okresu epidemicznego, jeśli
+badania mają na celu ogólną charakterystykę choroby w odniesieniu do
+populacji. Kolumny natomiast zawierają cechę (zmienną) obserwacji -- w
+przypadku danych pacjentów mogą to być parametry medyczne, a bardziej
+globalne analizy (np. całego kraju) przykładowo zawierają statystyki
+tyczące się badanej jednostki jako ogółu.
+
+Analizując przebieg sytuacji epidemicznej, kluczową kwestią jest
+poznanie liczby nowych przypadków chorobowych w czasie. Nie jest jednak
+możliwe jej precyzyjne określenie ze względu na niemożliwość regularnego
+badania wszystkich osobników populacji czy też możliwe błędy w trakcie
+analiz, np. podczas przeprowadzanych wywiadów z pacjentami czy też
+niedokładność wyników badań. Biorąc pod uwagę choroby zakaźne, poważnym
+ograniczeniem jest też liczba wykonywanych testów mających na celu
+ustalenie finalnej diagnozy zapadalności na określoną chorobę, dlatego
+analiza przebiegu epidemii w dłuższym okresie może być utrudniona na
+skutek nieregularnych skoków i spadków krzywej zachorowań. Wówczas
+pomocne może być wygładzenie krzywej, które można osiągnąć, wyznaczając
+średnią liczbę nowych zakażeń bądź zgonów w oknie $k$-dniowym,
+najczęściej 7-dniowym bądź 14-dniowym -- według równania (2.1).
+
+$$SMA = \frac{m_1 + m_2 + ... + m_{k}}{k}$$ gdzie:
+
+-   $m_1$, $m_2$, $m_{k}$ = średnia arytmetyczna z odpowiednio 1., 2. i
+    $k$. okresów.
+
+Czynnikiem limitującym liczbę nowych zakażeń stanowi również liczebność
+populacji danego kraju. Im większa jest populacja, tym oczekiwać można
+większej liczby pomiarów, a więc i większej skali wyników. Porównując
+zatem kraje czy też obszary pod względem tego samego czynnika (np.
+liczby osób zmarłych), należy uwzględnić liczebność populacji, a sam
+wynik przeliczyć na $n$ osób, by zachować proporcję, np. 1 mln osób, co
+przedstawia równanie (2.2).
+
+$$IR = \frac{Liczba \ nowych \ przypadkow \ chorobowych}{Calkowita \ liczebnosc \ populacji} \cdot 10^6$$
+
+Liczba nowych przypadków zakażeń jest proporcjonalna do wykonywanych w
+kraju testów, a proporcja pomiędzy liczbami nowych zakażeń a wykonanymi
+testami nosi miano współczynnika testów pozytywnych ($PR$); najczęściej
+wyrażany jest w procentach. Przykładowo, jeżeli na 1 000 wykonanych
+testów stwierdzono 500 nowych zakażeń, to średnio 1 wykonany test na 2
+dostarczał wynik pozytywny, a zatem współczynnik ten będzie wynosił 50%.
+Uwzględniając dwa parametry (liczby nowych zakażeń i przeprowadzonych
+testów), pozwala na efektywne monitorowanie sytuacji epidemicznej w
+danym kraju, wprowadzając odniesienie do pochodnej, tj. źródła liczby
+nowych zakażeń -- równanie (2.3). WHO zaleciła progową interpretację
+$PR$, tzn. o względnie stabilnej sytuacji epidemicznej można mówić
+wtedy, kiedy współczynnik ten w czasie jest mniejszy od 5%, co odpowiada
+mniej niż 1 nowemu zakażeniu na 20 wykonanych testów; ponadto zaleciła
+ona rozważenie luzowania obostrzeń przez rządy krajów wtedy, gdy
+współczynnik ten będzie utrzymywać się na poziomie minimalnym (mniejszym
+od 5%) przez co najmniej 2 tygodnie [@hartman_covid-19_2020].
+
+$$PR = \frac{Liczba \ nowych \ zakazen \ w \ czasie}{Liczba \ wykonanych \ testow \ w \ czasie} \cdot 100\%$$
+
+Analizując jednowymiarową cechę statystyczną, np, liczbę zakażeń w
+czasie, często interesujący może być jej rozkład, a w szczególności
+zmienność poszczególnych wartości. Obok konstrukcji wykresu
+ilustrującego przyrosty i spadki skorzystać można z klasycznej miary
+zróżnicowania, jaką jest estymator współczynnika zmienności ($CV$) dany
+równaniem (2.4):
+
+$$CV = \frac{s}{m}$$ gdzie:
+
+-   $s$ = odchylenie standardowe wartości badanej cechy,
+
+-   $m$ = średnia arytmetyczna wartości badanej cechy.
+
+Często przydatne może się okazać określenie skośności rozkładu zmiennej,
+np. podczas analizy rozkładu wieku pacjentów zmarłych. W takim przypadku
+badacz może być zainteresowany weryfikacją grup wiekowych o największym
+stopniu ryzyka. Do rozwiązania tak postawionego problemu posłużyć może
+współczynnik skośności ($A_S$) dany wzorem (2.5).
+
+$$A_S = \frac{1}{n} \cdot \frac{\sum_{i=1}^n (x_i - m)^3}{s^4}$$ gdzie
+
+-   $s$ = odchylenie standardowe wartości badanej cechy,
+
+-   $m$ = średnia arytmetyczna wartości badanej cechy,
+
+-   $x_i$ = $i$-ta obserwacja z próby.
+
+Inne spojrzenie na rozwój epidemii zaproponował George MacDonald.
+Zamiast rozpatrywać przyrost nowych zakażeń w aspekcie globalnym,
+zaproponował on skupienie się na jednostce (osobniku) i jej przeciętnym
+wpływie na ograniczenie bądź dalsze rozprzestrzenianie się czynnika
+chorobotwórczego. Jego rozważania przejął Klaus Dietz, który
+przekładając podstawy biologiczne na język matematyki, wyznaczył
+współczynnik określający średnią liczbę osób zakażonych w czasie przez
+poszczególną jednostkę, znaną jako współczynnik reprodukcji wirusa $R$.
+Taki współczynnik przyjmować może dowolne wartości ze zbioru liczb
+rzeczywistych dodatnich, przy czym im większa jest jego wartość, tym
+spodziewać się można intensywniejszego rozwoju epidemii. O
+niestabilności mówi się wtedy, gdy jest on wyższy od 1 -- wówczas każda
+osoba średnio zakaża więcej niż 1 osobę. Przeciwnie, jeśli współczynnik
+ten jest mniejszy od 1 i utrzymuje się przez pewien okres, to rozwój
+epidemii zostaje minimalizowany, gdyż każda osoba zakaża mniej niż 1
+osobę. Sytuację idealną stanowi $R$ równy 0, czyli całkowita eliminacja
+czynnika chorobotwórczego ze środowiska bądź jego nieprzenoszenie się na
+teoretycznie podatne osobniki populacji. Jak podkreśla Kucharski,
+wartość współczynnika $R$ zależy od czterech czynników. Z racji tego, że
+tyczy się on każdego osobnika populacji, ważny jest czas przebywania
+przez osobę zakażoną choroby. Kolejną składową jest liczba okazji, czyli
+kontaktów, z jakimi wchodzi osoba zakażona. Interakcje międzyludzkie
+sprzyjają przenoszeniu się czynników chorobotwórczych (patogenów),
+aczkolwiek istnieje pewne prawdopodobieństwo jego przekazania, co
+również ma niebagatelny wpływ na współczynnik $R$. Finalnie, biorąc pod
+uwagę zmienność populacyjną, rozpatrywany jest czynnik podatności, czyli
+osobnicza szansa na przyjęcie czynnika [@kucharski_prawa_2020]. Składową
+wszystkich tych wartości jest współczynnik $R$ opisany równaniem (2.6).
+
+$$R = Czas \ \cdot \ Okazje \ \cdot \ Prawdopodobienstwo \ przekazania \ \cdot \ Podatnosc$$
+
+Do estymacji współczynnika $R$ można wykorzystać podstawowy model
+epidemiologiczny $SIR$ z ograniczoną liczbą parametrów, co jest znane
+jako filtr Kalmana. Istnieją również narzędzia zaimplementowane w
+popularnych pakietach do statystycznej analizy danych.

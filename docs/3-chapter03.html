@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Rozdział 3 Pandemia COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Rozdział 3 Pandemia COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Rozdział 3 Pandemia COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rozdział 3 Pandemia COVID-19 | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="2-chapter02.html"/>
+<link rel="next" href="4-chapter04.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter03" class="section level1" number="3">
+<h1><span class="header-section-number">Rozdział 3</span> Pandemia COVID-19</h1>
+<div id="wirus-sars-cov-2-i-choroba-covid-19" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Wirus SARS-CoV-2 i choroba COVID-19</h2>
+<p>W listopadzie 2019 r. w chińskim mieście Wuhan położonym w prowincji
+Hubei zdiagnozowano przypadki zapalenia płuc nieznanego pochodzenia.
+Począwszy od 17 listopada, kiedy osobliwość tę zidentyfikowano u
+55-letniego pacjenta, każdego dnia zgłaszano ok. 5 nowych przypadków,
+tak że do 31.12.2019 r. liczba zakażeń wyniosła 266 <span class="citation">(<a href="#ref-ma_chinas_2020" role="doc-biblioref">J. Ma, 2020</a>)</span>.
+Przeprowadzone analizy wykluczyły wirusy SARS-CoV, MERS-CoV, ptasie
+grypyj i inne już znane, a infekujące układ oddechowy, jako czynniki
+wywołujące tę chorobę. Nowy wirus został nazwany przez WHO jako
+2019-nCoV (SARS-CoV-2) ze względu na ok. 70% podobieństwo jego genomu z
+genomem SARS-CoV z roku 2003. Wkrótce po tym określiła nazwę nowej
+choroby wywoływanej przez SARS-CoV-2 – COVID-19 <span class="citation">(<a href="#ref-hui_continuing_2020" role="doc-biblioref">Hui et al., 2020</a>)</span>.</p>
+<p>Choroby układu oddechowego w przebiegu są do siebie na ogół podobne, a
+różnice między nimi wynikają z intensywności objawów, jak i występowania
+innych, dodatkowych symptomów. COVID-19 ma bardzo podobne objawy do
+sezonowej grypy, należą do nich m.in. kaszel, gorączka, katar, ogólne
+zmęczenie i osłabienie organizmu i trudności w oddychaniu, z czego to
+ostatnie zostało przypisane COVID-19 jako objaw charakterystyczny.
+Zarówno COVID-19, jak i grypa są przenoszone drogą kropelkową, jednakże
+szansa zakażeniem się COVID-19 jest większa <span class="citation">(<a href="#ref-cdc_similarities_2021" role="doc-biblioref">CDC, 2021a</a>)</span>. W
+czasie u pacjentów, którzy przebyli COVID-19, potwierdziły się inne,
+możliwie neurologiczne powikłania: zaburzenia węchu i smaku. W swoim
+badaniu Lechien i in. stwierdzili, że wśród pacjentów częściej obserwuje
+się utratę węchu niż smaku; również frekwencja kobiet niż mężczyzn
+mających tę powikłania była większa <span class="citation">(<a href="#ref-lechien_olfactory_2020" role="doc-biblioref">Lechien et al., 2020</a>)</span>.</p>
+<p>Początkowo najbardziej zagrożone z powodu szybko rozprzestrzeniającego
+się wirusa SARS-CoV-2 były Chiny, które szczyt zakażeń osiągnęły w
+lutym. Kiedy Azja przeważała pod kątem sumarycznej liczby zakażeń i
+zgonów Europę, jeszcze przed szczytem epidemii Chiny wdrożyły surowe
+środki bezpieczeństwa: 23.01 zamknięte zostało miasto Wuhan, zablokowany
+też został transport z i do miasta. Zamknięte też zostały obiekty użytku
+publicznego i zminimalizowany został dystans społeczny. Tak szybkie
+wdrożenie wydawać by się mogło radykalnych metod w niedługim czasie
+poskutkowało wygaszeniem epidemii w Chinach <span class="citation">(<a href="#ref-lai_severe_2020" role="doc-biblioref">Lai et al., 2020</a>)</span>. Z kolei
+pierwsze obostrzenia w Polsce zostały wprowadzone już na początku marca:
+od 10.03 zakazane było organizowanie imprez masowych, natomiast od 12.03
+zamknięte zostały placówki oświaty – szkoły, uczelnie wyższe, żłobki i
+przedszkola. 16.03, czyli 5 dni po ogłoszeniu stanu pandemii na świecie
+przez WHO, wprowadzony został stan zagrożenia epidemicznego, co
+pociągnęło za sobą ograniczenie lotów międzynarodowych, rozpoczęcie
+“zamrażania” gospodarki, czyli zamknięcia placówek często odwiedzanych
+przez ludzi – restauracji, pubów, a także sklepów niespożywczych w
+galeriach handlowych (poza aptekami i drogeriami). 24.03 zakazano
+spotkań w przestrzeni publicznej w liczbie większej niż 2, nałożono
+nakaz wychodzenia z domu tylko w celach niezbędnych, w komunikacji
+miejskiej nałożono limity na miejsca siedzące, a w ceremoniach
+religijnych uczestniczyć mogło do 5 osób
+<span class="citation">(<a href="#ref-tatiana_naklicka_koronawirus_2021" role="doc-biblioref">Tatiana Naklicka, 2021</a>)</span>.</p>
+<p>Według WHO koronawirus z roku 2019 stał się nie tylko problemem
+medycznym, ale i społecznym. Spotęgował on skalę istniejących już
+problemów na świecie, takich jak niedożywienie czy ubóstwo w krajach
+Trzeciego Świata, jednocześnie negatywnie wpływając na gospodarkę
+pozostałych krajów, co miało swój wydźwięk w zamykaniu granic,
+ograniczeniach handlowych, co z kolei postawiło w niepewnej pozycji
+miliony przedsiębiorstw, jak i pracowników sektorów gospodarki
+<span class="citation">(<a href="#ref-who_impact_2020" role="doc-biblioref">WHO, 2020a</a>)</span>.</p>
+</div>
+<div id="sposoby-ograniczenia-transmisji-wirusa-w-populacji" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Sposoby ograniczenia transmisji wirusa w populacji</h2>
+<div id="dbanie-o-higienę-osobistą" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Dbanie o higienę osobistą</h3>
+<p>Jednym z polecanych środków ochrony przed zakażeniem się SARS-CoV-2
+przez rządy państw i agencje ochrony zdrowia jest częste mycie rąk wodą
+z mydłem i ich dezynfekcja <span class="citation">(<a href="#ref-narodowy_fundusz_zdrowia_infolinia_2020" role="doc-biblioref">Narodowy Fundusz Zdrowia, 2020</a>)</span>.
+Sama CDC podkreśla, że jest to jeden z najefektywniejszych sposobów na
+ochronę zdrowia nie tylko własnego, ale też osób z najbliższego
+otoczenia, przy czym ważne jest, by czynność tę wykonywać regularnie
+<span class="citation">(<a href="#ref-cdc_when_2020" role="doc-biblioref">CDC, 2020</a>)</span>. Jak się okazuje, utrzymywanie higieny osobistej na
+optymalnym poziomie często nie jest możliwe w wielu regionach świata,
+gdzie nawet pracownicy sektora zdrowia publicznego nie mają dostępu do
+urządzeń sanitarnych. UNICEF szacuje, że tylko 3 na 5 osób na całym
+świecie ma swobodną możliwość umycia rąk wodą z mydłem
+<span class="citation">(<a href="#ref-unicef_handwashing_2020" role="doc-biblioref">UNICEF, 2020</a>)</span>. Pomimo dostępności urządzeń sanitarnych,
+wody i produktów higienicznych w niemal każdym domu i placówce
+publicznej w krajach rozwiniętych, wciąż istnieje pewna część ludzi,
+która nie dba o higienę osobistą. Tu winą mogą być czynniki
+psychologiczne leżące u podstaw ludzkiej natury. Jak wyjaśniają
+<span class="citation">(<a href="#ref-judah_experimental_2009" role="doc-biblioref">Judah et al., 2009</a>)</span>, ludzie chętniej wykonują daną czynność,
+jeśli ktoś inny również ją wykonuje, w związku z czym zachowania w
+publicznych toaletach mogą być również podyktowane normami społecznymi.
+Wydaje się, że pandemia COVID-19 przypomniała ludziom o czyhających w
+środowisku naturalnym patogenach i sposobie ochrony przed nimi właśnie
+poprzez zadbanie o higienę osobistą. Po ogłoszeniu pandemii przez WHO i
+wzrostu zakażeń w wielu krajach, w centrach handlowych postawiono
+właśnie na higienę, implementując urządzenia do dezynfekcji i nakazując
+używanie jednorazowych rękawiczek
+<span class="citation">(<a href="#ref-serwis_rzeczypospolitej_polskiej_centra_2020" role="doc-biblioref">Serwis Rzeczypospolitej Polskiej, 2020b</a>)</span>. Dodatkowo wiele sklepów
+zadbało o bezpieczeństwo swoich klientów – przykładem może być sieć
+Carrefour, która wedle swoich zapewnień regularnie dezynfekowała wózki,
+kasy i wagi w sklepach, a produkty na wagę pakowała do pojemników
+<span class="citation">(<a href="#ref-carrefour_bezpiecznie_2020" role="doc-biblioref">Carrefour, 2020</a>)</span>.</p>
+<p>Ze zdrowotnego punktu widzenia kompulsywne, a przy tym wielokrotne mycie
+rąk może jednak spowodować poważne komplikacje zdrowotne. Długotrwała
+ekspozycja skóry na wodę może prowadzić do jej obrzęku na skutek
+rozerwania struktury lipidów międzykomórkowych. Ten sam efekt może
+przynieść stosowanie środków chemicznych o działaniu drażniącym na
+skórę, gdyż przyczyniają się one do denaturacji jej białek, zwiększając
+prawdopodobieństwo pojawienia się stanu zapalnego. Tu szczególnie
+narażone są osoby borykające się z chorobami skóry, np. atopowym
+zapaleniem skóry.</p>
+<p>Wysuszanie i osłabienie bariery skórnej mogą także powodować preparaty
+na bazie alkoholu, które są zalecane przez WHO w razie niedostępności
+wody z mydłem. W razie komplikacji poleca się natychmiastowe wdrożenie
+leczenia skóry, np. poprzez stosowanie różnych maści czy kremów, przy
+ciągłym utrzymywaniu jej higieny jako środka mającego istotny wpływ na
+minimalizację szansy zakażenia się SARS-CoV-2, jak i innymi patogenami
+<span class="citation">(<a href="#ref-bai_still_2020" role="doc-biblioref">Bai, 2020</a>)</span>. Mimo to nawet w takich sytuacjach poleca się
+zastosować leczenie skóry i dalsze mycie rąk ze względu na dużą
+zasadność tej metody w zapobieganiu rozprzestrzeniania się SARS-CoV-2,
+jak i osobniczego zakażenia <span class="citation">(<a href="#ref-beiu_frequent_2020" role="doc-biblioref">Beiu et al., 2020</a>)</span>. Aby spowolnić
+wykładnicze rozprzestrzeniania się wirusa w populacji, sama higiena rąk
+może jednak nie wystarczyć. Ma i in. <span class="citation">(<a href="#ref-ma_potential_2020" role="doc-biblioref">Q.-X. Ma et al., 2020</a>)</span> rekomendują
+jednoczesne wdrożenie nawyku noszenia masek i utrzymywania higieny rąk
+na optymalnym poziomie, co może skutecznie spowolnić rozprzestrzenianie
+się wirusa. Takie podejście nazywają MIH (ang. “mask‐wearing plus
+instant hand hygiene”), czyli noszenie maski i natychmiastowa higiena
+rąk, z czego to ostatnie może być skutecznie realizowane z użyciem
+podręcznych produktów higienicznych przy braku dostępu urządzeń
+sanitarnych. Praktyka ta została wcześnie wdrożona w Chinach, Republice
+Korei i Japonii, co możliwie miało istotny wpływ na spadek nowych
+dziennych przypadków zakażeń w późniejszym okresie w porównaniu z innymi
+krajami, np. Stanami Zjednoczonymi czy Hiszpanią, które takiego
+podejścia nie zastosowały, a ich obywatele niechętnie zakładali maski
+<span class="citation">(<a href="#ref-ma_potential_2020" role="doc-biblioref">Q.-X. Ma et al., 2020</a>)</span>.</p>
+</div>
+<div id="utrzymywanie-dystansu-społecznego" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Utrzymywanie dystansu społecznego</h3>
+<p>Wirus SARS-CoV-2 przenosi się drogą kropelkową w postaci małych cząstek
+cieczy, które wydobywają się z ust czy nosa osoby zakażonej. Szansa na
+zakażenie się wzrasta przy bliskim kontakcie z drugą osobą, a także w
+słabo wentylowanych pomieszczeniach, w których poziom cyrkulacji
+powietrza jest niedostateczny, przez co wirus może unosić się w
+zawiesinie. Nie każda osoba zakażona wykazuje objawy choroby COVID-19, a
+przeprowadzone badania sugerują, że od właściwego czasu zakażenia się
+SARS-CoV-2 a pierwszymi symptomami choroby średnio mija kilka dni, a
+więc wirus może przenosić się w postaci utajonej. Takie
+“roznosicielskie” zachowanie ma duży wpływ na rozwój sytuacji
+epidemicznej i jest proporcjonalne do prowadzonego przez osobę zakażoną
+stylu życia <span class="citation">(<a href="#ref-who_coronavirus_2020" role="doc-biblioref">WHO, 2020b</a>)</span>. Jak zaznacza CDC, przede wszystkim
+na ciężki przebieg choroby COVID-19 narażone są osoby starsze i choć
+szansa na zakażenie się jest dość jednorodna wśród młodszych i starszych
+grup wiekowych, to osoby w przedziale wiekowym 65–74 mają 40-krotnie
+większą szansę na hospitalizację w porównaniu z grupą wiekową 5–17 i 1
+300-krotnie większą szansę na zgon. W przypadku grupy wiekowej 18–29
+krotności te wynoszą już odpowiednio 6 i 10 <span class="citation">(<a href="#ref-cdc_risk_2021" role="doc-biblioref">CDC, 2021b</a>)</span>.</p>
+<p>W sezonie wiosenno-letnim roku 2020, kiedy zaczęły pojawiać się nagłe
+przyrosty dziennych liczb zakażeń (“fale”), w niektórych krajach świata
+zdecydowano się ograniczyć przemieszczanie się do absolutnego minimum,
+podczas gdy inne kraje stopniowo minimalizowały dystans społeczny
+poprzez ograniczenie liczby osób przebywających w centrach handlowych
+czy liczby osób przebywających w komunikacji miejskiej. Do pierwszej
+grupy należała m.in. Francja, gdzie od 17.03 początkowo przez 15 dni
+obywatele mogli wychodzić z domu wyłącznie w sprawach niezbędnych,
+takich jak zrobienie zakupów czy udanie się do pracy. Rząd zapewnił
+powstanie punktów kontrolnych weryfikujących obywateli, a każdy
+niestosujący się do ustalonych obostrzeń ryzykował otrzymanie grzywny w
+wysokości do 135 euro <span class="citation">(<a href="#ref-cuthbertson_france_2020" role="doc-biblioref">Cuthbertson, 2020</a>)</span>. W sposób mniej
+radykalny podeszła Polska: mimo że ograniczenie poruszania się w
+przestrzeni publicznej zostało już wprowadzone 16.03, a obowiązek
+zakrywania ust i nosa 16.04, obostrzenia były etapowo łagodzone
+począwszy od końca kwietnia <span class="citation">(<a href="#ref-polityka_zdrowotna_rok_2021" role="doc-biblioref">Polityka Zdrowotna, 2021</a>)</span>.</p>
+<p>Chociaż pandemia COVID-19 znacząco wpłynęła na wykonywane codziennie
+obowiązki i przyzwyczajenia, a ograniczenie dystansu społecznego
+dodatkowo miało szkodliwy wpływ na zdrowie psychiczne, jak i fizyczne
+<span class="citation">(<a href="#ref-sikali_dangers_2020" role="doc-biblioref">Sikali, 2020</a>)</span>, WHO stanowczo potwierdza, że ograniczenie to ma
+znaczący wpływ na minimalizację transmisji wirusa, a więc i poprawę
+jakości życia wielu osób. Jeśli istnieje konieczna potrzeba wyjścia z
+domu, zaleca zaplanowanie trasy, tak aby ograniczyć spotkania z
+przypadkowymi osobami do minimum, co zabezpieczy nie tylko siebie
+samego, ale i inne osoby.</p>
+</div>
+<div id="zasłanianie-ust-i-nosa" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Zasłanianie ust i nosa</h3>
+<p>Wraz z postępującym wzrostem dziennej liczby przypadków zakażeń na
+SARS-CoV-2 i pojawiającymi się zgonami osób uprzednio zakażonych w I
+kwartale roku 2020 rządy wielu krajów świata zaostrzyły ówcześnie
+panujące zasady sanitarne o obowiązkowe zasłanianie ust i nosa w
+przestrzeni publicznej w celu minimalizacji dalszego rozprzestrzeniania
+się wirusa. W Polsce taki nakaz obowiązywał od 16.04, a Ministerstwo
+Zdrowia zaleciło, by twarz była zasłaniania z użyciem jednorazowej bądź
+materiałowej maseczki, apaszki, szalika czy chusty, przy czym maseczka
+materiałowa mogła być wykonana z różnych rodzajów tkanin, np.
+bawełnianych czy poliestrowych
+<span class="citation">(<a href="#ref-serwis_rzeczypospolitej_polskiej_wychodzisz_2020" role="doc-biblioref">Serwis Rzeczypospolitej Polskiej, 2020a</a>)</span>. Taki obowiązek
+prędko stał się normą w większości krajów europejskich w 2020 roku,
+m.in. w Anglii, Francji, Belgii, Niemczech, Włoszech czy Rumunii, a za
+nieprzestrzeganie tej zasady rządy części krajów zastosowały kary
+pieniężne – w Wielkiej Brytanii, przykładowo, grzywna mogła wynosić do
+100 funtów <span class="citation">(<a href="#ref-euronews_mandatory_2020" role="doc-biblioref">Euronews, 2020</a>)</span>.</p>
+<p>O skuteczności stosowania masek w przestrzeni publicznej spekulowano
+jeszcze przed ogłoszeniem pandemii przez WHO. W większości często
+odmienne postępowania krajów w tamtym okresie było podyktowane
+zaleceniami organizacji zajmujących się ochroną zdrowia, a także
+krajowych agencji zdrowia publicznego – głównie WHO i CDC. W początkach
+trwania epidemii brak było wystarczających dowodów na zasadność
+stosowania masek w przestrzeni publicznej. Sama WHO określiła, że nie ma
+potrzeby zakrywania ust i nosa, jeśli dana osoba nie opiekuje się osobą
+chorą na COVID-19. Podążając za WHO, rząd niemiecki oświadczył, że ze
+względu na brak istotnych dowodów wskazujących na skuteczność użycia
+masek chirurgicznych, nie rekomenduje ich stosowania. Podobne zdanie
+podzielała CDC, podkreślając, że osoby, które są zdrowe i czują się
+dobrze, nie muszą nosić masek w przestrzeni publicznej. Porównując do
+krajów europejskich, odmienne postępowanie w tej kwestii wdrożyły kraje
+azjatyckie. W Chinach podzielono populację ze względu na osoby o bardzo
+niskim, niskim i średnim ryzyku zakażenia się wirusem. Noszenie bądź
+nienoszenie maski danego typu maski zależało od przynależności do danej
+grupy. I tak osoby o bardzo niskim ryzyku<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> nie musiały zakrywać dróg
+oddechowych, ci przydzieleni do grupy średniego ryzyka<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> z kolei mieli
+obowiązek stosowania jednorazowej maski chirurgicznej. Również Hongkong
+jasno określił, że przepływ przenoszenia wirusów układu oddechowego może
+zostać zminimalizowane przez stosowane masek chirurgicznych
+<span class="citation">(<a href="#ref-feng_rational_2020" role="doc-biblioref">Feng et al., 2020</a>)</span>. To różne podejście do stosowania masek w
+przestrzeni publicznej mogło pośrednio wynikać z utrwalonej w danym
+kraju kulturze, przez co niektóre, pomijając kwestię związaną z
+zasadności ich noszenia ujętą w publikowanych w tamtych czasach pracach
+naukowych, nie były mentalnie przygotowane na wdrożenie tego typu
+rozwiązań (Stany Zjednoczone), pozostałe z kolei (kraje azjatyckie)
+wręcz przeciwnie.</p>
+<p>Wraz ze zwiększaniem się liczb nowych dziennych przypadków zakażeń i
+zgonów w krajach świata i zainteresowaniem badaczy tematyką skuteczności
+filtracji masek dostępnych na rynku i zasadności ich użycia w konspekcie
+pandemii COVID-19, CDC 5.04 wyklarowało swoje stanowisko i potwierdziło
+potrzebę zakrywania ust i nosa w przestrzeni publicznej bez względu na
+wiek, płeć, pochodzenie etniczne czy stan zdrowia. Niemal 2 miesiące
+później, tj. 5.06, w ślady CDC poszła WHO również zalecająca stosowanie
+masek. W głównej mierze ich stanowiska opierały się o powszechne wśród
+przebadanych osób bezobjawowe przechodzenie choroby COVID-19 i
+transmisję wirusa do środowiska poprzez krople śliny wydalane wraz z
+kichaniem, a nawet mówieniem <span class="citation">(<a href="#ref-gandhi_can_2020" role="doc-biblioref">Gandhi, 2020</a>)</span>. Pojawiające się w
+tamtym czasie badania dowiodły, że ilość kropel śliny przedostających
+się do środowiska podczas mówienia, czy kasłania można skutecznie
+zahamować, zakrywając usta i nos maską <span class="citation">(<a href="#ref-anfinrud_visualizing_2020" role="doc-biblioref">Anfinrud et al., 2020</a>)</span>.</p>
+<p>Oprócz liczby osób czynnie zasłaniających usta i nos w populacji istotne
+znacznie ma też rodzaj stosowanego materiału, z którego składa się
+maska. Aktualnie na rynku istnieje spora gama produktów, którymi można
+zasłonić usta i nos – wyróżnić można jednorazowe maski chirurgiczne,
+wielorazowe maski czy filtrujące, jak np. N95. Skuteczność każdej maski
+może być wyrażana jako średnia skuteczność usuwania cząstek. Ma ona
+pierwszorzędne znaczenie dla osób zajmujących się osobami schorowanymi
+(o dużym ryzyku zakażenia) lub też pracujących w placówkach zdrowotnych.
+Istotny wkład w szczelność maski odgrywa również jej dopasowanie do
+twarzy, co można wyrazić poprzez porównanie stężenia cząstek unoszących
+się w powietrzu wewnątrz i na zewnątrz maski. I tak powszechnie
+sprzedawane maski chirurgiczne mają średnią skuteczność usuwania cząstek
+oscylującą między 53% a 75%, ale ok. 90%, gdy są dopasowane do twarzy
+dodatkową warstwą nylonową. Z kolei skuteczność popularnych masek
+materiałowych waha się pomiędzy 28% a 91%, co również w dużej mierze
+zależne jest od jej dopasowania do twarzy (rysunek
+<a href="#fig:niemojobraz" reference-type="ref" reference="fig:maski-filtracja">3.2</a>) <span class="citation">(<a href="#ref-mueller_quantitative_2020" role="doc-biblioref">Mueller et al., 2020</a>)</span>.</p>
+<div class="figure">
+<img src="figure/chap03/maski-filtracja.jpg" id="fig:maski-filtracja" alt="" />
+<p class="caption">Skuteczność filtracji maski wyrażona jako % przefiltrowanych cząstek
+do wewnątrz maski dla różnych typów masek: N95-1 (dobrze dopasowana
+maska N95), N95-2 (źle dopasowana maska N95), od S-1 do S-3 (różne
+rodzaje masek medycznych), O-1 (maska z filtrem węglowym). Niebieskie
+słupki reprezentują średnią skuteczność usuwania cząstek, a szare –
+najlepszy możliwy współczynnik dopasowania poprzez dodanie dodatkowej
+nylonowej warstwy. Źródło: Mueller i in.
+<span class="citation">(<a href="#ref-mueller_quantitative_2020" role="doc-biblioref">Mueller et al., 2020</a>)</span></p>
+</div>
+<p>Zastosowanie dodatkowej nylonowej warstwy w masce efektywnie podnosi
+wskaźnik skuteczności filtracji poprzez minimalizację liczby przerw
+między materiałowymi włóknami, co wraz z kombinacją dobrze
+dopasowującego się materiału do twarzy może nie tylko zahamować
+transmisję SARS-CoV-2, ale też poprawić ogólną jakość wdychanego
+(przefitrowanego) powietrza <span class="citation">(<a href="#ref-mueller_quantitative_2020" role="doc-biblioref">Mueller et al., 2020</a>)</span>. Według
+kalifornijskiego lekarza Chin-Hong, aby pozbyć się zagrożenia ze strony
+SARS-CoV, należy wdrożyć codziennie praktykowane trzy “W” (ang. “three
+W’s to ward off COVID-19”): noszenie maski (ang. “wearing a mask”),
+mycie rąk (ang. “washing your hands”) i utrzymywanie dystansu
+społecznego (ang. “watching your distance”), z których najważniejsze
+jest noszenie maski <span class="citation">(<a href="#ref-bai_still_2020" role="doc-biblioref">Bai, 2020</a>)</span>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-anfinrud_visualizing_2020" class="csl-entry">
+Anfinrud, P., Stadnytskyi, V., Bax, C. E., &amp; Bax, A. (2020). Visualizing <span>Speech</span>-<span>Generated</span> <span>Oral</span> <span>Fluid</span> <span>Droplets</span> with <span>Laser</span> <span>Light</span> <span>Scattering</span>. <em>New England Journal of Medicine</em>, <em>382</em>(21), 2061–2063. <a href="https://doi.org/10.1056/NEJMc2007800">https://doi.org/10.1056/NEJMc2007800</a>
+</div>
+<div id="ref-bai_still_2020" class="csl-entry">
+Bai, N. (2020). Still <span>Confused</span> <span>About</span> <span>Masks</span>? <span>Here</span>’s the <span>Science</span> <span>Behind</span> <span>How</span> <span>Face</span> <span>Masks</span> <span>Prevent</span> <span>Coronavirus</span>. In <em>Still Confused About Masks? Here’s the Science Behind How Face Masks Prevent Coronavirus <span></span> UC San Francisco</em>. <a href="https://www.ucsf.edu/news/2020/06/417906/still-confused-about-masks-heres-science-behind-how-face-masks-prevent">https://www.ucsf.edu/news/2020/06/417906/still-confused-about-masks-heres-science-behind-how-face-masks-prevent</a>
+</div>
+<div id="ref-beiu_frequent_2020" class="csl-entry">
+Beiu, C., Mihai, M., Popa, L., Cima, L., &amp; Popescu, M. N. (2020). Frequent <span>Hand</span> <span>Washing</span> for <span>COVID</span>-19 <span>Prevention</span> <span>Can</span> <span>Cause</span> <span>Hand</span> <span>Dermatitis</span>: <span>Management</span> <span>Tips</span>. <em>Cureus</em>, <em>12</em>(4). <a href="https://doi.org/10.7759/cureus.7506">https://doi.org/10.7759/cureus.7506</a>
+</div>
+<div id="ref-carrefour_bezpiecznie_2020" class="csl-entry">
+Carrefour. (2020). <em>Bezpiecznie w <span>Carrefour</span> podczas pandemii koronawirusa</em>. <a href="https://www.carrefour.pl/lp-w-trosce-o-zdrowie/artykuly/bezpiecznie-w-carrefour-podczas-pandemii">https://www.carrefour.pl/lp-w-trosce-o-zdrowie/artykuly/bezpiecznie-w-carrefour-podczas-pandemii</a>
+</div>
+<div id="ref-cdc_similarities_2021" class="csl-entry">
+CDC. (2021a). Similarities and <span>Differences</span> between <span>Flu</span> and <span>COVID</span>-19​. In <em>Centers for Disease Control and Prevention</em>. <a href="https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm">https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm</a>
+</div>
+<div id="ref-cdc_risk_2021" class="csl-entry">
+CDC. (2021b). Risk for <span>COVID</span>-19 <span>Infection</span>, <span>Hospitalization</span>, and <span>Death</span> <span>By</span> <span>Age</span> <span>Group</span>. In <em>Centers for Disease Control and Prevention</em>. <a href="https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-age.html">https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-age.html</a>
+</div>
+<div id="ref-cdc_when_2020" class="csl-entry">
+CDC. (2020). <em>When and <span>How</span> to <span>Wash</span> <span>Your</span> <span>Hands</span> <span></span> <span>Handwashing</span> <span></span> <span>CDC</span></em>. <a href="https://www.cdc.gov/handwashing/when-how-handwashing.html">https://www.cdc.gov/handwashing/when-how-handwashing.html</a>
+</div>
+<div id="ref-cuthbertson_france_2020" class="csl-entry">
+Cuthbertson, A. (2020). France imposes 15-day lockdown and mobilises 100,000 police to enforce coronavirus restrictions. In <em>The Independent</em>. <a href="https://www.independent.co.uk/news/world/europe/coronavirus-france-lockdown-cases-update-covid-19-macron-a9405136.html">https://www.independent.co.uk/news/world/europe/coronavirus-france-lockdown-cases-update-covid-19-macron-a9405136.html</a>
+</div>
+<div id="ref-euronews_mandatory_2020" class="csl-entry">
+Euronews. (2020). Mandatory mask-wearing now the norm in <span>Europe</span> as <span>COVID</span>-19 cases rise. In <em>euronews</em>. <a href="https://www.euronews.com/2020/07/24/coronavirus-mandatory-mask-wearing-becomes-the-norm-in-europe-as-cases-rise">https://www.euronews.com/2020/07/24/coronavirus-mandatory-mask-wearing-becomes-the-norm-in-europe-as-cases-rise</a>
+</div>
+<div id="ref-feng_rational_2020" class="csl-entry">
+Feng, S., Shen, C., Xia, N., Song, W., Fan, M., &amp; Cowling, B. J. (2020). Rational use of face masks in the <span>COVID</span>-19 pandemic. <em>The Lancet Respiratory Medicine</em>, <em>8</em>(5), 434–436. <a href="https://doi.org/10.1016/S2213-2600(20)30134-X">https://doi.org/10.1016/S2213-2600(20)30134-X</a>
+</div>
+<div id="ref-gandhi_can_2020" class="csl-entry">
+Gandhi, M. (2020). Can people spread the coronavirus if they don’t have symptoms? 5 questions answered about asymptomatic <span>COVID</span>-19. In <em>The Conversation</em>. <a href="http://theconversation.com/can-people-spread-the-coronavirus-if-they-dont-have-symptoms-5-questions-answered-about-asymptomatic-covid-19-140531">http://theconversation.com/can-people-spread-the-coronavirus-if-they-dont-have-symptoms-5-questions-answered-about-asymptomatic-covid-19-140531</a>
+</div>
+<div id="ref-hui_continuing_2020" class="csl-entry">
+Hui, D. S., I Azhar, E., Madani, T. A., Ntoumi, F., Kock, R., Dar, O., Ippolito, G., Mchugh, T. D., Memish, Z. A., Drosten, C., Zumla, A., &amp; Petersen, E. (2020). The continuing 2019-<span class="nocase">nCoV</span> epidemic threat of novel coronaviruses to global health — <span>The</span> latest 2019 novel coronavirus outbreak in <span>Wuhan</span>, <span>China</span>. <em>International Journal of Infectious Diseases</em>, <em>91</em>, 264–266. <a href="https://doi.org/10.1016/j.ijid.2020.01.009">https://doi.org/10.1016/j.ijid.2020.01.009</a>
+</div>
+<div id="ref-judah_experimental_2009" class="csl-entry">
+Judah, G., Aunger, R., Schmidt, W.-P., Michie, S., Granger, S., &amp; Curtis, V. (2009). Experimental <span>Pretesting</span> of <span>Hand</span>-<span>Washing</span> <span>Interventions</span> in a <span>Natural</span> <span>Setting</span>. <em>American Journal of Public Health</em>, <em>99</em>(Suppl 2), S405–S411. <a href="https://doi.org/10.2105/AJPH.2009.164160">https://doi.org/10.2105/AJPH.2009.164160</a>
+</div>
+<div id="ref-lai_severe_2020" class="csl-entry">
+Lai, C.-C., Shih, T.-P., Ko, W.-C., Tang, H.-J., &amp; Hsueh, P.-R. (2020). Severe acute respiratory syndrome coronavirus 2 (<span>SARS</span>-<span>CoV</span>-2) and coronavirus disease-2019 (<span>COVID</span>-19): <span>The</span> epidemic and the challenges. <em>International Journal of Antimicrobial Agents</em>, <em>55</em>(3), 105924. <a href="https://doi.org/10.1016/j.ijantimicag.2020.105924">https://doi.org/10.1016/j.ijantimicag.2020.105924</a>
+</div>
+<div id="ref-lechien_olfactory_2020" class="csl-entry">
+Lechien, J. R., Chiesa-Estomba, C. M., De Siati, D. R., Horoi, M., Le Bon, S. D., Rodriguez, A., Dequanter, D., Blecic, S., El Afia, F., Distinguin, L., Chekkoury-Idrissi, Y., Hans, S., Delgado, I. L., Calvo-Henriquez, C., Lavigne, P., Falanga, C., Barillari, M. R., Cammaroto, G., Khalife, M., … Saussez, S. (2020). Olfactory and gustatory dysfunctions as a clinical presentation of mild-to-moderate forms of the coronavirus disease (<span>COVID</span>-19): A multicenter <span>European</span> study. <em>European Archives of Oto-Rhino-Laryngology</em>, <em>277</em>(8), 2251–2261. <a href="https://doi.org/10.1007/s00405-020-05965-1">https://doi.org/10.1007/s00405-020-05965-1</a>
+</div>
+<div id="ref-ma_chinas_2020" class="csl-entry">
+Ma, J. (2020). China’s first confirmed <span>Covid</span>-19 case traced back to <span>November</span> 17. In <em>South China Morning Post</em>. <a href="https://www.scmp.com/news/china/society/article/3074991/coronavirus-chinas-first-confirmed-covid-19-case-traced-back">https://www.scmp.com/news/china/society/article/3074991/coronavirus-chinas-first-confirmed-covid-19-case-traced-back</a>
+</div>
+<div id="ref-ma_potential_2020" class="csl-entry">
+Ma, Q.-X., Shan, H., Zhang, H.-L., Li, G.-M., Yang, R.-M., &amp; Chen, J.-M. (2020). Potential utilities of mask-wearing and instant hand hygiene for fighting <span>SARS</span>-<span>CoV</span>-2. <em>Journal of Medical Virology</em>, <em>92</em>(9), 1567–1571. https://doi.org/<a href="https://doi.org/10.1002/jmv.25805">https://doi.org/10.1002/jmv.25805</a>
+</div>
+<div id="ref-mueller_quantitative_2020" class="csl-entry">
+Mueller, A. V., Eden, M. J., Oakes, J. M., Bellini, C., &amp; Fernandez, L. A. (2020). Quantitative <span>Method</span> for <span>Comparative</span> <span>Assessment</span> of <span>Particle</span> <span>Removal</span> <span>Efficiency</span> of <span>Fabric</span> <span>Masks</span> as <span>Alternatives</span> to <span>Standard</span> <span>Surgical</span> <span>Masks</span> for <span>PPE</span>. <em>Matter</em>, <em>3</em>(3), 950–962. <a href="https://doi.org/10.1016/j.matt.2020.07.006">https://doi.org/10.1016/j.matt.2020.07.006</a>
+</div>
+<div id="ref-narodowy_fundusz_zdrowia_infolinia_2020" class="csl-entry">
+Narodowy Fundusz Zdrowia. (2020). Infolinia <span>NFZ</span>: <span>Najczęściej</span> zadawane pytania związane z koronawirusem. In <em>Narodowy Fundusz Zdrowia (NFZ) – finansujemy zdrowie Polaków</em>. <a href="https://www.nfz.gov.pl/aktualnosci/aktualnosci-oddzialow/infolinia-nfz-najczesciej-zadawane-pytania-zwiazane-z-koronawirusem,387.html">https://www.nfz.gov.pl/aktualnosci/aktualnosci-oddzialow/infolinia-nfz-najczesciej-zadawane-pytania-zwiazane-z-koronawirusem,387.html</a>
+</div>
+<div id="ref-polityka_zdrowotna_rok_2021" class="csl-entry">
+Polityka Zdrowotna. (2021). <em>Rok od pierwszego przypadku <span>COVID</span>-19 w <span>Polsce</span></em>. <a href="https://www.politykazdrowotna.com/70992,rok-od-pierwszego-przypadku-covid-19-w-polsce">https://www.politykazdrowotna.com/70992,rok-od-pierwszego-przypadku-covid-19-w-polsce</a>
+</div>
+<div id="ref-serwis_rzeczypospolitej_polskiej_wychodzisz_2020" class="csl-entry">
+Serwis Rzeczypospolitej Polskiej. (2020a). Wychodzisz z domu? <span>Zasłoń</span> usta i nos! - <span>Koronawirus</span>: Informacje i zalecenia - <span>Portal</span> <span>Gov</span>.pl. In <em>Koronawirus: informacje i zalecenia</em>. <a href="https://www.gov.pl/web/koronawirus/zaslon-usta-i-nos">https://www.gov.pl/web/koronawirus/zaslon-usta-i-nos</a>
+</div>
+<div id="ref-serwis_rzeczypospolitej_polskiej_centra_2020" class="csl-entry">
+Serwis Rzeczypospolitej Polskiej. (2020b). Centra handlowe - <span>Ministerstwo</span> <span>Rozwoju</span>, <span>Pracy</span> i <span>Technologii</span> - <span>Portal</span> <span>Gov</span>.pl. In <em>Ministerstwo Rozwoju, Pracy i Technologii</em>. <a href="https://www.gov.pl/web/rozwoj-praca-technologia/centra-handlowe">https://www.gov.pl/web/rozwoj-praca-technologia/centra-handlowe</a>
+</div>
+<div id="ref-sikali_dangers_2020" class="csl-entry">
+Sikali, K. (2020). The dangers of social distancing: <span>How</span> <span>COVID</span>‐19 can reshape our social experience. <em>Journal of Community Psychology</em>. <a href="https://doi.org/10.1002/jcop.22430">https://doi.org/10.1002/jcop.22430</a>
+</div>
+<div id="ref-tatiana_naklicka_koronawirus_2021" class="csl-entry">
+Tatiana Naklicka. (2021). Koronawirus - aktualne obostrzenia w <span>Polsc</span>. In <em>medonet.pl</em>. <a href="https://www.medonet.pl/koronawirus-pytania-i-odpowiedzi/sars-cov-2,koronawirus---aktualne-obostrzenia-w-polsce--aktualizacja-,artykul,98382723.html">https://www.medonet.pl/koronawirus-pytania-i-odpowiedzi/sars-cov-2,koronawirus---aktualne-obostrzenia-w-polsce--aktualizacja-,artykul,98382723.html</a>
+</div>
+<div id="ref-unicef_handwashing_2020" class="csl-entry">
+UNICEF. (2020). <em>Handwashing around the world</em>. <a href="https://www.unicef.org/supply/stories/handwashing-around-world">https://www.unicef.org/supply/stories/handwashing-around-world</a>
+</div>
+<div id="ref-who_impact_2020" class="csl-entry">
+WHO. (2020a). <em>Impact of <span>COVID</span>-19 on people’s livelihoods, their health and our food systems</em>. <a href="https://www.who.int/news/item/13-10-2020-impact-of-covid-19-on-people&#39;s-livelihoods-their-health-and-our-food-systems">https://www.who.int/news/item/13-10-2020-impact-of-covid-19-on-people's-livelihoods-their-health-and-our-food-systems</a>
+</div>
+<div id="ref-who_coronavirus_2020" class="csl-entry">
+WHO. (2020b). <em>Coronavirus disease (<span>COVID</span>-19): <span>How</span> is it transmitted?</em> <a href="https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19-how-is-it-transmitted">https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19-how-is-it-transmitted</a>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Głównie osoby pozostające długoterminowo w domu, pracujące w
+pomieszczeniach wentylowanych, itp.<a href="3-chapter03.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Głównie osoby mające stały kontakt z różnymi osobami; również te,
+których elementem pracy jest kontakt z drugą osobą, jak np. kurierzy
+czy pracownicy supermarketu.<a href="3-chapter03.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="2-chapter02.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="4-chapter04.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

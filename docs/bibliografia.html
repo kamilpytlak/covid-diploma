@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Bibliografia | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Bibliografia | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Bibliografia | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bibliografia | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bibliografia" class="section level1 unnumbered">
+<h1>Bibliografia</h1>
+<!--
+This manually sets the header for this unnumbered chapter.
+-->
+<!--
+To remove the indentation of the first entry.
+-->
+<p></p>
+<!--
+To create a hanging indent and spacing between entries. This line may need 
+to be removed for styles that don't require the hanging indent.
+-->
+<!--
+This is just for testing with more citations for the bibliography at the end.  Add other entries into the list here if you'd like them to appear in the bibliography even if they weren't explicitly cited in the document.
+-->
+<!-- --- -->
+<!-- nocite: |  -->
+<!--   @angel2000, @angel2001, @angel2002a -->
+<!-- ... -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div class="csl-entry">
+Anfinrud, P., Stadnytskyi, V., Bax, C. E., &amp; Bax, A. (2020). Visualizing <span>Speech</span>-<span>Generated</span> <span>Oral</span> <span>Fluid</span> <span>Droplets</span> with <span>Laser</span> <span>Light</span> <span>Scattering</span>. <em>New England Journal of Medicine</em>, <em>382</em>(21), 2061–2063. <a href="https://doi.org/10.1056/NEJMc2007800">https://doi.org/10.1056/NEJMc2007800</a>
+</div>
+<div class="csl-entry">
+Arroyo Marioli, F., Bullano, F., Kucinskas, S., &amp; Rondón-Moreno, C. (2020). <em>Tracking <span>R</span> of <span>COVID</span>-19: <span>A</span> <span>New</span> <span>Real</span>-<span>Time</span> <span>Estimation</span> <span>Using</span> the <span>Kalman</span> <span>Filter</span></em>. Social Science Research Network. <a href="https://papers.ssrn.com/abstract=3581633">https://papers.ssrn.com/abstract=3581633</a>
+</div>
+<div class="csl-entry">
+Bai, N. (2020). Still <span>Confused</span> <span>About</span> <span>Masks</span>? <span>Here</span>’s the <span>Science</span> <span>Behind</span> <span>How</span> <span>Face</span> <span>Masks</span> <span>Prevent</span> <span>Coronavirus</span>. In <em>Still Confused About Masks? Here’s the Science Behind How Face Masks Prevent Coronavirus <span></span> UC San Francisco</em>. <a href="https://www.ucsf.edu/news/2020/06/417906/still-confused-about-masks-heres-science-behind-how-face-masks-prevent">https://www.ucsf.edu/news/2020/06/417906/still-confused-about-masks-heres-science-behind-how-face-masks-prevent</a>
+</div>
+<div class="csl-entry">
+Beaglehole, R., Bonita, R., Kjellström, T., Szeszenia-Dąbrowska, N., &amp; Hanke, W. (2002). <em>Podstawy epidemiologii</em>. Instytut Medycyny Pracy im. prof. J. Nofera. Oficyna Wydawnicza.
+</div>
+<div class="csl-entry">
+Beiu, C., Mihai, M., Popa, L., Cima, L., &amp; Popescu, M. N. (2020). Frequent <span>Hand</span> <span>Washing</span> for <span>COVID</span>-19 <span>Prevention</span> <span>Can</span> <span>Cause</span> <span>Hand</span> <span>Dermatitis</span>: <span>Management</span> <span>Tips</span>. <em>Cureus</em>, <em>12</em>(4). <a href="https://doi.org/10.7759/cureus.7506">https://doi.org/10.7759/cureus.7506</a>
+</div>
+<div class="csl-entry">
+Carrefour. (2020). <em>Bezpiecznie w <span>Carrefour</span> podczas pandemii koronawirusa</em>. <a href="https://www.carrefour.pl/lp-w-trosce-o-zdrowie/artykuly/bezpiecznie-w-carrefour-podczas-pandemii">https://www.carrefour.pl/lp-w-trosce-o-zdrowie/artykuly/bezpiecznie-w-carrefour-podczas-pandemii</a>
+</div>
+<div class="csl-entry">
+CDC. (2021a). Similarities and <span>Differences</span> between <span>Flu</span> and <span>COVID</span>-19​. In <em>Centers for Disease Control and Prevention</em>. <a href="https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm">https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm</a>
+</div>
+<div class="csl-entry">
+CDC. (2021b). Risk for <span>COVID</span>-19 <span>Infection</span>, <span>Hospitalization</span>, and <span>Death</span> <span>By</span> <span>Age</span> <span>Group</span>. In <em>Centers for Disease Control and Prevention</em>. <a href="https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-age.html">https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-age.html</a>
+</div>
+<div class="csl-entry">
+CDC. (2020). <em>When and <span>How</span> to <span>Wash</span> <span>Your</span> <span>Hands</span> <span></span> <span>Handwashing</span> <span></span> <span>CDC</span></em>. <a href="https://www.cdc.gov/handwashing/when-how-handwashing.html">https://www.cdc.gov/handwashing/when-how-handwashing.html</a>
+</div>
+<div class="csl-entry">
+Chang, W., Cheng, J., Allaire, J. J., Sievert, C., Schloerke, B., Xie, Y., Allen, J., McPherson, J., Dipert, A., &amp; Borges, B. (2021). <em>Shiny: <span>Web</span> <span>Application</span> <span>Framework</span> for <span>R</span></em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>
+</div>
+<div class="csl-entry">
+Chang, W., &amp; Ribeiro, B. B. (2018). <em>Shinydashboard: <span>Create</span> <span>Dashboards</span> with ’<span>Shiny</span>’</em>. <a href="https://CRAN.R-project.org/package=shinydashboard">https://CRAN.R-project.org/package=shinydashboard</a>
+</div>
+<div class="csl-entry">
+Cori, A. (2021). <em><span>EpiEstim</span>: <span>Estimate</span> <span>Time</span> <span>Varying</span> <span>Reproduction</span> <span>Numbers</span> from <span>Epidemic</span> <span>Curves</span></em>. <a href="https://CRAN.R-project.org/package=EpiEstim">https://CRAN.R-project.org/package=EpiEstim</a>
+</div>
+<div class="csl-entry">
+Cori, A., Ferguson, N. M., Fraser, C., &amp; Cauchemez, S. (2013). A <span>New</span> <span>Framework</span> and <span>Software</span> to <span>Estimate</span> <span>Time</span>-<span>Varying</span> <span>Reproduction</span> <span>Numbers</span> <span>During</span> <span>Epidemics</span>. <em>American Journal of Epidemiology</em>, <em>178</em>(9), 1505–1512. <a href="https://doi.org/10.1093/aje/kwt133">https://doi.org/10.1093/aje/kwt133</a>
+</div>
+<div class="csl-entry">
+Cuthbertson, A. (2020). France imposes 15-day lockdown and mobilises 100,000 police to enforce coronavirus restrictions. In <em>The Independent</em>. <a href="https://www.independent.co.uk/news/world/europe/coronavirus-france-lockdown-cases-update-covid-19-macron-a9405136.html">https://www.independent.co.uk/news/world/europe/coronavirus-france-lockdown-cases-update-covid-19-macron-a9405136.html</a>
+</div>
+<div class="csl-entry">
+Dinno, A. (2017). <em>Dunn.test: <span>Dunn</span>’s <span>Test</span> of <span>Multiple</span> <span>Comparisons</span> <span>Using</span> <span>Rank</span> <span>Sums</span></em>. <a href="https://CRAN.R-project.org/package=dunn.test">https://CRAN.R-project.org/package=dunn.test</a>
+</div>
+<div class="csl-entry">
+Ed Sperr, M.L.I.S. (2016). <em><span>PubMed</span> by <span>Year</span></em>. <a href="https://esperr.github.io/pubmed-by-year/">https://esperr.github.io/pubmed-by-year/</a>
+</div>
+<div class="csl-entry">
+Euronews. (2020). Mandatory mask-wearing now the norm in <span>Europe</span> as <span>COVID</span>-19 cases rise. In <em>euronews</em>. <a href="https://www.euronews.com/2020/07/24/coronavirus-mandatory-mask-wearing-becomes-the-norm-in-europe-as-cases-rise">https://www.euronews.com/2020/07/24/coronavirus-mandatory-mask-wearing-becomes-the-norm-in-europe-as-cases-rise</a>
+</div>
+<div class="csl-entry">
+Feng, S., Shen, C., Xia, N., Song, W., Fan, M., &amp; Cowling, B. J. (2020). Rational use of face masks in the <span>COVID</span>-19 pandemic. <em>The Lancet Respiratory Medicine</em>, <em>8</em>(5), 434–436. <a href="https://doi.org/10.1016/S2213-2600(20)30134-X">https://doi.org/10.1016/S2213-2600(20)30134-X</a>
+</div>
+<div class="csl-entry">
+Gandhi, M. (2020). Can people spread the coronavirus if they don’t have symptoms? 5 questions answered about asymptomatic <span>COVID</span>-19. In <em>The Conversation</em>. <a href="http://theconversation.com/can-people-spread-the-coronavirus-if-they-dont-have-symptoms-5-questions-answered-about-asymptomatic-covid-19-140531">http://theconversation.com/can-people-spread-the-coronavirus-if-they-dont-have-symptoms-5-questions-answered-about-asymptomatic-covid-19-140531</a>
+</div>
+<div class="csl-entry">
+Gapiński, A. (2020). Szacowanie parametru <span>R</span>(t) dla <span>COVID</span>-19 w <span>Polsce</span> na podstawie modelu <span>SIR</span>. In <em>Google Docs</em>. <a href="https://bit.ly/covid19-Rt-doc">https://bit.ly/covid19-Rt-doc</a>
+</div>
+<div class="csl-entry">
+Google. (2021). Google <span>Trends</span>. In <em>Google Trends</em>. <a href="https://trends.google.com/trends/">https://trends.google.com/trends/</a>
+</div>
+<div class="csl-entry">
+Hartman, M. (2020). <span>COVID</span>-19 <span>Testing</span>: <span>Understanding</span> the <span>“<span>Percent</span> <span>Positive</span>.”</span> In <em>Johns Hopkins Bloomberg School of Public Health</em>. <a href="https://www.jhsph.edu/covid-19/articles/covid-19-testing-understanding-the-percent-positive.html">https://www.jhsph.edu/covid-19/articles/covid-19-testing-understanding-the-percent-positive.html</a>
+</div>
+<div class="csl-entry">
+Hui, D. S., I Azhar, E., Madani, T. A., Ntoumi, F., Kock, R., Dar, O., Ippolito, G., Mchugh, T. D., Memish, Z. A., Drosten, C., Zumla, A., &amp; Petersen, E. (2020). The continuing 2019-<span class="nocase">nCoV</span> epidemic threat of novel coronaviruses to global health — <span>The</span> latest 2019 novel coronavirus outbreak in <span>Wuhan</span>, <span>China</span>. <em>International Journal of Infectious Diseases</em>, <em>91</em>, 264–266. <a href="https://doi.org/10.1016/j.ijid.2020.01.009">https://doi.org/10.1016/j.ijid.2020.01.009</a>
+</div>
+<div class="csl-entry">
+Judah, G., Aunger, R., Schmidt, W.-P., Michie, S., Granger, S., &amp; Curtis, V. (2009). Experimental <span>Pretesting</span> of <span>Hand</span>-<span>Washing</span> <span>Interventions</span> in a <span>Natural</span> <span>Setting</span>. <em>American Journal of Public Health</em>, <em>99</em>(Suppl 2), S405–S411. <a href="https://doi.org/10.2105/AJPH.2009.164160">https://doi.org/10.2105/AJPH.2009.164160</a>
+</div>
+<div class="csl-entry">
+Kucharski, A., &amp; Maksymowicz-Hamann, J. (2020). <em>Prawa epidemii: Skąd się epidemie biorą i czemu wygasają?</em> Wydawnictwo Relacja.
+</div>
+<div class="csl-entry">
+Kurian, S. J., Bhatti, A. ur R., Alvi, M. A., Ting, H. H., Storlie, C., Wilson, P. M., Shah, N. D., Liu, H., &amp; Bydon, M. (2020). Correlations <span>Between</span> <span>COVID</span>-19 <span>Cases</span> and <span>Google</span> <span>Trends</span> <span>Data</span> in the <span>United</span> <span>States</span>: <span>A</span> <span>State</span>-by-<span>State</span> <span>Analysis</span>. <em>Mayo Clinic Proceedings</em>, <em>95</em>(11), 2370–2381. <a href="https://doi.org/10.1016/j.mayocp.2020.08.022">https://doi.org/10.1016/j.mayocp.2020.08.022</a>
+</div>
+<div class="csl-entry">
+Lai, C.-C., Shih, T.-P., Ko, W.-C., Tang, H.-J., &amp; Hsueh, P.-R. (2020). Severe acute respiratory syndrome coronavirus 2 (<span>SARS</span>-<span>CoV</span>-2) and coronavirus disease-2019 (<span>COVID</span>-19): <span>The</span> epidemic and the challenges. <em>International Journal of Antimicrobial Agents</em>, <em>55</em>(3), 105924. <a href="https://doi.org/10.1016/j.ijantimicag.2020.105924">https://doi.org/10.1016/j.ijantimicag.2020.105924</a>
+</div>
+<div class="csl-entry">
+Lechien, J. R., Chiesa-Estomba, C. M., De Siati, D. R., Horoi, M., Le Bon, S. D., Rodriguez, A., Dequanter, D., Blecic, S., El Afia, F., Distinguin, L., Chekkoury-Idrissi, Y., Hans, S., Delgado, I. L., Calvo-Henriquez, C., Lavigne, P., Falanga, C., Barillari, M. R., Cammaroto, G., Khalife, M., … Saussez, S. (2020). Olfactory and gustatory dysfunctions as a clinical presentation of mild-to-moderate forms of the coronavirus disease (<span>COVID</span>-19): A multicenter <span>European</span> study. <em>European Archives of Oto-Rhino-Laryngology</em>, <em>277</em>(8), 2251–2261. <a href="https://doi.org/10.1007/s00405-020-05965-1">https://doi.org/10.1007/s00405-020-05965-1</a>
+</div>
+<div class="csl-entry">
+Ma, J. (2020). China’s first confirmed <span>Covid</span>-19 case traced back to <span>November</span> 17. In <em>South China Morning Post</em>. <a href="https://www.scmp.com/news/china/society/article/3074991/coronavirus-chinas-first-confirmed-covid-19-case-traced-back">https://www.scmp.com/news/china/society/article/3074991/coronavirus-chinas-first-confirmed-covid-19-case-traced-back</a>
+</div>
+<div class="csl-entry">
+Ma, Q.-X., Shan, H., Zhang, H.-L., Li, G.-M., Yang, R.-M., &amp; Chen, J.-M. (2020). Potential utilities of mask-wearing and instant hand hygiene for fighting <span>SARS</span>-<span>CoV</span>-2. <em>Journal of Medical Virology</em>, <em>92</em>(9), 1567–1571. https://doi.org/<a href="https://doi.org/10.1002/jmv.25805">https://doi.org/10.1002/jmv.25805</a>
+</div>
+<div class="csl-entry">
+Mandal, C. C., &amp; Panwar, M. S. (2020). Can the summer temperatures reduce <span>COVID</span>-19 cases? <em>Public Health</em>, <em>185</em>, 72–79. <a href="https://doi.org/10.1016/j.puhe.2020.05.065">https://doi.org/10.1016/j.puhe.2020.05.065</a>
+</div>
+<div class="csl-entry">
+Monto, A. S., DeJonge, P. M., Callear, A. P., Bazzi, L. A., Capriola, S. B., Malosh, R. E., Martin, E. T., &amp; Petrie, J. G. (2020). Coronavirus <span>Occurrence</span> and <span>Transmission</span> <span>Over</span> 8 <span>Years</span> in the <span>HIVE</span> <span>Cohort</span> of <span>Households</span> in <span>Michigan</span>. <em>The Journal of Infectious Diseases</em>, <em>222</em>(1), 9–16. <a href="https://doi.org/10.1093/infdis/jiaa161">https://doi.org/10.1093/infdis/jiaa161</a>
+</div>
+<div class="csl-entry">
+Mueller, A. V., Eden, M. J., Oakes, J. M., Bellini, C., &amp; Fernandez, L. A. (2020). Quantitative <span>Method</span> for <span>Comparative</span> <span>Assessment</span> of <span>Particle</span> <span>Removal</span> <span>Efficiency</span> of <span>Fabric</span> <span>Masks</span> as <span>Alternatives</span> to <span>Standard</span> <span>Surgical</span> <span>Masks</span> for <span>PPE</span>. <em>Matter</em>, <em>3</em>(3), 950–962. <a href="https://doi.org/10.1016/j.matt.2020.07.006">https://doi.org/10.1016/j.matt.2020.07.006</a>
+</div>
+<div class="csl-entry">
+MusikAnimal, Kaldari, &amp; Marcel Ruinz Forns. (2021). <em>Pageviews</em>. <a href="https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog">https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog</a>
+</div>
+<div class="csl-entry">
+Narodowy Fundusz Zdrowia. (2020). Infolinia <span>NFZ</span>: <span>Najczęściej</span> zadawane pytania związane z koronawirusem. In <em>Narodowy Fundusz Zdrowia (NFZ) – finansujemy zdrowie Polaków</em>. <a href="https://www.nfz.gov.pl/aktualnosci/aktualnosci-oddzialow/infolinia-nfz-najczesciej-zadawane-pytania-zwiazane-z-koronawirusem,387.html">https://www.nfz.gov.pl/aktualnosci/aktualnosci-oddzialow/infolinia-nfz-najczesciej-zadawane-pytania-zwiazane-z-koronawirusem,387.html</a>
+</div>
+<div class="csl-entry">
+Nordahl, M. (2021). <em>Here’s why women are more likely to report vaccine side effects</em>. <a href="https://sciencenorway.no/a/1849620">https://sciencenorway.no/a/1849620</a>
+</div>
+<div class="csl-entry">
+Polityka Zdrowotna. (2021). <em>Rok od pierwszego przypadku <span>COVID</span>-19 w <span>Polsce</span></em>. <a href="https://www.politykazdrowotna.com/70992,rok-od-pierwszego-przypadku-covid-19-w-polsce">https://www.politykazdrowotna.com/70992,rok-od-pierwszego-przypadku-covid-19-w-polsce</a>
+</div>
+<div class="csl-entry">
+PWN. (2021a). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: epidemia</em>. <a href="https://sjp.pwn.pl/sjp/epidemia;2457537.html">https://sjp.pwn.pl/sjp/epidemia;2457537.html</a>
+</div>
+<div class="csl-entry">
+PWN. (2021b). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: epidemiologia</em>. <a href="https://sjp.pwn.pl/sjp/epidemiologia;2457541.html">https://sjp.pwn.pl/sjp/epidemiologia;2457541.html</a>
+</div>
+<div class="csl-entry">
+PWN. (2021c). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: pandemia</em>. <a href="https://sjp.pwn.pl/sjp/pandemia;2570434.html">https://sjp.pwn.pl/sjp/pandemia;2570434.html</a>
+</div>
+<div class="csl-entry">
+PWN. (2021d). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: przyczyna</em>. <a href="https://sjp.pwn.pl/sjp/przyczyna;2511925.html">https://sjp.pwn.pl/sjp/przyczyna;2511925.html</a>
+</div>
+<div class="csl-entry">
+R Core Team. (2021). <em>R: <span>A</span> <span>Language</span> and <span>Environment</span> for <span>Statistical</span> <span>Computing</span></em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+</div>
+<div class="csl-entry">
+Richardson, L. (2007). Beautiful soup documentation. <em>April</em>.
+</div>
+<div class="csl-entry">
+Ritchie, H., Ortiz-Ospina, E., Beltekian, D., Mathieu, E., Hasell, J., Macdonald, B., Giattino, C., Appel, C., Rodés-Guirao, L., &amp; Roser, M. (2020). Coronavirus <span>Pandemic</span> (<span>COVID</span>-19). <em>Our World in Data</em>.
+</div>
+<div class="csl-entry">
+Rogalski, M. (2021). Dane zebrane na podstawie raportów podawanych przez <span>Ministerstwo</span> <span>Zdrowia</span>, danych z <span>WSSE</span>, <span>PSSE</span>, <span>Urzędów</span> <span>Wojewódzkich</span>, oraz tych uzyskanych w prośbach o dostęp do informacji publicznej. In <em>Google Docs</em>. <a href="https://bit.ly/covid19-poland">bit.ly/covid19-poland</a>
+</div>
+<div class="csl-entry">
+Rossum, V., Guido, D., &amp; L, F. (2009). <em>Python 3 <span>Reference</span> <span>Manual</span></em>. CreateSpace.
+</div>
+<div class="csl-entry">
+RStudio Team. (2021). <em><span>RStudio</span>: <span>Integrated</span> <span>Development</span> <span>Environment</span> for <span>R</span></em>. RStudio, PBC. <a href="http://www.rstudio.com/">http://www.rstudio.com/</a>
+</div>
+<div class="csl-entry">
+Serwis Rzeczypospolitej Polskiej. (2020a). Wychodzisz z domu? <span>Zasłoń</span> usta i nos! - <span>Koronawirus</span>: Informacje i zalecenia - <span>Portal</span> <span>Gov</span>.pl. In <em>Koronawirus: informacje i zalecenia</em>. <a href="https://www.gov.pl/web/koronawirus/zaslon-usta-i-nos">https://www.gov.pl/web/koronawirus/zaslon-usta-i-nos</a>
+</div>
+<div class="csl-entry">
+Serwis Rzeczypospolitej Polskiej. (2020b). Centra handlowe - <span>Ministerstwo</span> <span>Rozwoju</span>, <span>Pracy</span> i <span>Technologii</span> - <span>Portal</span> <span>Gov</span>.pl. In <em>Ministerstwo Rozwoju, Pracy i Technologii</em>. <a href="https://www.gov.pl/web/rozwoj-praca-technologia/centra-handlowe">https://www.gov.pl/web/rozwoj-praca-technologia/centra-handlowe</a>
+</div>
+<div class="csl-entry">
+Sikali, K. (2020). The dangers of social distancing: <span>How</span> <span>COVID</span>‐19 can reshape our social experience. <em>Journal of Community Psychology</em>. <a href="https://doi.org/10.1002/jcop.22430">https://doi.org/10.1002/jcop.22430</a>
+</div>
+<div class="csl-entry">
+Silge, J., &amp; Robinson, D. (2016). Tidytext: <span>Text</span> <span>Mining</span> and <span>Analysis</span> <span>Using</span> <span>Tidy</span> <span>Data</span> <span>Principles</span> in <span>R</span>. <em>JOSS</em>, <em>1</em>(3). <a href="https://doi.org/10.21105/joss.00037">https://doi.org/10.21105/joss.00037</a>
+</div>
+<div class="csl-entry">
+Tatiana Naklicka. (2021). Koronawirus - aktualne obostrzenia w <span>Polsc</span>. In <em>medonet.pl</em>. <a href="https://www.medonet.pl/koronawirus-pytania-i-odpowiedzi/sars-cov-2,koronawirus---aktualne-obostrzenia-w-polsce--aktualizacja-,artykul,98382723.html">https://www.medonet.pl/koronawirus-pytania-i-odpowiedzi/sars-cov-2,koronawirus---aktualne-obostrzenia-w-polsce--aktualizacja-,artykul,98382723.html</a>
+</div>
+<div class="csl-entry">
+Taylor, D. (2020). <span>COVID</span>-19: <span>Social</span> media use goes up as country stays indoors. In <em>Victoria News</em>. <a href="https://www.vicnews.com/news/covid-19-social-media-use-goes-up-as-country-stays-indoors/">https://www.vicnews.com/news/covid-19-social-media-use-goes-up-as-country-stays-indoors/</a>
+</div>
+<div class="csl-entry">
+Torales, J., O’Higgins, M., Castaldelli-Maia, J. M., &amp; Ventriglio, A. (2020). The outbreak of <span>COVID</span>-19 coronavirus and its impact on global mental health. <em>International Journal of Social Psychiatry</em>, <em>66</em>(4), 317–320. <a href="https://doi.org/10.1177/0020764020915212">https://doi.org/10.1177/0020764020915212</a>
+</div>
+<div class="csl-entry">
+Ungar, L. (2021). The <span>Gender</span> <span>Vaccine</span> <span>Gap</span>: <span>More</span> <span>Women</span> <span>Than</span> <span>Men</span> <span>Are</span> <span>Getting</span> <span>Covid</span> <span>Shots</span>. In <em>Kaiser Health News</em>. <a href="https://khn.org/news/article/gender-vaccine-gap-more-women-than-men-vaccinated-against-covid/">https://khn.org/news/article/gender-vaccine-gap-more-women-than-men-vaccinated-against-covid/</a>
+</div>
+<div class="csl-entry">
+UNICEF. (2020). <em>Handwashing around the world</em>. <a href="https://www.unicef.org/supply/stories/handwashing-around-world">https://www.unicef.org/supply/stories/handwashing-around-world</a>
+</div>
+<div class="csl-entry">
+WayScript, Inc. (2021). <span>WayScript</span>. In <em>WayScript</em>. <a href="https://wayscript.com/">https://wayscript.com/</a>
+</div>
+<div class="csl-entry">
+Wei, T., &amp; Simko, V. (2021). <em>R package "corrplot": <span>Visualization</span> of a <span>Correlation</span> <span>Matrix</span></em>. <a href="https://github.com/taiyun/corrplot">https://github.com/taiyun/corrplot</a>
+</div>
+<div class="csl-entry">
+WHO. (2020a). <em>Impact of <span>COVID</span>-19 on people’s livelihoods, their health and our food systems</em>. <a href="https://www.who.int/news/item/13-10-2020-impact-of-covid-19-on-people&#39;s-livelihoods-their-health-and-our-food-systems">https://www.who.int/news/item/13-10-2020-impact-of-covid-19-on-people's-livelihoods-their-health-and-our-food-systems</a>
+</div>
+<div class="csl-entry">
+WHO. (2020b). <em>Coronavirus disease (<span>COVID</span>-19): <span>How</span> is it transmitted?</em> <a href="https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19-how-is-it-transmitted">https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19-how-is-it-transmitted</a>
+</div>
+<div class="csl-entry">
+Woods, J. A., Hutchinson, N. T., Powers, S. K., Roberts, W. O., Gomez-Cabrera, M. C., Radak, Z., Berkes, I., Boros, A., Boldogh, I., Leeuwenburgh, C., Coelho-Júnior, H. J., Marzetti, E., Cheng, Y., Liu, J., Durstine, J. L., Sun, J., &amp; Ji, L. L. (2020). The <span>COVID</span>-19 pandemic and physical activity. <em>Sports Medicine and Health Science</em>, <em>2</em>(2), 55–64. <a href="https://doi.org/10.1016/j.smhs.2020.05.006">https://doi.org/10.1016/j.smhs.2020.05.006</a>
+</div>
+<div class="csl-entry">
+Worldometers.info. (2021). <em><span>COVID</span>-19 <span>CORONAVIRUS</span> <span>PANDEMIC</span></em>. <a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+# Metodologiczne podstawy badań własnych {#chapter04}
+
+## Przedmiot i cel badań
+
+Przedmiotem badań była analiza danych związanych z COVID-19 w roku 2020.
+Celem natomiast szczegółowa charakterystyka sytuacji epidemicznej w
+różnych krajach świata, którą zrealizowano na podstawie analizy danych
+codziennie udostępnianych przez instytucje rządowe i elektroniczne
+publikacje naukowe, a tyczących się statystyk związanych z osobami
+pozytywnie zdiagnozowanymi pod kątem COVID-19, jak i zmarłymi. Skupiono
+się na szczegółowej analizie Polski, którą dodatkowo przeprowadzono dla
+jej poszczególnych województw; dla Polski zweryfikowano również
+frekwencje niepożądanych objawów poszczepiennych (NOP) zgłaszanych w
+okresie od pierwszego jego wystąpienia do 31.03.2021 r. Sprawdzono, w
+jaki sposób aktualna sytuacja związana z COVID-19 w Polsce i na świecie
+(tj. przyrosty liczb nowych zakażeń i zgonów) oddziaływała na
+popularyzację haseł związanych z koronawirusem i zdrowiem w kontekście
+popularnych stron i wyszukiwarek internetowych. Zaprezentowano dwie
+metody do estymacji współczynnika reprodukcji wirusa; na ich podstawie
+porównano również dynamikę przebiegu epidemii w poszczególnych krajach
+świata, jak i pomiędzy krajami. Tak oszacowane współczynniki reprodukcji
+zostały zestawione celem weryfikacji zbieżności obu użytych metod.
+Zaprezentowano również wizualizację automatycznego pobierania danych z
+użyciem skryptu napisanego w języku Python w programie Kibana.
+
+## Problemy i hipotezy badawcze
+
+Motywację do przeprowadzania analiz stanowiły następujące problemy
+badawcze:
+
+1.  Dla jakich okresów i z jaką siłą hasła/artykuły związane z
+    SARS-CoV-2/COVID-19 i zdrowiem cieszyły się popularnością w Polsce i
+    na świecie w roku 2020 w kontekście popularnych stron i wyszukiwarek
+    internetowych?
+
+2.  Charakterystyka sytuacji epidemicznej związanej z COVID-19 w krajach
+    świata z największą sumaryczną liczbą zakażeń w roku 2020, Szwecji,
+    Polsce i krajach z nią graniczących.
+
+3.  Czy pomiędzy sezonami wiosenno-letnim a jesienno-zimowym roku 2020
+    istniały statystycznie istotne różnice dla danego państwa i grupy
+    państw w ogólnym przebiegu epidemii?
+
+4.  Czy podczas okresu letniego sytuacja epidemiczna w krajach
+    pozostawała na stabilnym poziomie?
+
+5.  Jak przedstawiały się frekwencje niepożądanych objawów
+    poszczepiennych (NOP-ów) wśród mieszkańców Polski do 31.03.2021 r.?
+    Czy płeć lub grupa wiekowa miały decydujący wpływ na wyższe
+    prawdopodobieństwo otrzymania NOP-u?
+
+6.  Przedstawienie różnych metod estymacji współczynnika reprodukcji
+    wirusa $R(t)$ w odniesieniu do danych okresów roku 2020 dla kraju i
+    grupy krajów. Czy metody są zbieżne, tzn. zapewniają porównywalne
+    wyniki?
+
+Mając na względzie różnice fizjologiczne pomiędzy kobietami a
+mężczyznami, które odnoszą się do ogólnej siły i sprawności organizmu,
+ujemnie skorelowanymi wraz z postępującym procesem starzenia się,
+wysnuto hipotezę, że odsetek NOP-ów wśród kobiet jest większy niż wśród
+mężczyzn, a szansa na otrzymanie NOP-u wzrasta wraz z wiekiem (grupą
+wiekową). Założono, że pomiędzy badanymi sezonami istniały różnice w
+średnich/medianach liczb zakażeń/zgonów, a ze względu na luzowanie
+obostrzeń w większości krajów świata w lecie w sezonie jesienno-zimowym
+i późne decyzje ws. kolejnych ograniczeń nastąpił bardziej dynamiczny i
+ilościowo większy przyrost dziennych liczb zakażeń i zgonów.
+
+## Metody, techniki i narzędzia badawcze
+
+### Wykorzystane zbiory danych
+
+Analizę popularności haseł/artykułów związanych z SARS-CoV-2/COVID-19
+przeprowadzono na podstawie zebranych danych z narzędzi Google Trends
+[@google_google_2021] i Pageviews [@musikanimal_pageviews_2021]. Do
+analizy danych wykorzystano dane codziennie udostępniane przez
+instytucje rządowe, a agregowane w ogólny zbiór danych przez
+elektroniczną publikację naukową Our World in Data
+[@hannah_ritchie_coronavirus_2020]. Są one codziennie aktualizowane
+(stan na maj 2021) i zawierają m.in. takie dane, jak liczby nowych
+przypadków zakażeń na SARS-CoV-2, zgonów, hospitalizowanych pacjentów
+czy wykonanych testów. Posłużyły one do szczegółowej analizy przebiegu
+epidemii w roku 2020 dla różnych krajów świata i pomiędzy krajami, a
+także estymacji chwilowego współczynnika reprodukcji wirusa $R(t)$. Do
+analizy sytuacji epidemicznej w województwach Polski, jak i
+niepożądanych objawów poszczepiennych (NOP-ów) zgłaszanych przez jej
+mieszkańców został wykorzystany zbiór danych opracowany przez M.
+Rogalskiego [@rogalski_dane_2021].
+
+Metodą "web--scraping" w języku Python pobrano dane w postaci tabeli z
+witryny Worldometer [@worldometersinfo_covid-19_2021]. Do napisania
+skryptu pobierającego dzienne dane z witryny Worldometer wykorzystano
+język Python [@rossum_python_2009] i bibliotekę Beautiful Soup
+[@richardson_beautiful_2007]. Kod programu został umieszczony w
+w dodatku. Celem automatyzacji codziennego pobierania danych
+został on zamieszczony na serwerze z ustawionym trybem wykonywania o
+godzinie 23:55 GMT +0 oferowanym przez platformę WayScript
+[@wayscript_inc_wayscript_2021].
+
+### Analiza przebiegu pandemii
+
+Analizę danych przeprowadzono z użyciem języka R [@r_core_team_r_2021] i
+oprogramowania RStudio [@rstudio_team_rstudio_2021]. Podczas testowania
+hipotez przyjęto poziom istotności $\alpha = 0,05$. Założenie o
+rozkładzie normalnym wektorów zweryfikowano za pomocą testu
+Shapiro-Wilka, którego wynik został dodatkowo skonfrontowany z wykresem
+kwantyl-kwantyl. Zależność pomiędzy liczbą dziennych odsłon artykułów
+związanych z koronawirusem i zdrowiem w polskiej i angielskiej wersji
+Wikipedii a dziennymi liczbami nowych zakażeń, zgonów, jak i liczbą
+dziennych odsłon pozostałych rozpatrywanych artykułów sprawdzono z
+użyciem korelacji $\tau$ Kendalla, jako że rozkłady zmiennych nie były
+zbliżone do rozkładu normalnego, a weryfikowana była każda dowolna
+monotoniczność, nie tylko liniowa, do sprawdzenia której służy klasyczna
+korelacja liniowa $r$ Pearsona. Na podstawie wyników testu istotności
+dla współczynnika korelacji $\tau$ Kendalla wygenerowano mapę cieplną
+(ang. "heatplot") [@wei_r_2021].
+
+W analizie przebiegu sytuacji epidemicznej dla kraju i grupy krajów w
+zależności od czynnika ilościowego skorzystano z testów
+nieparametrycznych, takich jak kolejności par Wilcoxona dla dwóch krajów
+i Kruskala-Wallisa dla więcej niż dwóch krajów z wykonanym testem *post
+hoc* porównań wielokrotnych Dunneta z poprawką Benjamini-Hochberga
+[@dinno_dunntest_2017], ponieważ żaden z wektorów nie miał rozkładu
+zbliżonego do normalnego. Do charakterystyki rozkładów zmiennych
+posłużyły klasyczne miary położenia, takie jak średnia arytmetyczna,
+mediana i kwantyle (pierwszy i trzeci). Zmienność wartości badanej cechy
+oszacowano na podstawie współczynnika zmienności, a skośność rozkładu
+zweryfikowano z użyciem współczynnika skośności. Dodatkowo w celu
+usprawnienia analiz stworzono aplikację internetową COVID-19 Analyzer
+[@chang_shiny_2021; @chang_shinydashboard_2018]. Jest ona dostępna pod
+następującym linkiem: <https://kpytlak.shinyapps.io/covid-19-analyzer/>,
+jednakże jej omówienie wykracza poza tematykę niniejszej pracy.
+
+Analizę niepożądanych objawów poszczepiennych (NOP-ów) wśród mieszkańców
+Polskich przeprowadzono dla okresu od 31.12.2020 r., czyli daty
+pierwszej rejestracji NOP-u, do 31.03.2021 r. Jej podstawą było
+porównanie proporcji pomiędzy zaszczepionymi grupami mężczyzn i kobiet,
+które doświadczyły NOP-ów, w zależności od jednej z czterech
+klasyfikacji objawu -- tu zastosowano test dla proporcji bazujący na
+statystyce $\chi^2$. Ponadto zastosowano metodę eksploracji tekstu (ang.
+"text mining") na zmiennej w zbiorze danych składującej wprowadzone
+ręcznie informacje o symptomach, jakie doświadczał dany pacjent
+[@silge_tidytext_2016]. Zidentyfikowano 10 najczęściej występujących
+ciągów tekstowych dla każdej kategorii objawu.
+
+## Estymacja współczynnika reprodukcji wirusa $R(t)$
+
+Estymację efektywnego współczynnika reprodukcji wirusa $R(t)$
+przeprowadzono dla 3 krajów z najwyższą sumaryczną liczbą zakażeń w roku
+2020 (Stany Zjednoczone, Brazylia, Indie), Szwecji, Polski i krajów z
+nią graniczących z użyciem dwóch metod: filtra Kalmana
+[@arroyo_marioli_tracking_2020; @gapinski_szacowanie_2020] i z
+biblioteki EpiEstim [@cori_new_2013] w R. Oszacowane współczynniki
+zostały końcowo porównane.
+
+### Filtr Kalmana
+
+Jak opisał Gapiński [@gapinski_szacowanie_2020], efektywny współczynnik
+reprodukcji wirusa $R(t)$ można oszacować, bazując na podstawowym modelu
+epidemiologicznym $SIR$ ($S$, ang. "susceptible", tłum. "podatne"; $I$,
+ang. "infectious", tłum. "zakażone"; $R$, ang. "recovered"/"removed",
+tłum. "wyzdrowiałe"/"zmarłe") określonym następującymi równaniami:
+
+$$S_t = S_{t-1} - I_{t-1} \cdot \beta \cdot \frac{S_{t-1}}{N}$$
+
+$$I_t = I_{t-1} - I_{t-1} \cdot \beta \cdot \frac{S_{t-1}}{N} - I_{t-1} \cdot \gamma$$
+
+$$R_t = R_{t-1} + I_{t-1} * \gamma$$
+
+gdzie:
+
+-   $t$ = czas (wyrażony w dniach),
+
+-   $\beta$ = współczynnik definiujący liczbę osób podatnych ($S$),
+    które przechodzą do grupy osób zakażonych ($I$),
+
+-   $N =$ całkowita liczebność populacji, równa $S + I + R$,
+
+-   $\gamma =$ współczynnik definiujący liczbę osób zakażonych ($I$),
+    które przechodzą do grupy osób wyzdrowiałych/zmarłych ($R$).
+
+Wówczas bazowy współczynnik reprodukcji wirusa $R_0$ i efektywny
+współczynnik reprodukcji wirusa $R(t)$ zdefiniować można jako:
+
+$$R_0 = \frac{\beta_0}{\gamma_0}$$
+
+$$R_t = \frac{\beta_t}{\gamma_t}$$ Korzystając z faktu, że wraz z
+malejącą w czasie liczbą osób podatnych na zakażenie ($S$) wzrastają
+liczby osób zakażonych ($I$) i wyzdrowiałych/zmarłych ($R$), zakłada
+się, że współczynnik $\gamma$ jest stały, a $\beta$ zmienia się w czasie
+i wynosi:
+
+$$\beta_t = \beta_0 \cdot \frac{S_{t-1}}{N}$$ Wtedy równanie (4.2)
+sprowadza się do:
+$$I_t = I_{t-1} - I_{t-1} \cdot \beta_t - I_{t-1} \cdot \gamma$$ A to
+(4.7) z kolei po przekształceniach zapisać można jako:
+$$\beta_t - \gamma = \frac{I_t - I_{t-1}}{I_{t-1}}$$ Finalnie,
+korzystając z własności wiążącej efektywny współczynnik reprodukcji
+wirusa $R(t$) ze współczynnikami $\beta$ i $\gamma$, tzn.:
+$$R(t) = \frac{\beta(t)}{\gamma}$$ Równanie (4.8) sprowadzić można do
+postaci:
+
+$$R(t) = \frac{1}{\gamma} \cdot \frac{I_t - I_{t-1}}{I_{t-1}} + 1$$
+Dodatkowo, aby obliczyć $I_t$ i $I_{t-1}$ można przekształcić równanie
+(4.7) do równoważnej postaci:
+
+$$I_t = I_{t-1} + (I_t - I_{t-1}) - I_{t-1} \cdot \gamma$$
+
+$$I_t = (1 - \gamma) \cdot I_{t-1} + (I_t - I_{t-1})$$
+
+Odwrotność parametru $\gamma$, tzn. $\gamma^{-1}$ jest czasem zakażenia
+$\tau$. Arroyo Marioli i in. [@arroyo_marioli_tracking_2020] założyli,
+że $\tau = 7$, co daje $\gamma = \frac{1}{\tau} = \frac{1}{7}$ -- taka
+też wartość została przyjęta w metodyce obliczeń. Finalnie, mając serię
+danych o nowych zakażeniach i sumarycznej liczbie zgonów i bazując na
+ograniczonej liczbie parametrów, z użyciem iteracyjnego obliczania $I_t$
+określonego równaniem (4.12), można obliczyć współczynnik wzrostu
+zakażeń, czyli czynnik $\frac{I_t - I_{t-1}}{I_{t-1}}$ równania (4.10),
+a finalnie $R(t)$.
+
+### EpiEstim
+
+Metoda szacowania $R(t)$ opracowana w 2013 r. przez Cori i in.
+[@cori_epiestim_2021] zakłada, że każdego zakażonego osobnika populacji
+scharakteryzować można "profilem zakaźności" (ang. "infectivity
+profile") określonym przez nieznaną funkcję rozkładu prawdopodobieństwa
+$w_s$; niezależnym od czasu kalendarzowego $t$, ale zależnym od czasu,
+jaki upłynął od zakażenia do chwili wystąpienia pierwszych objawów
+[@cori_new_2013]. Wówczas oszacowanie chwilowego współczynnika
+reprodukcji wirusa sprowadza się do równania (4.13):
+
+$$I_t = R_t \sum_{s = 1}^t I_{t-s} w_s$$ gdzie:
+
+-   $I_t$ = liczba nowych zakażeń w czasie $t$,
+
+-   $R_t$ = chwilowy współczynnik reprodukcji wirusa w czasie $t$,
+
+-   $\sum_{s = 1}^t I_{t-s} w_s$ = suma zakażeń do czasu $t-s$ ważona
+    funkcją $w_s$.
+
+Nieznana funkcja $w_s$ jest aproksymowana na podstawie rozkładu
+przedziału seryjnego $SI$ (ang. "serial interval"), który określa czas
+od chwili zakażenia do wystąpienia pierwszych objawów chorobowych u
+osób, które przekazują wirusa i tych, które zostają zakażone; metoda
+Cori i in. pozwala na ustalenie niepewności co do zakładanego rozkładu
+$SI$, jak i jego parametryzacji -- wówczas określony jest parametrami
+$\mu_{SI}$ i $\sigma_{SI}$. W swej metodyce Marioli i in.
+[@arroyo_marioli_tracking_2020] założyli, że $SI$ dla SARS-CoV-2 opisać
+można rozkładem Gamma z parametrami odpowiednio $\mu_{SI} = 5.2$ i
+$\sigma_{SI} = 5.1$ z uwzględnieniem 7-dniowego okna -- takie też
+założenie co do $SI$ zostało przyjęte w niniejszej pracy.
+
+### Porównanie metod
+
+Wyestymowane z użyciem metod filtra Kalmana i z pakietu EpiEstim w R
+współczynniki $R(t)$ zostały porównane z użyciem różnych metod
+statystycznych i metryk. Zweryfikowano zarówno zbieżność danych
+codziennych współczynników $R(t)$ z filtra Kalmana, jak i uśrednionych w
+oknie 7-dniowym ze względu na uwzględnianie 7-dniowego okna interwału
+seryjnego przez narzędzie Cori i in. Współczynnik korelacji liniowej $r$
+Pearsona oraz test dla współczynnika korelacji posłużyły do sprawdzenia,
+czy dane tworzą układ liniowy. Skorzystano również z korelacji $\tau$
+Kendalla w celu określenia ogólnej monotoniczności pomiędzy parami
+oszacowanych współczynników $R(t)$. Wyznaczono bezwzględne wartości
+reszt, czyli różnice pomiędzy współczynnikami $R(t)$ uzyskanymi z
+użyciem obu metod -- dla danych codziennych, jak i uśrednionych w oknie
+7-dniowym dla filtra Kalmana. Wykreślone zostały rozkłady tychże reszt,
+jak i wyznaczone zostały klasyczne miary położenia: pierwszy, drugi
+(mediana) i trzeci kwartyl, a także oszacowany został współczynnik
+asymetrii $A_S$. Dla każdego kraju obliczony został średni błąd
+bezwzględny ($MAE$, z ang. "mean absolute error") wedle poniższego
+równania:
+
+$$MAE = \frac{\sum_{i=1}^n |b_i - k_i|}{n}$$ gdzie:
+
+-   $b_i =$ $i$-ty współczynnik $R(t)$ oszacowany z użyciem pakietu
+    EpiEstim w R,
+
+-   $k_i$ = $i$-ty współczynnik $R(t)$ oszacowany z użyciem filtru
+    Kalmana,
+
+-   n = liczba dni o kompletnych parach oszacowanych współczynników
+    $R(t)$ obiema metodami.
+
+Dodatkowo, kierując się podstawową interpretacją współczynnika $R(t)$ o
+stabilizacji epidemii, jeśli współczynnik ten wynosi mniej niż 1, i
+rozwoju jej przebiegu dla $R(t)$ większego od 1, sprawdzone zostało, czy
+każda para współczynników $b_i$ i $k_i$ (dla filtra Kalmana z danych
+codziennych i uśrednionych w oknie 7-dniowym) jest zgodna co do wartości
+względem powyższej interpretacji, tzn. czy spełniony jest warunek
+$(k_i \wedge b_i < 1) \vee (k_i \wedge b_i \geqslant 1)$.

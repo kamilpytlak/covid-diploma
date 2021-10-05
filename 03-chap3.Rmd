@@ -1,0 +1,291 @@
+# Pandemia COVID-19 {#chapter03}
+
+
+## Wirus SARS-CoV-2 i choroba COVID-19
+
+W listopadzie 2019 r. w chińskim mieście Wuhan położonym w prowincji
+Hubei zdiagnozowano przypadki zapalenia płuc nieznanego pochodzenia.
+Począwszy od 17 listopada, kiedy osobliwość tę zidentyfikowano u
+55-letniego pacjenta, każdego dnia zgłaszano ok. 5 nowych przypadków,
+tak że do 31.12.2019 r. liczba zakażeń wyniosła 266 [@ma_chinas_2020].
+Przeprowadzone analizy wykluczyły wirusy SARS-CoV, MERS-CoV, ptasie
+grypyj i inne już znane, a infekujące układ oddechowy, jako czynniki
+wywołujące tę chorobę. Nowy wirus został nazwany przez WHO jako
+2019-nCoV (SARS-CoV-2) ze względu na ok. 70% podobieństwo jego genomu z
+genomem SARS-CoV z roku 2003. Wkrótce po tym określiła nazwę nowej
+choroby wywoływanej przez SARS-CoV-2 -- COVID-19 [@hui_continuing_2020].
+
+Choroby układu oddechowego w przebiegu są do siebie na ogół podobne, a
+różnice między nimi wynikają z intensywności objawów, jak i występowania
+innych, dodatkowych symptomów. COVID-19 ma bardzo podobne objawy do
+sezonowej grypy, należą do nich m.in. kaszel, gorączka, katar, ogólne
+zmęczenie i osłabienie organizmu i trudności w oddychaniu, z czego to
+ostatnie zostało przypisane COVID-19 jako objaw charakterystyczny.
+Zarówno COVID-19, jak i grypa są przenoszone drogą kropelkową, jednakże
+szansa zakażeniem się COVID-19 jest większa [@cdc_similarities_2021]. W
+czasie u pacjentów, którzy przebyli COVID-19, potwierdziły się inne,
+możliwie neurologiczne powikłania: zaburzenia węchu i smaku. W swoim
+badaniu Lechien i in. stwierdzili, że wśród pacjentów częściej obserwuje
+się utratę węchu niż smaku; również frekwencja kobiet niż mężczyzn
+mających tę powikłania była większa [@lechien_olfactory_2020].
+
+Początkowo najbardziej zagrożone z powodu szybko rozprzestrzeniającego
+się wirusa SARS-CoV-2 były Chiny, które szczyt zakażeń osiągnęły w
+lutym. Kiedy Azja przeważała pod kątem sumarycznej liczby zakażeń i
+zgonów Europę, jeszcze przed szczytem epidemii Chiny wdrożyły surowe
+środki bezpieczeństwa: 23.01 zamknięte zostało miasto Wuhan, zablokowany
+też został transport z i do miasta. Zamknięte też zostały obiekty użytku
+publicznego i zminimalizowany został dystans społeczny. Tak szybkie
+wdrożenie wydawać by się mogło radykalnych metod w niedługim czasie
+poskutkowało wygaszeniem epidemii w Chinach [@lai_severe_2020]. Z kolei
+pierwsze obostrzenia w Polsce zostały wprowadzone już na początku marca:
+od 10.03 zakazane było organizowanie imprez masowych, natomiast od 12.03
+zamknięte zostały placówki oświaty -- szkoły, uczelnie wyższe, żłobki i
+przedszkola. 16.03, czyli 5 dni po ogłoszeniu stanu pandemii na świecie
+przez WHO, wprowadzony został stan zagrożenia epidemicznego, co
+pociągnęło za sobą ograniczenie lotów międzynarodowych, rozpoczęcie
+"zamrażania" gospodarki, czyli zamknięcia placówek często odwiedzanych
+przez ludzi -- restauracji, pubów, a także sklepów niespożywczych w
+galeriach handlowych (poza aptekami i drogeriami). 24.03 zakazano
+spotkań w przestrzeni publicznej w liczbie większej niż 2, nałożono
+nakaz wychodzenia z domu tylko w celach niezbędnych, w komunikacji
+miejskiej nałożono limity na miejsca siedzące, a w ceremoniach
+religijnych uczestniczyć mogło do 5 osób
+[@tatiana_naklicka_koronawirus_2021].
+
+Według WHO koronawirus z roku 2019 stał się nie tylko problemem
+medycznym, ale i społecznym. Spotęgował on skalę istniejących już
+problemów na świecie, takich jak niedożywienie czy ubóstwo w krajach
+Trzeciego Świata, jednocześnie negatywnie wpływając na gospodarkę
+pozostałych krajów, co miało swój wydźwięk w zamykaniu granic,
+ograniczeniach handlowych, co z kolei postawiło w niepewnej pozycji
+miliony przedsiębiorstw, jak i pracowników sektorów gospodarki
+[@who_impact_2020].
+
+
+## Sposoby ograniczenia transmisji wirusa w populacji
+
+
+### Dbanie o higienę osobistą
+
+Jednym z polecanych środków ochrony przed zakażeniem się SARS-CoV-2
+przez rządy państw i agencje ochrony zdrowia jest częste mycie rąk wodą
+z mydłem i ich dezynfekcja [@narodowy_fundusz_zdrowia_infolinia_2020].
+Sama CDC podkreśla, że jest to jeden z najefektywniejszych sposobów na
+ochronę zdrowia nie tylko własnego, ale też osób z najbliższego
+otoczenia, przy czym ważne jest, by czynność tę wykonywać regularnie
+[@cdc_when_2020]. Jak się okazuje, utrzymywanie higieny osobistej na
+optymalnym poziomie często nie jest możliwe w wielu regionach świata,
+gdzie nawet pracownicy sektora zdrowia publicznego nie mają dostępu do
+urządzeń sanitarnych. UNICEF szacuje, że tylko 3 na 5 osób na całym
+świecie ma swobodną możliwość umycia rąk wodą z mydłem
+[@unicef_handwashing_2020]. Pomimo dostępności urządzeń sanitarnych,
+wody i produktów higienicznych w niemal każdym domu i placówce
+publicznej w krajach rozwiniętych, wciąż istnieje pewna część ludzi,
+która nie dba o higienę osobistą. Tu winą mogą być czynniki
+psychologiczne leżące u podstaw ludzkiej natury. Jak wyjaśniają
+[@judah_experimental_2009], ludzie chętniej wykonują daną czynność,
+jeśli ktoś inny również ją wykonuje, w związku z czym zachowania w
+publicznych toaletach mogą być również podyktowane normami społecznymi.
+Wydaje się, że pandemia COVID-19 przypomniała ludziom o czyhających w
+środowisku naturalnym patogenach i sposobie ochrony przed nimi właśnie
+poprzez zadbanie o higienę osobistą. Po ogłoszeniu pandemii przez WHO i
+wzrostu zakażeń w wielu krajach, w centrach handlowych postawiono
+właśnie na higienę, implementując urządzenia do dezynfekcji i nakazując
+używanie jednorazowych rękawiczek
+[@serwis_rzeczypospolitej_polskiej_centra_2020]. Dodatkowo wiele sklepów
+zadbało o bezpieczeństwo swoich klientów -- przykładem może być sieć
+Carrefour, która wedle swoich zapewnień regularnie dezynfekowała wózki,
+kasy i wagi w sklepach, a produkty na wagę pakowała do pojemników
+[@carrefour_bezpiecznie_2020].
+
+Ze zdrowotnego punktu widzenia kompulsywne, a przy tym wielokrotne mycie
+rąk może jednak spowodować poważne komplikacje zdrowotne. Długotrwała
+ekspozycja skóry na wodę może prowadzić do jej obrzęku na skutek
+rozerwania struktury lipidów międzykomórkowych. Ten sam efekt może
+przynieść stosowanie środków chemicznych o działaniu drażniącym na
+skórę, gdyż przyczyniają się one do denaturacji jej białek, zwiększając
+prawdopodobieństwo pojawienia się stanu zapalnego. Tu szczególnie
+narażone są osoby borykające się z chorobami skóry, np. atopowym
+zapaleniem skóry.
+
+Wysuszanie i osłabienie bariery skórnej mogą także powodować preparaty
+na bazie alkoholu, które są zalecane przez WHO w razie niedostępności
+wody z mydłem. W razie komplikacji poleca się natychmiastowe wdrożenie
+leczenia skóry, np. poprzez stosowanie różnych maści czy kremów, przy
+ciągłym utrzymywaniu jej higieny jako środka mającego istotny wpływ na
+minimalizację szansy zakażenia się SARS-CoV-2, jak i innymi patogenami
+[@bai_still_2020]. Mimo to nawet w takich sytuacjach poleca się
+zastosować leczenie skóry i dalsze mycie rąk ze względu na dużą
+zasadność tej metody w zapobieganiu rozprzestrzeniania się SARS-CoV-2,
+jak i osobniczego zakażenia [@beiu_frequent_2020]. Aby spowolnić
+wykładnicze rozprzestrzeniania się wirusa w populacji, sama higiena rąk
+może jednak nie wystarczyć. Ma i in. [@ma_potential_2020] rekomendują
+jednoczesne wdrożenie nawyku noszenia masek i utrzymywania higieny rąk
+na optymalnym poziomie, co może skutecznie spowolnić rozprzestrzenianie
+się wirusa. Takie podejście nazywają MIH (ang. "mask‐wearing plus
+instant hand hygiene"), czyli noszenie maski i natychmiastowa higiena
+rąk, z czego to ostatnie może być skutecznie realizowane z użyciem
+podręcznych produktów higienicznych przy braku dostępu urządzeń
+sanitarnych. Praktyka ta została wcześnie wdrożona w Chinach, Republice
+Korei i Japonii, co możliwie miało istotny wpływ na spadek nowych
+dziennych przypadków zakażeń w późniejszym okresie w porównaniu z innymi
+krajami, np. Stanami Zjednoczonymi czy Hiszpanią, które takiego
+podejścia nie zastosowały, a ich obywatele niechętnie zakładali maski
+[@ma_potential_2020].
+
+
+### Utrzymywanie dystansu społecznego
+
+Wirus SARS-CoV-2 przenosi się drogą kropelkową w postaci małych cząstek
+cieczy, które wydobywają się z ust czy nosa osoby zakażonej. Szansa na
+zakażenie się wzrasta przy bliskim kontakcie z drugą osobą, a także w
+słabo wentylowanych pomieszczeniach, w których poziom cyrkulacji
+powietrza jest niedostateczny, przez co wirus może unosić się w
+zawiesinie. Nie każda osoba zakażona wykazuje objawy choroby COVID-19, a
+przeprowadzone badania sugerują, że od właściwego czasu zakażenia się
+SARS-CoV-2 a pierwszymi symptomami choroby średnio mija kilka dni, a
+więc wirus może przenosić się w postaci utajonej. Takie
+"roznosicielskie" zachowanie ma duży wpływ na rozwój sytuacji
+epidemicznej i jest proporcjonalne do prowadzonego przez osobę zakażoną
+stylu życia [@who_coronavirus_2020]. Jak zaznacza CDC, przede wszystkim
+na ciężki przebieg choroby COVID-19 narażone są osoby starsze i choć
+szansa na zakażenie się jest dość jednorodna wśród młodszych i starszych
+grup wiekowych, to osoby w przedziale wiekowym 65--74 mają 40-krotnie
+większą szansę na hospitalizację w porównaniu z grupą wiekową 5--17 i 1
+300-krotnie większą szansę na zgon. W przypadku grupy wiekowej 18--29
+krotności te wynoszą już odpowiednio 6 i 10 [@cdc_risk_2021].
+
+W sezonie wiosenno-letnim roku 2020, kiedy zaczęły pojawiać się nagłe
+przyrosty dziennych liczb zakażeń ("fale"), w niektórych krajach świata
+zdecydowano się ograniczyć przemieszczanie się do absolutnego minimum,
+podczas gdy inne kraje stopniowo minimalizowały dystans społeczny
+poprzez ograniczenie liczby osób przebywających w centrach handlowych
+czy liczby osób przebywających w komunikacji miejskiej. Do pierwszej
+grupy należała m.in. Francja, gdzie od 17.03 początkowo przez 15 dni
+obywatele mogli wychodzić z domu wyłącznie w sprawach niezbędnych,
+takich jak zrobienie zakupów czy udanie się do pracy. Rząd zapewnił
+powstanie punktów kontrolnych weryfikujących obywateli, a każdy
+niestosujący się do ustalonych obostrzeń ryzykował otrzymanie grzywny w
+wysokości do 135 euro [@cuthbertson_france_2020]. W sposób mniej
+radykalny podeszła Polska: mimo że ograniczenie poruszania się w
+przestrzeni publicznej zostało już wprowadzone 16.03, a obowiązek
+zakrywania ust i nosa 16.04, obostrzenia były etapowo łagodzone
+począwszy od końca kwietnia [@polityka_zdrowotna_rok_2021].
+
+Chociaż pandemia COVID-19 znacząco wpłynęła na wykonywane codziennie
+obowiązki i przyzwyczajenia, a ograniczenie dystansu społecznego
+dodatkowo miało szkodliwy wpływ na zdrowie psychiczne, jak i fizyczne
+[@sikali_dangers_2020], WHO stanowczo potwierdza, że ograniczenie to ma
+znaczący wpływ na minimalizację transmisji wirusa, a więc i poprawę
+jakości życia wielu osób. Jeśli istnieje konieczna potrzeba wyjścia z
+domu, zaleca zaplanowanie trasy, tak aby ograniczyć spotkania z
+przypadkowymi osobami do minimum, co zabezpieczy nie tylko siebie
+samego, ale i inne osoby.
+
+
+### Zasłanianie ust i nosa
+
+Wraz z postępującym wzrostem dziennej liczby przypadków zakażeń na
+SARS-CoV-2 i pojawiającymi się zgonami osób uprzednio zakażonych w I
+kwartale roku 2020 rządy wielu krajów świata zaostrzyły ówcześnie
+panujące zasady sanitarne o obowiązkowe zasłanianie ust i nosa w
+przestrzeni publicznej w celu minimalizacji dalszego rozprzestrzeniania
+się wirusa. W Polsce taki nakaz obowiązywał od 16.04, a Ministerstwo
+Zdrowia zaleciło, by twarz była zasłaniania z użyciem jednorazowej bądź
+materiałowej maseczki, apaszki, szalika czy chusty, przy czym maseczka
+materiałowa mogła być wykonana z różnych rodzajów tkanin, np.
+bawełnianych czy poliestrowych
+[@serwis_rzeczypospolitej_polskiej_wychodzisz_2020]. Taki obowiązek
+prędko stał się normą w większości krajów europejskich w 2020 roku,
+m.in. w Anglii, Francji, Belgii, Niemczech, Włoszech czy Rumunii, a za
+nieprzestrzeganie tej zasady rządy części krajów zastosowały kary
+pieniężne -- w Wielkiej Brytanii, przykładowo, grzywna mogła wynosić do
+100 funtów [@euronews_mandatory_2020].
+
+O skuteczności stosowania masek w przestrzeni publicznej spekulowano
+jeszcze przed ogłoszeniem pandemii przez WHO. W większości często
+odmienne postępowania krajów w tamtym okresie było podyktowane
+zaleceniami organizacji zajmujących się ochroną zdrowia, a także
+krajowych agencji zdrowia publicznego -- głównie WHO i CDC. W początkach
+trwania epidemii brak było wystarczających dowodów na zasadność
+stosowania masek w przestrzeni publicznej. Sama WHO określiła, że nie ma
+potrzeby zakrywania ust i nosa, jeśli dana osoba nie opiekuje się osobą
+chorą na COVID-19. Podążając za WHO, rząd niemiecki oświadczył, że ze
+względu na brak istotnych dowodów wskazujących na skuteczność użycia
+masek chirurgicznych, nie rekomenduje ich stosowania. Podobne zdanie
+podzielała CDC, podkreślając, że osoby, które są zdrowe i czują się
+dobrze, nie muszą nosić masek w przestrzeni publicznej. Porównując do
+krajów europejskich, odmienne postępowanie w tej kwestii wdrożyły kraje
+azjatyckie. W Chinach podzielono populację ze względu na osoby o bardzo
+niskim, niskim i średnim ryzyku zakażenia się wirusem. Noszenie bądź
+nienoszenie maski danego typu maski zależało od przynależności do danej
+grupy. I tak osoby o bardzo niskim ryzyku[^2] nie musiały zakrywać dróg
+oddechowych, ci przydzieleni do grupy średniego ryzyka[^3] z kolei mieli
+obowiązek stosowania jednorazowej maski chirurgicznej. Również Hongkong
+jasno określił, że przepływ przenoszenia wirusów układu oddechowego może
+zostać zminimalizowane przez stosowane masek chirurgicznych
+[@feng_rational_2020]. To różne podejście do stosowania masek w
+przestrzeni publicznej mogło pośrednio wynikać z utrwalonej w danym
+kraju kulturze, przez co niektóre, pomijając kwestię związaną z
+zasadności ich noszenia ujętą w publikowanych w tamtych czasach pracach
+naukowych, nie były mentalnie przygotowane na wdrożenie tego typu
+rozwiązań (Stany Zjednoczone), pozostałe z kolei (kraje azjatyckie)
+wręcz przeciwnie.
+
+Wraz ze zwiększaniem się liczb nowych dziennych przypadków zakażeń i
+zgonów w krajach świata i zainteresowaniem badaczy tematyką skuteczności
+filtracji masek dostępnych na rynku i zasadności ich użycia w konspekcie
+pandemii COVID-19, CDC 5.04 wyklarowało swoje stanowisko i potwierdziło
+potrzebę zakrywania ust i nosa w przestrzeni publicznej bez względu na
+wiek, płeć, pochodzenie etniczne czy stan zdrowia. Niemal 2 miesiące
+później, tj. 5.06, w ślady CDC poszła WHO również zalecająca stosowanie
+masek. W głównej mierze ich stanowiska opierały się o powszechne wśród
+przebadanych osób bezobjawowe przechodzenie choroby COVID-19 i
+transmisję wirusa do środowiska poprzez krople śliny wydalane wraz z
+kichaniem, a nawet mówieniem [@gandhi_can_2020]. Pojawiające się w
+tamtym czasie badania dowiodły, że ilość kropel śliny przedostających
+się do środowiska podczas mówienia, czy kasłania można skutecznie
+zahamować, zakrywając usta i nos maską [@anfinrud_visualizing_2020].
+
+Oprócz liczby osób czynnie zasłaniających usta i nos w populacji istotne
+znacznie ma też rodzaj stosowanego materiału, z którego składa się
+maska. Aktualnie na rynku istnieje spora gama produktów, którymi można
+zasłonić usta i nos -- wyróżnić można jednorazowe maski chirurgiczne,
+wielorazowe maski czy filtrujące, jak np. N95. Skuteczność każdej maski
+może być wyrażana jako średnia skuteczność usuwania cząstek. Ma ona
+pierwszorzędne znaczenie dla osób zajmujących się osobami schorowanymi
+(o dużym ryzyku zakażenia) lub też pracujących w placówkach zdrowotnych.
+Istotny wkład w szczelność maski odgrywa również jej dopasowanie do
+twarzy, co można wyrazić poprzez porównanie stężenia cząstek unoszących
+się w powietrzu wewnątrz i na zewnątrz maski. I tak powszechnie
+sprzedawane maski chirurgiczne mają średnią skuteczność usuwania cząstek
+oscylującą między 53% a 75%, ale ok. 90%, gdy są dopasowane do twarzy
+dodatkową warstwą nylonową. Z kolei skuteczność popularnych masek
+materiałowych waha się pomiędzy 28% a 91%, co również w dużej mierze
+zależne jest od jej dopasowania do twarzy (rysunek
+[3.2](#fig:niemojobraz){reference-type="ref"
+reference="fig:maski-filtracja"}) [@mueller_quantitative_2020].
+
+![Skuteczność filtracji maski wyrażona jako % przefiltrowanych cząstek
+do wewnątrz maski dla różnych typów masek: N95-1 (dobrze dopasowana
+maska N95), N95-2 (źle dopasowana maska N95), od S-1 do S-3 (różne
+rodzaje masek medycznych), O-1 (maska z filtrem węglowym). Niebieskie
+słupki reprezentują średnią skuteczność usuwania cząstek, a szare --
+najlepszy możliwy współczynnik dopasowania poprzez dodanie dodatkowej
+nylonowej warstwy. Źródło: Mueller i in.
+[@mueller_quantitative_2020]](figure/chap03/maski-filtracja.jpg){#fig:maski-filtracja
+width="0.8\\columnwidth"}
+
+Zastosowanie dodatkowej nylonowej warstwy w masce efektywnie podnosi
+wskaźnik skuteczności filtracji poprzez minimalizację liczby przerw
+między materiałowymi włóknami, co wraz z kombinacją dobrze
+dopasowującego się materiału do twarzy może nie tylko zahamować
+transmisję SARS-CoV-2, ale też poprawić ogólną jakość wdychanego
+(przefitrowanego) powietrza [@mueller_quantitative_2020]. Według
+kalifornijskiego lekarza Chin-Hong, aby pozbyć się zagrożenia ze strony
+SARS-CoV, należy wdrożyć codziennie praktykowane trzy "W" (ang. "three
+W's to ward off COVID-19"): noszenie maski (ang. "wearing a mask"),
+mycie rąk (ang. "washing your hands") i utrzymywanie dystansu
+społecznego (ang. "watching your distance"), z których najważniejsze
+jest noszenie maski [@bai_still_2020].

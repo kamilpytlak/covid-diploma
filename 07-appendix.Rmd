@@ -1,0 +1,48 @@
+`r if(knitr:::is_latex_output()) '\\appendix'`
+
+`r if(!knitr:::is_latex_output()) '# (APPENDIX) Dodatek {-}'` 
+
+# Program pobierający dzienne dane z witryny Worldometer
+
+```{python, eval = FALSE}
+    from datetime import datetime
+    import requests
+    from bs4 import BeautifulSoup
+    import pandas as pd
+    import numpy as np
+    
+    today = str(datetime.utcnow().date())
+    URL = 'https://www.worldometers.info/coronavirus/'
+    
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    table = soup.find('table', id='main_table_countries_today')
+    header = table.find_all('th')
+    header_names = [name.get_text().replace(u'\xa0', u' ').strip() for name in
+    header]
+    rows = table.find_all('tr', class_=None)[1:]
+    df = pd.DataFrame(columns=header_names)
+    
+    final_out = []
+    for row in rows:
+        row_data = row.find_all('td')
+        row_formatted = [tr.get_text().replace('\n', '') for tr in row_data]
+        final_out.append(row_formatted)
+        
+        df = df.append(pd.DataFrame(final_out, columns=df.columns))
+        df.insert(loc=0, column='Date', value=today)
+        del df['#']
+        
+        df = df.replace(",", "", regex = True)
+        df = df.replace(r'^\s*$', np.NaN, regex=True)
+        df.columns = ["date", "country", "total_cases", "new_cases",
+        "total_deaths", "new_deaths", "total_recovered", "new_recovered",
+        "active_cases", "critical_cases", "total_cases_per_million",
+        "total_deaths_per_million", "total_tests",
+        "total_tests_per_million", "population", "continent",
+        "one_case_per_x_people", "one_death_per_x_people",
+        "one_test_per_x_people",
+        "new_cases_per_million", "new_deaths_per_million",
+        "active_cases_per_million"]
+        df.to_csv(today + '.csv', index=False)
+```

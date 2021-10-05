@@ -1,0 +1,65 @@
+---
+title: 'Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody "web--scraping"'
+author: 'Kamil Pytlak'
+date: 'Czerwiec 2021'
+institution: 'Uniwersytet Przyrodniczy we Wrocławiu'
+division: 'Biologii i Hodowli Zwierząt'
+advisor: 'Tomasz Suchocki'
+degree: 'Bioinformatyka (lic.)'
+knit: bookdown::render_book
+site: bookdown::bookdown_site
+
+header-includes:
+    - \usepackage{setspace}\onehalfspacing
+
+params:
+  'Install needed packages for {thesisdown}': True
+  
+output:
+  thesisdown::thesis_gitbook:
+    css: style.css
+
+abstract: '`r if(knitr:::is_latex_output()) paste(readLines(here::here("prelims", "00-abstract.Rmd")), collapse = "\n  ")`'
+
+bibliography: bib/thesis.bib
+link-citations: true
+csl: csl/apa.csl
+lot: true
+lof: true
+---
+
+```{r include_packages, include=FALSE}
+if (!require(remotes)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("remotes", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste('You need to run install.packages("remotes")",
+            "first in the Console.')
+    )
+  }
+}
+if (!require(thesisdown)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    remotes::install_github("ismayc/thesisdown")
+  } else {
+    stop(
+      paste(
+        "You need to run",
+        'remotes::install_github("ismayc/thesisdown")',
+        "first in the Console."
+      )
+    )
+  }
+}
+library(thesisdown)
+options(width = 70)
+```
+
+```{r eval=!knitr::is_latex_output(), child=here::here("prelims", "00--prelim.Rmd")}
+
+```
+
+```{r eval=!knitr::is_latex_output(), child=here::here("prelims", "00-abstract.Rmd")}
+
+```

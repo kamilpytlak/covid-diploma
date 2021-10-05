@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Rozdział 2 Epidemiologia jako nauka o przyczynowości zdarzeń | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Rozdział 2 Epidemiologia jako nauka o przyczynowości zdarzeń | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Rozdział 2 Epidemiologia jako nauka o przyczynowości zdarzeń | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rozdział 2 Epidemiologia jako nauka o przyczynowości zdarzeń | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="1-chapter01.html"/>
+<link rel="next" href="3-chapter03.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter02" class="section level1" number="2">
+<h1><span class="header-section-number">Rozdział 2</span> Epidemiologia jako nauka o przyczynowości zdarzeń</h1>
+<div id="epidemia-i-pandemia---nieodłączne-terminy-epidemiologii" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</h2>
+<p>Według słownika języka polskiego PWN “epidemiologia” jest definiowana
+jako “nauka zajmująca się badaniem czynników i warunków związanych z
+powstawaniem i szerzeniem się epidemii” <span class="citation">(<a href="#ref-pwn_slownik_2021" role="doc-biblioref">PWN, 2021b</a>)</span>. Z kolei
+pojęcie “epidemia” opisuje “pojawienie się wśród ludności danego terenu
+dużej liczby zachorowań na określoną chorobę”, ale też “nagminne
+występowanie, rozpowszechnianie się czegoś” <span class="citation">(<a href="#ref-pwn_slownik_2021-1" role="doc-biblioref">PWN, 2021a</a>)</span>. Można
+zatem mówić o epidemii dżumy czy ospy prawdziwej, ale też rozszerzyć ten
+zakres o dzieła kultury, np. <em>Contagion — Epidemia strachu</em> czy też
+<em>Epidemia miłości</em>; epidemią nazwać też można przemoc czy kryzys
+finansowy <span class="citation">(<a href="#ref-kucharski_prawa_2020" role="doc-biblioref">Kucharski &amp; Maksymowicz-Hamann, 2020</a>)</span>. Z kolei o wspólnym członie “-demia” z
+“epidemią” “pandemia” jest rozszerzeniem klasycznej definicji epidemii
+(i epidemii <em>per se</em> jako zjawiska) o zasięg globalny, jak to również
+ujmuje PWN: “epidemia obejmująca swym zasięgiem bardzo duże obszary”
+<span class="citation">(<a href="#ref-pwn_slownik_2021-2" role="doc-biblioref">PWN, 2021c</a>)</span>. Jako “przyczynę” ten sam słownik określa “czynnik
+lub zespół warunków wywołujący jakieś zjawisko jako swój skutek”
+<span class="citation">(<a href="#ref-pwn_slownik_2021-3" role="doc-biblioref">PWN, 2021d</a>)</span>. Można więc mówić o przyczynie choroby, czyli
+czynniku bądź czynnikach decydujących, które ją wywołały, np. palenie
+papierosów zwiększa ryzyko zachorowania na raka płuc czy krtani.
+Składając zatem klasyczne, słownikowe definicje epidemii i przyczyny,
+otrzymuje się czynniki możliwie zmieniające się w czasie, a na pewno
+rozprzestrzeniające się pośród obiektów, które są na nie narażone, w
+efekcie wywołując skutek. Beaglehole i in. podają cztery różne typy
+takich czynników. Ze względu na wiek czy płeć danego osobnika, czynnik
+taki można zaklasyfikować do predysponującego. Z drugiej strony, jeśli
+istnieje pewien podzbiór determinant, których wpływ i natężenie są w
+pewien sposób kontrolowane przez osobnika, można mówić o czynnikach
+umożliwiających, takich jak niewłaściwa dieta czy niedogodne warunki
+bytowe; przyspieszających, które przyczyniają się do powstania nowej
+choroby, jak i wzmacniających, czyli potęgujących efekt istniejącej już
+choroby <span class="citation">(<a href="#ref-beaglehole_podstawy_2002" role="doc-biblioref">Beaglehole et al., 2002</a>)</span>.</p>
+<p>Każda pandemia rozpoczyna się od epidemii, natomiast nie każda epidemia
+ewoluuje w pandemię. I tak mówi się o epidemii dżumy, epidemii SARS,
+pandemii grypy hiszpanki, jak i pandemii COVID-19<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Naturalną
+konsekwencją próby przystosowania się do warunków środowiska jest zmiana
+materiału genetycznego organizmu, tj. mutacja, którą obserwuje się
+również u bakterii i wirusów — patogenów będących inicjatorami
+epidemii. Mimo że epidemiologii jako nauce zaczęto poświęcać uwagę
+dopiero od XIX wieku, już ponad 2 000 lat temu Hipokrates stwierdził, że
+za rozprzestrzeniania się chorób przeważający wpływ ma środowisko.
+Współczesna epidemiologia bazuje nie tylko na pojawiających się w czasie
+w danym obszarze nieprzewidzianych ognisk nowej bądź znanej już choroby,
+ale też rozszerza swe metody o choroby przewlekłe czy też przenoszone
+drogą płciową. Wychodząc od przyczyny, uprzednio ją opisując,
+epidemiologia rozpatruje choroby w odniesieniu historycznym co do
+chwilowego stanu zdrowia osobnika, kolejno zmian przekształcających stan
+ten w patologię (chorobę) w rezultat w postaci wyzdrowienia bądź
+śmierci. Ujmując rzecz w ogóle, stany takie można scharakteryzować w
+przełożeniu na całą populację, co usprawnia nie tylko proces poznania
+czynnika chorobotwórczego, ale też jego wpływ na środowisko i zmienność
+w czasie. Finalnie, epidemiologia pozyskaną wiedzę teoretyczną stosuje
+do ewaluacji działań związanych z zapobieganiem, leczeniem i ogólną
+ochroną zdrowia (rysunek
+<a href="2-chapter02.html#fig:epidemiologia-czynniki" reference-type="ref" reference="fig:epidemiologia-czynniki">2.1</a>). Dąży ku temu poprzez
+szczegółową analizę pozyskanych danych epidemicznych i wdrożeniem metod
+mających na celu poprawienie jakości życia i ogólnego stanu zdrowia na
+obszarach, na których zaistniały warunki wystąpienia epidemii bądź
+rozprzestrzeniania się aktualnie trwającej <span class="citation">(<a href="#ref-beaglehole_podstawy_2002" role="doc-biblioref">Beaglehole et al., 2002</a>)</span>.</p>
+<div class="figure">
+<img src="figure/chap02/epidemiologia-czynniki.PNG" id="fig:epidemiologia-czynniki" alt="" />
+<p class="caption">Zastosowania epidemiologii. Źródło: Beaglehole i in.
+<span class="citation">(<a href="#ref-beaglehole_podstawy_2002" role="doc-biblioref">Beaglehole et al., 2002</a>)</span>.</p>
+</div>
+</div>
+<div id="miary-epidemiologiczne" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Miary epidemiologiczne</h2>
+<p>Proces poznania nowej choroby bądź scharakteryzowania istniejącego już
+czynnika chorobotwórczego rozpoczyna się od zebrania informacji, które
+zwyczajowo agreguje się w zbiór danych złożony z wierszy i kolumn. W
+wierszach najczęściej przechowywane są informacje o danej jednostce
+badanej – może to być pacjent szpitala, któremu został przypisany
+unikatowy numer ID, bądź też dany dzień okresu epidemicznego, jeśli
+badania mają na celu ogólną charakterystykę choroby w odniesieniu do
+populacji. Kolumny natomiast zawierają cechę (zmienną) obserwacji – w
+przypadku danych pacjentów mogą to być parametry medyczne, a bardziej
+globalne analizy (np. całego kraju) przykładowo zawierają statystyki
+tyczące się badanej jednostki jako ogółu.</p>
+<p>Analizując przebieg sytuacji epidemicznej, kluczową kwestią jest
+poznanie liczby nowych przypadków chorobowych w czasie. Nie jest jednak
+możliwe jej precyzyjne określenie ze względu na niemożliwość regularnego
+badania wszystkich osobników populacji czy też możliwe błędy w trakcie
+analiz, np. podczas przeprowadzanych wywiadów z pacjentami czy też
+niedokładność wyników badań. Biorąc pod uwagę choroby zakaźne, poważnym
+ograniczeniem jest też liczba wykonywanych testów mających na celu
+ustalenie finalnej diagnozy zapadalności na określoną chorobę, dlatego
+analiza przebiegu epidemii w dłuższym okresie może być utrudniona na
+skutek nieregularnych skoków i spadków krzywej zachorowań. Wówczas
+pomocne może być wygładzenie krzywej, które można osiągnąć, wyznaczając
+średnią liczbę nowych zakażeń bądź zgonów w oknie <span class="math inline">\(k\)</span>-dniowym,
+najczęściej 7-dniowym bądź 14-dniowym – według równania (2.1).</p>
+<p><span class="math display">\[SMA = \frac{m_1 + m_2 + ... + m_{k}}{k}\]</span> gdzie:</p>
+<ul>
+<li><span class="math inline">\(m_1\)</span>, <span class="math inline">\(m_2\)</span>, <span class="math inline">\(m_{k}\)</span> = średnia arytmetyczna z odpowiednio 1., 2. i
+<span class="math inline">\(k\)</span>. okresów.</li>
+</ul>
+<p>Czynnikiem limitującym liczbę nowych zakażeń stanowi również liczebność
+populacji danego kraju. Im większa jest populacja, tym oczekiwać można
+większej liczby pomiarów, a więc i większej skali wyników. Porównując
+zatem kraje czy też obszary pod względem tego samego czynnika (np.
+liczby osób zmarłych), należy uwzględnić liczebność populacji, a sam
+wynik przeliczyć na <span class="math inline">\(n\)</span> osób, by zachować proporcję, np. 1 mln osób, co
+przedstawia równanie (2.2).</p>
+<p><span class="math display">\[IR = \frac{Liczba \ nowych \ przypadkow \ chorobowych}{Calkowita \ liczebnosc \ populacji} \cdot 10^6\]</span></p>
+<p>Liczba nowych przypadków zakażeń jest proporcjonalna do wykonywanych w
+kraju testów, a proporcja pomiędzy liczbami nowych zakażeń a wykonanymi
+testami nosi miano współczynnika testów pozytywnych (<span class="math inline">\(PR\)</span>); najczęściej
+wyrażany jest w procentach. Przykładowo, jeżeli na 1 000 wykonanych
+testów stwierdzono 500 nowych zakażeń, to średnio 1 wykonany test na 2
+dostarczał wynik pozytywny, a zatem współczynnik ten będzie wynosił 50%.
+Uwzględniając dwa parametry (liczby nowych zakażeń i przeprowadzonych
+testów), pozwala na efektywne monitorowanie sytuacji epidemicznej w
+danym kraju, wprowadzając odniesienie do pochodnej, tj. źródła liczby
+nowych zakażeń – równanie (2.3). WHO zaleciła progową interpretację
+<span class="math inline">\(PR\)</span>, tzn. o względnie stabilnej sytuacji epidemicznej można mówić
+wtedy, kiedy współczynnik ten w czasie jest mniejszy od 5%, co odpowiada
+mniej niż 1 nowemu zakażeniu na 20 wykonanych testów; ponadto zaleciła
+ona rozważenie luzowania obostrzeń przez rządy krajów wtedy, gdy
+współczynnik ten będzie utrzymywać się na poziomie minimalnym (mniejszym
+od 5%) przez co najmniej 2 tygodnie <span class="citation">(<a href="#ref-hartman_covid-19_2020" role="doc-biblioref">Hartman, 2020</a>)</span>.</p>
+<p><span class="math display">\[PR = \frac{Liczba \ nowych \ zakazen \ w \ czasie}{Liczba \ wykonanych \ testow \ w \ czasie} \cdot 100\%\]</span></p>
+<p>Analizując jednowymiarową cechę statystyczną, np, liczbę zakażeń w
+czasie, często interesujący może być jej rozkład, a w szczególności
+zmienność poszczególnych wartości. Obok konstrukcji wykresu
+ilustrującego przyrosty i spadki skorzystać można z klasycznej miary
+zróżnicowania, jaką jest estymator współczynnika zmienności (<span class="math inline">\(CV\)</span>) dany
+równaniem (2.4):</p>
+<p><span class="math display">\[CV = \frac{s}{m}\]</span> gdzie:</p>
+<ul>
+<li><p><span class="math inline">\(s\)</span> = odchylenie standardowe wartości badanej cechy,</p></li>
+<li><p><span class="math inline">\(m\)</span> = średnia arytmetyczna wartości badanej cechy.</p></li>
+</ul>
+<p>Często przydatne może się okazać określenie skośności rozkładu zmiennej,
+np. podczas analizy rozkładu wieku pacjentów zmarłych. W takim przypadku
+badacz może być zainteresowany weryfikacją grup wiekowych o największym
+stopniu ryzyka. Do rozwiązania tak postawionego problemu posłużyć może
+współczynnik skośności (<span class="math inline">\(A_S\)</span>) dany wzorem (2.5).</p>
+<p><span class="math display">\[A_S = \frac{1}{n} \cdot \frac{\sum_{i=1}^n (x_i - m)^3}{s^4}\]</span> gdzie</p>
+<ul>
+<li><p><span class="math inline">\(s\)</span> = odchylenie standardowe wartości badanej cechy,</p></li>
+<li><p><span class="math inline">\(m\)</span> = średnia arytmetyczna wartości badanej cechy,</p></li>
+<li><p><span class="math inline">\(x_i\)</span> = <span class="math inline">\(i\)</span>-ta obserwacja z próby.</p></li>
+</ul>
+<p>Inne spojrzenie na rozwój epidemii zaproponował George MacDonald.
+Zamiast rozpatrywać przyrost nowych zakażeń w aspekcie globalnym,
+zaproponował on skupienie się na jednostce (osobniku) i jej przeciętnym
+wpływie na ograniczenie bądź dalsze rozprzestrzenianie się czynnika
+chorobotwórczego. Jego rozważania przejął Klaus Dietz, który
+przekładając podstawy biologiczne na język matematyki, wyznaczył
+współczynnik określający średnią liczbę osób zakażonych w czasie przez
+poszczególną jednostkę, znaną jako współczynnik reprodukcji wirusa <span class="math inline">\(R\)</span>.
+Taki współczynnik przyjmować może dowolne wartości ze zbioru liczb
+rzeczywistych dodatnich, przy czym im większa jest jego wartość, tym
+spodziewać się można intensywniejszego rozwoju epidemii. O
+niestabilności mówi się wtedy, gdy jest on wyższy od 1 – wówczas każda
+osoba średnio zakaża więcej niż 1 osobę. Przeciwnie, jeśli współczynnik
+ten jest mniejszy od 1 i utrzymuje się przez pewien okres, to rozwój
+epidemii zostaje minimalizowany, gdyż każda osoba zakaża mniej niż 1
+osobę. Sytuację idealną stanowi <span class="math inline">\(R\)</span> równy 0, czyli całkowita eliminacja
+czynnika chorobotwórczego ze środowiska bądź jego nieprzenoszenie się na
+teoretycznie podatne osobniki populacji. Jak podkreśla Kucharski,
+wartość współczynnika <span class="math inline">\(R\)</span> zależy od czterech czynników. Z racji tego, że
+tyczy się on każdego osobnika populacji, ważny jest czas przebywania
+przez osobę zakażoną choroby. Kolejną składową jest liczba okazji, czyli
+kontaktów, z jakimi wchodzi osoba zakażona. Interakcje międzyludzkie
+sprzyjają przenoszeniu się czynników chorobotwórczych (patogenów),
+aczkolwiek istnieje pewne prawdopodobieństwo jego przekazania, co
+również ma niebagatelny wpływ na współczynnik <span class="math inline">\(R\)</span>. Finalnie, biorąc pod
+uwagę zmienność populacyjną, rozpatrywany jest czynnik podatności, czyli
+osobnicza szansa na przyjęcie czynnika <span class="citation">(<a href="#ref-kucharski_prawa_2020" role="doc-biblioref">Kucharski &amp; Maksymowicz-Hamann, 2020</a>)</span>. Składową
+wszystkich tych wartości jest współczynnik <span class="math inline">\(R\)</span> opisany równaniem (2.6).</p>
+<p><span class="math display">\[R = Czas \ \cdot \ Okazje \ \cdot \ Prawdopodobienstwo \ przekazania \ \cdot \ Podatnosc\]</span></p>
+<p>Do estymacji współczynnika <span class="math inline">\(R\)</span> można wykorzystać podstawowy model
+epidemiologiczny <span class="math inline">\(SIR\)</span> z ograniczoną liczbą parametrów, co jest znane
+jako filtr Kalmana. Istnieją również narzędzia zaimplementowane w
+popularnych pakietach do statystycznej analizy danych.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-beaglehole_podstawy_2002" class="csl-entry">
+Beaglehole, R., Bonita, R., Kjellström, T., Szeszenia-Dąbrowska, N., &amp; Hanke, W. (2002). <em>Podstawy epidemiologii</em>. Instytut Medycyny Pracy im. prof. J. Nofera. Oficyna Wydawnicza.
+</div>
+<div id="ref-hartman_covid-19_2020" class="csl-entry">
+Hartman, M. (2020). <span>COVID</span>-19 <span>Testing</span>: <span>Understanding</span> the <span>“<span>Percent</span> <span>Positive</span>.”</span> In <em>Johns Hopkins Bloomberg School of Public Health</em>. <a href="https://www.jhsph.edu/covid-19/articles/covid-19-testing-understanding-the-percent-positive.html">https://www.jhsph.edu/covid-19/articles/covid-19-testing-understanding-the-percent-positive.html</a>
+</div>
+<div id="ref-kucharski_prawa_2020" class="csl-entry">
+Kucharski, A., &amp; Maksymowicz-Hamann, J. (2020). <em>Prawa epidemii: Skąd się epidemie biorą i czemu wygasają?</em> Wydawnictwo Relacja.
+</div>
+<div id="ref-pwn_slownik_2021-1" class="csl-entry">
+PWN. (2021a). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: epidemia</em>. <a href="https://sjp.pwn.pl/sjp/epidemia;2457537.html">https://sjp.pwn.pl/sjp/epidemia;2457537.html</a>
+</div>
+<div id="ref-pwn_slownik_2021" class="csl-entry">
+PWN. (2021b). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: epidemiologia</em>. <a href="https://sjp.pwn.pl/sjp/epidemiologia;2457541.html">https://sjp.pwn.pl/sjp/epidemiologia;2457541.html</a>
+</div>
+<div id="ref-pwn_slownik_2021-2" class="csl-entry">
+PWN. (2021c). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: pandemia</em>. <a href="https://sjp.pwn.pl/sjp/pandemia;2570434.html">https://sjp.pwn.pl/sjp/pandemia;2570434.html</a>
+</div>
+<div id="ref-pwn_slownik_2021-3" class="csl-entry">
+PWN. (2021d). <em>Słownik języka polskiego <span>PWN</span>. <span>Pojęcie</span>: przyczyna</em>. <a href="https://sjp.pwn.pl/sjp/przyczyna;2511925.html">https://sjp.pwn.pl/sjp/przyczyna;2511925.html</a>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Odnosząc się do danego okresu rozprzestrzeniania się choroby, o
+pandemii można również się wyrazić jako o epidemii, np. epidemia
+COVID-19 w Wuhan w grudniu 2019 r.<a href="2-chapter02.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="1-chapter01.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-chapter03.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

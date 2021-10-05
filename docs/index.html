@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="1-chapter01.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</h1>
+<p class="author"><em>Kamil Pytlak</em></p>
+<p class="date"><em>Czerwiec 2021</em></p>
+</div>
+<div id="streszczenie" class="section level1 unnumbered">
+<h1>Streszczenie</h1>
+<p>Epidemiologia jako nauka czerpiąca swą wiedzę z danych wymaga podjęcia
+szybkich i zdecydowanych działań celem zapobieżenia bądź minimalizacji
+skutków istniejącego już zagrożenia epidemicznego. Za sprawą nowego
+szczepu koronawirusa z roku 2019 (SARS-CoV-2), dziedzina ta ponownie
+zyskała na popularności. W niniejszej pracy przedstawiono wczesny rozwój
+sytuacji epidemicznej związanej z wirusem SARS-CoV-2 na świecie, objawy
+i sposoby zmniejszenia szansy zapadalności na chorobę COVID-19. Nacisk
+położono na analizę popularności haseł/artykułów związanych z
+koronawirusem w Internecie, analizie danych epidemicznych dla 3 krajów z
+najwyższą sumaryczną liczbą zakażeń w roku 2020, Szwecji, Polski i jej
+sąsiadów, niepożądanych odczynów poszczepiennych (NOP-ów) wśród
+mieszkańców Polski, estymacji chwilowego współczynnika reprodukcji
+wirusa <span class="math inline">\(R(t)\)</span>, jak i automatyzacji procesu pobierania danych i ich
+późniejszej wizualizacji. Przebieg epidemii w krajach zweryfikowano z
+użyciem klasycznych miar epidemiologicznych, a do sprawdzenia istotnych
+różnic pomiędzy czynnikami ilościowymi wykorzystano testowanie hipotez
+statystycznych. Dodatkowo podczas analizy zbioru z NOP-ami zastosowano
+eksploracyjną analizę tekstu celem wydobycia najczęściej pojawiających
+się haseł związanych ze stanem pacjenta w zależności od danej kategorii
+objawu. Do oszacowania <span class="math inline">\(R(t)\)</span> wykorzystano dwie metody: filtr Kalmana i
+z pakietu EpiEstim w R. Zbieżność obu metod została zweryfikowana z
+użyciem korelacji <span class="math inline">\(r\)</span> Pearsona i <span class="math inline">\(\tau\)</span> Kendalla, metryki <span class="math inline">\(MAE\)</span> i
+estymatorów metody najmniejszych kwadratów. Automatyczne pobieranie
+danych z witryny Worldometer zrealizowano z użyciem własnoręcznie
+napisanego skryptu opierającego się na technice “web–scraping” w języku
+Python, którego wyniki zostały poddane wizualizacji w programie Kibana.
+Użytkownicy przejawiali postępujące w miarę zwiększania się liczb nowych
+zakażeń i zgonów zainteresowanie tematykami SARS-CoV-2/COVID-19, jak i
+zdrowiem w ogóle, ale nie dezynfekcją rąk. Rozpatrywane kraje świata
+różniły się pod względem rozwoju sytuacji epidemicznej, a istotne
+różnice występowały pomiędzy sezonem wiosenno-letnim a jesienno-zimowym,
+kiedy w części krajach nastąpił znaczny przyrost liczb nowych
+zakażeń/zgonów. Również przez znaczną część okresu letniego w niektórych
+krajach <span class="math inline">\(R(t)\)</span> był mniejszy od 1 lub proporcje nie różniły się istotnie.
+Większy odsetek pacjentów zgłaszających NOP-y stanowiły kobiety,
+aczkolwiek mężczyźni częściej niż kobiety borykali się z poważniejszymi
+powikłaniami. Rozkład wieku zmarłych pacjentów był lewoskośny, co
+potwierdza, że COVID-19 największe zagrożenie stanowi dla starszych grup
+wiekowych. Wykorzystane metody estymacji okazały się być zbieżne, a
+analiza uzyskanych z nich <span class="math inline">\(R(t)\)</span> doprowadziła do podobnych wniosków.
+Jeszcze większą zgodność uzyskano po uśrednieniu danych codziennych z
+filtra Kalmana w oknie 7-dniowym.<br />
+<br />
+<strong>Słowa kluczowe:</strong> koronawirus, SARS-CoV-2, COVID-19, analiza danych,
+web–scraping, współczynnik reprodukcji wirusa, filtr Kalmana, EpiEstim,
+popularność, niepożądane odczyny poszczepienne</p>
+<!-- The preface pretty much says it all.  \par -->
+<!-- Second paragraph of abstract starts here. -->
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="1-chapter01.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

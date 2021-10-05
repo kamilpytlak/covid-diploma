@@ -1,0 +1,183 @@
+# Analiza wyników, wnioski i dyskusja {#chapter06}
+
+## Podsumowanie
+
+Wirus SARS-CoV-2 i powodowana przez niego choroba COVID-19 znacząco
+wpłynęła na życie społeczne ludzi na całym świecie. Użytkownicy
+Internetu największe zainteresowanie jego tematyką przejawiali na
+początku roku 2020, kiedy to Azja przewyższała w liczbie zakażeń Europę,
+aczkolwiek w miarę wzrostu liczb nowych zakażeń i zgonów popularność
+haseł/artykułów związanych z nim i zdrowiem również przybierała na sile.
+Możliwe, że wpływ na to mogły mieć przyrastające statystyki związane z
+COVID-19, co dodatkowo przyciągnęło uwagę mediów, jak i różne ogłaszane
+badania mające na celu pozbycie się zagrożenia ze strony nowego szczepu
+koronawirusa, np. opatentowanie szczepionki. Tematyka związana z
+dezynfekcją rąk nie cieszyła się zainteresowaniem, mimo że ogólna
+powiązana z higieną osobistą wykazywała wzrost popularności w miarę
+zwiększania się liczb nowych przypadków zakażeń i zgonów, jednakże w
+mniejszym stopniu niż tematyka szczepionki. Do podobnych wniosków doszli
+Kurian i in., analizując pojęcia związane z SARS-CoV-2/COVID-19 i
+zdrowiem z użyciem narzędzia Google Trends dla Stanów Zjednoczonych
+[@kurian_correlations_2020]. W tym zakresie jednak potrzebne jest dalsze
+uświadamianie społeczeństwa na temat COVID-19, ale i innych chorób
+zakaźnych, ze szczególnym naciskiem na skuteczność różnych, łatwo
+dostępnych i nieprzysparzających trudności metod efektywnie
+ograniczających transmisję patogenów, jak np. częste mycie rąk czy
+zasłanianie ust i nosa.
+
+Przeprowadzone analizy potwierdziły, że chwilowy współczynnik
+reprodukcji wirusa $R(t)$ podczas okresu letniego nie zmieniał się
+istotnie, a dla niektórych krajów w znacznej części okresu był mniejszy
+od 1, co według jego podstawowej interpretacji sugeruje na skuteczną
+minimalizację transmisji wirusa w populacji z racji tego, że średnio
+jedna osoba zakaża mniej niż jedną osobę. W krzywych epidemicznych w
+większości rozpatrywanych w niniejszej pracy krajach już od maja 2020 r.
+dało się zauważyć mniejszy przyrost liczb nowych zakażeń i zgonów, które
+uprzednio sukcesywnie wzrastały od kwietnia. Pod tym względem stabilna
+również pozostawała Polska i znaczna część jej województw. Zbliżone do
+pierwszej fali zakażeń na początku sezonu wiosenno-letnim gwałtowne
+przyrosty liczb nowych zakażeń i zgonów obserwowano również już od
+początku sezonu jesienno-zimowego -- przede wszystkim w październiku i
+listopadzie -- z widocznym spadkiem w okresie przedświątecznym w
+grudniu. Na minimalizację współczynnika $R(t)$ w lecie, pomimo
+zmniejszenia dystansu społecznego, zniesienia części obostrzeń i nakazu
+zasłaniania ust i nosa w większości krajów, wpływ mogło mieć wiele
+czynników. Mandal i Panwar sugerują, że na szansę zakażenia się nowym
+typem koronawirusa przeważający wpływ może mieć temperatura, jako że
+więcej przypadków zakażenia obserwowano w krajach położonych na wyższych
+szerokościach geograficznych, a więc o niskich średnich dobowych
+temperaturach [@mandal_can_2020]. Do podobnych wniosków doszli Monto i
+in. [@monto_coronavirus_2020], którzy na podstawie analizy czterech
+innych występujących w naturze szczepów koronawirusa potwierdzają
+czynnik sezonowości w transmisji przenoszenia, przy czym minimalizacja
+ta była największa właśnie w okresie letnim. Woods i in. dodatkowo
+podkreślają wpływ aktywności fizycznej na stymulację układu
+odpornościowego człowieka, a jej brak może w znacznym stopniu przyczynić
+się do obniżenia wydolności tlenowej organizmu, co w połączeniu z
+hospitalizacją skutkować może ciężkim przebiegiem choroby COVID-19
+[@woods_covid-19_2020].
+
+Rozkład zmarłych z powodu COVID-19 pacjentów był lewoskośny (zarówno dla
+mężczyzn, jak i kobiet), co potwierdza zwiększające się ryzyko zgonu
+postępujące wraz z wiekiem, co było najbardziej zauważalne począwszy od
+grupy wiekowej 60--69. Do takich samych spostrzeżeń doszła CDC
+[@cdc_risk_2021].
+
+Analiza niepożądanych objawów poszczepiennych (NOP) wśród mieszkańców
+Polski do 31.03.2021 r. wykazała, że więcej kobiet niż mężczyzn szczepi
+się przeciwko COVID-19; kobiety również częściej niż mężczyźni doznawały
+NOP, aczkolwiek znosiły je łagodniej niż mężczyźni, którzy też częściej
+niż kobiety umierali w przeciągu 4 tygodni od dnia aplikacji
+szczepionki. Jak zaznacza Nordahl, różnice te mogą wynikać z uwarunkowań
+płciowych -- spekuluje się, że kobiety wytwarzają silniejszą odpowiedź
+immunologiczną niż mężczyźni, w związku z czym reakcja na przyjęcie
+szczepionki może być bardziej zauważalna. Możliwym wyjaśnieniem jest też
+decyzja zgłoszenia NOP do danego organu wśród płci, co z kolei wynikać
+może już z uwarunkowań psychologicznych [@nordahl_heres_2021]. Większa
+część kobiet zaszczepionych niż mężczyzn wynikać może z podziału
+społeczeństwa na grupy, które miały pierwszeństwo do otrzymania dawki
+szczepionki. Ungar wyjaśnia, że znaczna część kobiet niż mężczyzn zasila
+sektory zdrowia i edukacji, a właśnie ci pracownicy w Polsce, jak i
+innych krajach świata byli priorytetyzowani. Tu również istotną rolę
+odgrywać mogą czynniki psychologiczne, takie jak zabieganie kobiet jako
+matek o zdrowie i bezpieczeństwo swoich dzieci [@ungar_gender_2021].
+
+Zaprezentowane zostały dwa narzędzia epidemiologiczne do estymacji
+chwilowego współczynnika reprodukcji wirusa $R(t)$, który stanowi
+niezwykle istotną miarę w monitorowaniu aktualnej sytuacji epidemicznej
+na danym obszarze, jak i podejmowaniu właściwych decyzji co do
+ograniczeń i wdrażanych technik leczenia: filtr Kalmana i metoda oparta
+na rozkładzie $SI$ z pakietu EpiEstim w R. Mimo że metody te różnią się
+stopniem złożoności (filtr Kalmana podlega ograniczonej liczbie
+parametrów, z czego metoda z EpiEstim wymaga określeniu rozkładu
+interwału seryjnego), w przypadku danych epidemicznych związanych z
+COVID-19 dla różnych krajów świata odznaczały się one dużą zbieżnością,
+z czego największą uzyskano, uśredniając dane z filtra Kalmana w oknie
+7-dniowym, co też stosowane jest w metodzie z EpiEstim. Często skuteczne
+monitorowanie sytuacji epidemicznej wymaga podjęcia szybkich,
+zdecydowanych, a przede wszystkim najlepiej zautomatyzowanych kroków, a
+mnogość narzędzi służących do estymacji $R(t)$ i możliwie wynikłe
+problemy podczas użytkowania ich często stanowi barierę. Pomimo różnych
+technik zastosowanych w filtrze Kalmana i EpiEstim w R, ocena sytuacji
+epidemicznej na podstawie obu tych narzędzi doprowadziła do podobnych
+wniosków, co potwierdza ich skuteczność w monitorowaniu epidemii.
+
+W ocenie sytuacji epidemicznej ważne znaczenie ma też analiza danych
+historycznych, którą można realizować z użyciem technik wizualizacji
+danych. W pracy przedstawiono automatyzację takiego procesu dzięki
+zastosowanej metodzie "web--scraping" w języku Python, dzięki której w
+kilka sekund można wydobyć dane z witryny zawierającej statystyki o
+COVID-19 dla krajów świata. Dostarczone programowi Kibana dane z
+uprzednio przygotowaną tablicą z wynikami (ang. *dashboard*) zostały w
+efektywny sposób zwizualizowane, a sam program dostarcza również
+narzędzia do analizy danych, co również przyspiesza i usprawnia analizę
+danych epidemicznych. Dobór właściwych narzędzi w przypadku dziedziny
+analizującej różne rodzaje danych, jaką jest epidemiologia, stanowi
+jeden z pierwszych celów, które powinien zrealizować badacz-epidemiolog,
+których zwieńczeniem finalnie powinien być możliwie w pełni
+zautomatyzowany, pozbawiony błędów proces zapewniający wyniki, których
+istotę da się przełożyć na stabilizację sytuacji epidemicznej. Nie jest
+jednak możliwa idealna ocena sytuacji epidemicznej ze względu na
+ograniczenia, jakim musi sprostać epidemiologia. Przede wszystkim
+częstym wątpliwościom zostają poddane pochodzenie i wiarygodność zbiorów
+danych. Nierozsądnym wydaje się bowiem pełne zawierzenie danym, których
+końcowa analiza doprowadza do wniosków niezgodnych ze stanem faktycznym.
+Dlatego też tu, oprócz sprawnego użycia narzędzi i wyrachowanego zmysłu
+analitycznego, niezbędne jest zachowanie ostrożnego podejścia do
+wniosków przekładających się na ewaluację działań.
+
+[^1]: Odnosząc się do danego okresu rozprzestrzeniania się choroby, o
+    pandemii można również się wyrazić jako o epidemii, np. epidemia
+    COVID-19 w Wuhan w grudniu 2019 r.
+
+[^2]: Głównie osoby pozostające długoterminowo w domu, pracujące w
+    pomieszczeniach wentylowanych, itp.
+
+[^3]: Głównie osoby mające stały kontakt z różnymi osobami; również te,
+    których elementem pracy jest kontakt z drugą osobą, jak np. kurierzy
+    czy pracownicy supermarketu.
+
+[^4]: Jak zaznacza Google, listy najbardziej popularnych haseł
+    konstruowane są na podstawie miernika popularności, czyli
+    popularności hasła w aktualnym roku w stosunku do roku ubiegłego.
+    Liczba wyświetleń hasła w danym punkcie czasu dzielona jest przez
+    całkowitą liczbę wyświetleń, a wyniki są normalizowane na skali
+    0--100, gdzie 0 oznacza znikomą popularność hasła, natomiast 100 --
+    najwyższe zainteresowanie.
+
+[^5]: Jak zaznacza Google, podane wyniki stanowią wyższy odsetek
+    zapytań, a nie większą bezwzględną liczbę zapytań.
+
+[^6]: Tematyka "Koronawirusy" uwzględnia wyszukiwane w wyszukiwarce
+    Google hasła związane z kategorią "Wirusy" jako charakterystyczne
+    dla "Koronawirusy" w ujęciu danego oficjalnego języka obowiązującego
+    w analizowanym kraju.
+
+[^7]: Artykuły: "COVID-19", "Koronawirusy"/"Coronavirus", "SARS-CoV-2".
+
+[^8]: W tym przypadku analizowano Wikipedię w języku angielskim.
+
+[^9]: Artykuły: "Dezynfekcja rąk"/"Hand washing", "Półmaska"/"Surgical
+    mask", "Szczepionka"/"Vaccine".
+
+[^10]: Przykładowo, stan zagrożenia epidemicznego w Polsce wprowadzony
+    został 12.03.2020 r., a począwszy od 16.04.2020 r. przez polski rząd
+    nałożony został nakaz zakrywania ust i nosa w przestrzeni
+    publicznej, np. z użyciem półmaski.
+
+[^11]: Wybrane zostały artykuły bezpośrednio związane z pandemią
+    COVID-19 ("Koronawirusy", "COVID-19", "SARS-CoV-2") i pośrednio
+    ("Higiena osobista", "Szczepionka", "Dezynfekcja rąk").
+
+[^12]: 6 659 zaszczepionym osobom (0,1%) nie przypisano płci.
+
+[^13]: Wg danych uzyskanych z pakietu EpiEstim w R.
+
+[^14]: 12 krajów: Białoruś, Brazylia, Czechy, Indie, Litwa, Niemcy,
+    Polska, Rosja, Słowacja, Stany Zjednoczone, Szwecja i Ukraina.
+
+[^15]: Tj. zgodności wyrażenia
+    $(k_i \wedge b_i < 1) \vee (k_i \wedge b_i \geqslant 1)$, które jest
+    prawdziwe, jeśli wyestymowany z użyciem filtra Kalmana $R(t)$ jako
+    $k_i$ jest mniejszy bądź większy od jedności z odpowiadającym z
+    pakietu EpiEstim w R jako $b_i$.

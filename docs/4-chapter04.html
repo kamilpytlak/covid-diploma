@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Rozdział 4 Metodologiczne podstawy badań własnych | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</title>
+  <meta name="description" content="Rozdział 4 Metodologiczne podstawy badań własnych | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Rozdział 4 Metodologiczne podstawy badań własnych | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rozdział 4 Metodologiczne podstawy badań własnych | Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”" />
+  
+  
+  
+
+<meta name="author" content="Kamil Pytlak" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="3-chapter03.html"/>
+<link rel="next" href="5-chapter05.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Streszczenie</a></li>
+<li class="chapter" data-level="1" data-path="1-chapter01.html"><a href="1-chapter01.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-chapter01.html"><a href="1-chapter01.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1.2" data-path="1-chapter01.html"><a href="1-chapter01.html#cel-pracy"><i class="fa fa-check"></i><b>1.2</b> Cel pracy</a></li>
+<li class="chapter" data-level="1.3" data-path="1-chapter01.html"><a href="1-chapter01.html#zawartość-merytoryczna"><i class="fa fa-check"></i><b>1.3</b> Zawartość merytoryczna</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter02.html"><a href="2-chapter02.html"><i class="fa fa-check"></i><b>2</b> Epidemiologia jako nauka o przyczynowości zdarzeń</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-chapter02.html"><a href="2-chapter02.html#epidemia-i-pandemia---nieodłączne-terminy-epidemiologii"><i class="fa fa-check"></i><b>2.1</b> “Epidemia” i “pandemia”” - nieodłączne terminy epidemiologii</a></li>
+<li class="chapter" data-level="2.2" data-path="2-chapter02.html"><a href="2-chapter02.html#miary-epidemiologiczne"><i class="fa fa-check"></i><b>2.2</b> Miary epidemiologiczne</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter03.html"><a href="3-chapter03.html"><i class="fa fa-check"></i><b>3</b> Pandemia COVID-19</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-chapter03.html"><a href="3-chapter03.html#wirus-sars-cov-2-i-choroba-covid-19"><i class="fa fa-check"></i><b>3.1</b> Wirus SARS-CoV-2 i choroba COVID-19</a></li>
+<li class="chapter" data-level="3.2" data-path="3-chapter03.html"><a href="3-chapter03.html#sposoby-ograniczenia-transmisji-wirusa-w-populacji"><i class="fa fa-check"></i><b>3.2</b> Sposoby ograniczenia transmisji wirusa w populacji</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-chapter03.html"><a href="3-chapter03.html#dbanie-o-higienę-osobistą"><i class="fa fa-check"></i><b>3.2.1</b> Dbanie o higienę osobistą</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-chapter03.html"><a href="3-chapter03.html#utrzymywanie-dystansu-społecznego"><i class="fa fa-check"></i><b>3.2.2</b> Utrzymywanie dystansu społecznego</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-chapter03.html"><a href="3-chapter03.html#zasłanianie-ust-i-nosa"><i class="fa fa-check"></i><b>3.2.3</b> Zasłanianie ust i nosa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter04.html"><a href="4-chapter04.html"><i class="fa fa-check"></i><b>4</b> Metodologiczne podstawy badań własnych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#przedmiot-i-cel-badań"><i class="fa fa-check"></i><b>4.1</b> Przedmiot i cel badań</a></li>
+<li class="chapter" data-level="4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#problemy-i-hipotezy-badawcze"><i class="fa fa-check"></i><b>4.2</b> Problemy i hipotezy badawcze</a></li>
+<li class="chapter" data-level="4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#metody-techniki-i-narzędzia-badawcze"><i class="fa fa-check"></i><b>4.3</b> Metody, techniki i narzędzia badawcze</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-chapter04.html"><a href="4-chapter04.html#wykorzystane-zbiory-danych"><i class="fa fa-check"></i><b>4.3.1</b> Wykorzystane zbiory danych</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-chapter04.html"><a href="4-chapter04.html#analiza-przebiegu-pandemii"><i class="fa fa-check"></i><b>4.3.2</b> Analiza przebiegu pandemii</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-chapter04.html"><a href="4-chapter04.html#estymacja-współczynnika-reprodukcji-wirusa-rt"><i class="fa fa-check"></i><b>4.4</b> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4-chapter04.html"><a href="4-chapter04.html#filtr-kalmana"><i class="fa fa-check"></i><b>4.4.1</b> Filtr Kalmana</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4-chapter04.html"><a href="4-chapter04.html#epiestim"><i class="fa fa-check"></i><b>4.4.2</b> EpiEstim</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4-chapter04.html"><a href="4-chapter04.html#porównanie-metod"><i class="fa fa-check"></i><b>4.4.3</b> Porównanie metod</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter05.html"><a href="5-chapter05.html"><i class="fa fa-check"></i><b>5</b> Analiza danych związanych z COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-chapter05.html"><a href="5-chapter05.html#popularność-haseł-związanych-z-koronawirusem-w-internecie"><i class="fa fa-check"></i><b>5.1</b> Popularność haseł związanych z koronawirusem w Internecie</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-chapter05.html"><a href="5-chapter05.html#google"><i class="fa fa-check"></i><b>5.1.1</b> Google</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-chapter05.html"><a href="5-chapter05.html#wikipedia"><i class="fa fa-check"></i><b>5.1.2</b> Wikipedia</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-chapter05.html"><a href="5-chapter05.html#pubmed"><i class="fa fa-check"></i><b>5.1.3</b> PubMed</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-chapter05.html"><a href="5-chapter05.html#przebieg-pandemii-covid-19-w-roku-2020-na-świecie"><i class="fa fa-check"></i><b>5.2</b> Przebieg pandemii COVID-19 w roku 2020 na świecie</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys"><i class="fa fa-check"></i><b>5.2.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-wiosenno-letni-do-22.09.2020-r."><i class="fa fa-check"></i><b>5.2.2</b> Sezon wiosenno-letni (do 22.09.2020 r.)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-chapter05.html"><a href="5-chapter05.html#sezon-jesienno-zimowy-23.0931.12.2020-r."><i class="fa fa-check"></i><b>5.2.3</b> Sezon jesienno-zimowy (23.09–31.12.2020 r.)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-chapter05.html"><a href="5-chapter05.html#szczepienia-w-kierunku-covid-19"><i class="fa fa-check"></i><b>5.3</b> Szczepienia w kierunku COVID-19</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-chapter05.html"><a href="5-chapter05.html#zarys-1"><i class="fa fa-check"></i><b>5.3.1</b> Zarys</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5-chapter05.html"><a href="5-chapter05.html#niepożądane-odczyny-poszczepiennie-nop-y-wśród-polskich-pacjentów"><i class="fa fa-check"></i><b>5.3.2</b> Niepożądane odczyny poszczepiennie (NOP-y) wśród polskich pacjentów</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-chapter05.html"><a href="5-chapter05.html#estymacja-współczynnika-reprodukcji-wirusa-r"><i class="fa fa-check"></i><b>5.4</b> Estymacja współczynnika reprodukcji wirusa (R)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-chapter05.html"><a href="5-chapter05.html#porównanie-współczynników-rt-pomiędzy-krajami"><i class="fa fa-check"></i><b>5.4.1</b> Porównanie współczynników <span class="math inline">\(R(t)\)</span> pomiędzy krajami</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-chapter05.html"><a href="5-chapter05.html#zbieżność-metod-estymacji"><i class="fa fa-check"></i><b>5.4.2</b> Zbieżność metod estymacji</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5-chapter05.html"><a href="5-chapter05.html#wizualizacja-dziennych-danych-w-programie-kibana"><i class="fa fa-check"></i><b>5.5</b> Wizualizacja dziennych danych w programie Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter06.html"><a href="6-chapter06.html"><i class="fa fa-check"></i><b>6</b> Analiza wyników, wnioski i dyskusja</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-chapter06.html"><a href="6-chapter06.html#podsumowanie"><i class="fa fa-check"></i><b>6.1</b> Podsumowanie</a></li>
+</ul></li>
+<li class="appendix"><span><b>Dodatek</b></span></li>
+<li class="chapter" data-level="A" data-path="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><a href="A-program-pobierający-dzienne-dane-z-witryny-worldometer.html"><i class="fa fa-check"></i><b>A</b> Program pobierający dzienne dane z witryny Worldometer</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza danych zachorowań na COVID-19 i ich wizualizacja przy zastosowaniu metody “web–scraping”</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter04" class="section level1" number="4">
+<h1><span class="header-section-number">Rozdział 4</span> Metodologiczne podstawy badań własnych</h1>
+<div id="przedmiot-i-cel-badań" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Przedmiot i cel badań</h2>
+<p>Przedmiotem badań była analiza danych związanych z COVID-19 w roku 2020.
+Celem natomiast szczegółowa charakterystyka sytuacji epidemicznej w
+różnych krajach świata, którą zrealizowano na podstawie analizy danych
+codziennie udostępnianych przez instytucje rządowe i elektroniczne
+publikacje naukowe, a tyczących się statystyk związanych z osobami
+pozytywnie zdiagnozowanymi pod kątem COVID-19, jak i zmarłymi. Skupiono
+się na szczegółowej analizie Polski, którą dodatkowo przeprowadzono dla
+jej poszczególnych województw; dla Polski zweryfikowano również
+frekwencje niepożądanych objawów poszczepiennych (NOP) zgłaszanych w
+okresie od pierwszego jego wystąpienia do 31.03.2021 r. Sprawdzono, w
+jaki sposób aktualna sytuacja związana z COVID-19 w Polsce i na świecie
+(tj. przyrosty liczb nowych zakażeń i zgonów) oddziaływała na
+popularyzację haseł związanych z koronawirusem i zdrowiem w kontekście
+popularnych stron i wyszukiwarek internetowych. Zaprezentowano dwie
+metody do estymacji współczynnika reprodukcji wirusa; na ich podstawie
+porównano również dynamikę przebiegu epidemii w poszczególnych krajach
+świata, jak i pomiędzy krajami. Tak oszacowane współczynniki reprodukcji
+zostały zestawione celem weryfikacji zbieżności obu użytych metod.
+Zaprezentowano również wizualizację automatycznego pobierania danych z
+użyciem skryptu napisanego w języku Python w programie Kibana.</p>
+</div>
+<div id="problemy-i-hipotezy-badawcze" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Problemy i hipotezy badawcze</h2>
+<p>Motywację do przeprowadzania analiz stanowiły następujące problemy
+badawcze:</p>
+<ol style="list-style-type: decimal">
+<li><p>Dla jakich okresów i z jaką siłą hasła/artykuły związane z
+SARS-CoV-2/COVID-19 i zdrowiem cieszyły się popularnością w Polsce i
+na świecie w roku 2020 w kontekście popularnych stron i wyszukiwarek
+internetowych?</p></li>
+<li><p>Charakterystyka sytuacji epidemicznej związanej z COVID-19 w krajach
+świata z największą sumaryczną liczbą zakażeń w roku 2020, Szwecji,
+Polsce i krajach z nią graniczących.</p></li>
+<li><p>Czy pomiędzy sezonami wiosenno-letnim a jesienno-zimowym roku 2020
+istniały statystycznie istotne różnice dla danego państwa i grupy
+państw w ogólnym przebiegu epidemii?</p></li>
+<li><p>Czy podczas okresu letniego sytuacja epidemiczna w krajach
+pozostawała na stabilnym poziomie?</p></li>
+<li><p>Jak przedstawiały się frekwencje niepożądanych objawów
+poszczepiennych (NOP-ów) wśród mieszkańców Polski do 31.03.2021 r.?
+Czy płeć lub grupa wiekowa miały decydujący wpływ na wyższe
+prawdopodobieństwo otrzymania NOP-u?</p></li>
+<li><p>Przedstawienie różnych metod estymacji współczynnika reprodukcji
+wirusa <span class="math inline">\(R(t)\)</span> w odniesieniu do danych okresów roku 2020 dla kraju i
+grupy krajów. Czy metody są zbieżne, tzn. zapewniają porównywalne
+wyniki?</p></li>
+</ol>
+<p>Mając na względzie różnice fizjologiczne pomiędzy kobietami a
+mężczyznami, które odnoszą się do ogólnej siły i sprawności organizmu,
+ujemnie skorelowanymi wraz z postępującym procesem starzenia się,
+wysnuto hipotezę, że odsetek NOP-ów wśród kobiet jest większy niż wśród
+mężczyzn, a szansa na otrzymanie NOP-u wzrasta wraz z wiekiem (grupą
+wiekową). Założono, że pomiędzy badanymi sezonami istniały różnice w
+średnich/medianach liczb zakażeń/zgonów, a ze względu na luzowanie
+obostrzeń w większości krajów świata w lecie w sezonie jesienno-zimowym
+i późne decyzje ws. kolejnych ograniczeń nastąpił bardziej dynamiczny i
+ilościowo większy przyrost dziennych liczb zakażeń i zgonów.</p>
+</div>
+<div id="metody-techniki-i-narzędzia-badawcze" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Metody, techniki i narzędzia badawcze</h2>
+<div id="wykorzystane-zbiory-danych" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Wykorzystane zbiory danych</h3>
+<p>Analizę popularności haseł/artykułów związanych z SARS-CoV-2/COVID-19
+przeprowadzono na podstawie zebranych danych z narzędzi Google Trends
+<span class="citation">(<a href="#ref-google_google_2021" role="doc-biblioref">Google, 2021</a>)</span> i Pageviews <span class="citation">(<a href="#ref-musikanimal_pageviews_2021" role="doc-biblioref">MusikAnimal et al., 2021</a>)</span>. Do
+analizy danych wykorzystano dane codziennie udostępniane przez
+instytucje rządowe, a agregowane w ogólny zbiór danych przez
+elektroniczną publikację naukową Our World in Data
+<span class="citation">(<a href="#ref-hannah_ritchie_coronavirus_2020" role="doc-biblioref">Ritchie et al., 2020</a>)</span>. Są one codziennie aktualizowane
+(stan na maj 2021) i zawierają m.in. takie dane, jak liczby nowych
+przypadków zakażeń na SARS-CoV-2, zgonów, hospitalizowanych pacjentów
+czy wykonanych testów. Posłużyły one do szczegółowej analizy przebiegu
+epidemii w roku 2020 dla różnych krajów świata i pomiędzy krajami, a
+także estymacji chwilowego współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span>. Do
+analizy sytuacji epidemicznej w województwach Polski, jak i
+niepożądanych objawów poszczepiennych (NOP-ów) zgłaszanych przez jej
+mieszkańców został wykorzystany zbiór danych opracowany przez M.
+Rogalskiego <span class="citation">(<a href="#ref-rogalski_dane_2021" role="doc-biblioref">Rogalski, 2021</a>)</span>.</p>
+<p>Metodą “web–scraping” w języku Python pobrano dane w postaci tabeli z
+witryny Worldometer <span class="citation">(<a href="#ref-worldometersinfo_covid-19_2021" role="doc-biblioref">Worldometers.info, 2021</a>)</span>. Do napisania
+skryptu pobierającego dzienne dane z witryny Worldometer wykorzystano
+język Python <span class="citation">(<a href="#ref-rossum_python_2009" role="doc-biblioref">Rossum et al., 2009</a>)</span> i bibliotekę Beautiful Soup
+<span class="citation">(<a href="#ref-richardson_beautiful_2007" role="doc-biblioref">Richardson, 2007</a>)</span>. Kod programu został umieszczony w
+w dodatku. Celem automatyzacji codziennego pobierania danych
+został on zamieszczony na serwerze z ustawionym trybem wykonywania o
+godzinie 23:55 GMT +0 oferowanym przez platformę WayScript
+<span class="citation">(<a href="#ref-wayscript_inc_wayscript_2021" role="doc-biblioref">WayScript, Inc., 2021</a>)</span>.</p>
+</div>
+<div id="analiza-przebiegu-pandemii" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Analiza przebiegu pandemii</h3>
+<p>Analizę danych przeprowadzono z użyciem języka R <span class="citation">(<a href="#ref-r_core_team_r_2021" role="doc-biblioref">R Core Team, 2021</a>)</span> i
+oprogramowania RStudio <span class="citation">(<a href="#ref-rstudio_team_rstudio_2021" role="doc-biblioref">RStudio Team, 2021</a>)</span>. Podczas testowania
+hipotez przyjęto poziom istotności <span class="math inline">\(\alpha = 0,05\)</span>. Założenie o
+rozkładzie normalnym wektorów zweryfikowano za pomocą testu
+Shapiro-Wilka, którego wynik został dodatkowo skonfrontowany z wykresem
+kwantyl-kwantyl. Zależność pomiędzy liczbą dziennych odsłon artykułów
+związanych z koronawirusem i zdrowiem w polskiej i angielskiej wersji
+Wikipedii a dziennymi liczbami nowych zakażeń, zgonów, jak i liczbą
+dziennych odsłon pozostałych rozpatrywanych artykułów sprawdzono z
+użyciem korelacji <span class="math inline">\(\tau\)</span> Kendalla, jako że rozkłady zmiennych nie były
+zbliżone do rozkładu normalnego, a weryfikowana była każda dowolna
+monotoniczność, nie tylko liniowa, do sprawdzenia której służy klasyczna
+korelacja liniowa <span class="math inline">\(r\)</span> Pearsona. Na podstawie wyników testu istotności
+dla współczynnika korelacji <span class="math inline">\(\tau\)</span> Kendalla wygenerowano mapę cieplną
+(ang. “heatplot”) <span class="citation">(<a href="#ref-wei_r_2021" role="doc-biblioref">Wei &amp; Simko, 2021</a>)</span>.</p>
+<p>W analizie przebiegu sytuacji epidemicznej dla kraju i grupy krajów w
+zależności od czynnika ilościowego skorzystano z testów
+nieparametrycznych, takich jak kolejności par Wilcoxona dla dwóch krajów
+i Kruskala-Wallisa dla więcej niż dwóch krajów z wykonanym testem <em>post
+hoc</em> porównań wielokrotnych Dunneta z poprawką Benjamini-Hochberga
+<span class="citation">(<a href="#ref-dinno_dunntest_2017" role="doc-biblioref">Dinno, 2017</a>)</span>, ponieważ żaden z wektorów nie miał rozkładu
+zbliżonego do normalnego. Do charakterystyki rozkładów zmiennych
+posłużyły klasyczne miary położenia, takie jak średnia arytmetyczna,
+mediana i kwantyle (pierwszy i trzeci). Zmienność wartości badanej cechy
+oszacowano na podstawie współczynnika zmienności, a skośność rozkładu
+zweryfikowano z użyciem współczynnika skośności. Dodatkowo w celu
+usprawnienia analiz stworzono aplikację internetową COVID-19 Analyzer
+<span class="citation">(<a href="#ref-chang_shiny_2021" role="doc-biblioref">Chang et al., 2021</a>; <a href="#ref-chang_shinydashboard_2018" role="doc-biblioref">Chang &amp; Ribeiro, 2018</a>)</span>. Jest ona dostępna pod
+następującym linkiem: <a href="https://kpytlak.shinyapps.io/covid-19-analyzer/" class="uri">https://kpytlak.shinyapps.io/covid-19-analyzer/</a>,
+jednakże jej omówienie wykracza poza tematykę niniejszej pracy.</p>
+<p>Analizę niepożądanych objawów poszczepiennych (NOP-ów) wśród mieszkańców
+Polskich przeprowadzono dla okresu od 31.12.2020 r., czyli daty
+pierwszej rejestracji NOP-u, do 31.03.2021 r. Jej podstawą było
+porównanie proporcji pomiędzy zaszczepionymi grupami mężczyzn i kobiet,
+które doświadczyły NOP-ów, w zależności od jednej z czterech
+klasyfikacji objawu – tu zastosowano test dla proporcji bazujący na
+statystyce <span class="math inline">\(\chi^2\)</span>. Ponadto zastosowano metodę eksploracji tekstu (ang.
+“text mining”) na zmiennej w zbiorze danych składującej wprowadzone
+ręcznie informacje o symptomach, jakie doświadczał dany pacjent
+<span class="citation">(<a href="#ref-silge_tidytext_2016" role="doc-biblioref">Silge &amp; Robinson, 2016</a>)</span>. Zidentyfikowano 10 najczęściej występujących
+ciągów tekstowych dla każdej kategorii objawu.</p>
+</div>
+</div>
+<div id="estymacja-współczynnika-reprodukcji-wirusa-rt" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Estymacja współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span></h2>
+<p>Estymację efektywnego współczynnika reprodukcji wirusa <span class="math inline">\(R(t)\)</span>
+przeprowadzono dla 3 krajów z najwyższą sumaryczną liczbą zakażeń w roku
+2020 (Stany Zjednoczone, Brazylia, Indie), Szwecji, Polski i krajów z
+nią graniczących z użyciem dwóch metod: filtra Kalmana
+<span class="citation">(<a href="#ref-arroyo_marioli_tracking_2020" role="doc-biblioref">Arroyo Marioli et al., 2020</a>; <a href="#ref-gapinski_szacowanie_2020" role="doc-biblioref">Gapiński, 2020</a>)</span> i z
+biblioteki EpiEstim <span class="citation">(<a href="#ref-cori_new_2013" role="doc-biblioref">Cori et al., 2013</a>)</span> w R. Oszacowane współczynniki
+zostały końcowo porównane.</p>
+<div id="filtr-kalmana" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Filtr Kalmana</h3>
+<p>Jak opisał Gapiński <span class="citation">(<a href="#ref-gapinski_szacowanie_2020" role="doc-biblioref">Gapiński, 2020</a>)</span>, efektywny współczynnik
+reprodukcji wirusa <span class="math inline">\(R(t)\)</span> można oszacować, bazując na podstawowym modelu
+epidemiologicznym <span class="math inline">\(SIR\)</span> (<span class="math inline">\(S\)</span>, ang. “susceptible”, tłum. “podatne”; <span class="math inline">\(I\)</span>,
+ang. “infectious”, tłum. “zakażone”; <span class="math inline">\(R\)</span>, ang. “recovered”/“removed”,
+tłum. “wyzdrowiałe”/“zmarłe”) określonym następującymi równaniami:</p>
+<p><span class="math display">\[S_t = S_{t-1} - I_{t-1} \cdot \beta \cdot \frac{S_{t-1}}{N}\]</span></p>
+<p><span class="math display">\[I_t = I_{t-1} - I_{t-1} \cdot \beta \cdot \frac{S_{t-1}}{N} - I_{t-1} \cdot \gamma\]</span></p>
+<p><span class="math display">\[R_t = R_{t-1} + I_{t-1} * \gamma\]</span></p>
+<p>gdzie:</p>
+<ul>
+<li><p><span class="math inline">\(t\)</span> = czas (wyrażony w dniach),</p></li>
+<li><p><span class="math inline">\(\beta\)</span> = współczynnik definiujący liczbę osób podatnych (<span class="math inline">\(S\)</span>),
+które przechodzą do grupy osób zakażonych (<span class="math inline">\(I\)</span>),</p></li>
+<li><p><span class="math inline">\(N =\)</span> całkowita liczebność populacji, równa <span class="math inline">\(S + I + R\)</span>,</p></li>
+<li><p><span class="math inline">\(\gamma =\)</span> współczynnik definiujący liczbę osób zakażonych (<span class="math inline">\(I\)</span>),
+które przechodzą do grupy osób wyzdrowiałych/zmarłych (<span class="math inline">\(R\)</span>).</p></li>
+</ul>
+<p>Wówczas bazowy współczynnik reprodukcji wirusa <span class="math inline">\(R_0\)</span> i efektywny
+współczynnik reprodukcji wirusa <span class="math inline">\(R(t)\)</span> zdefiniować można jako:</p>
+<p><span class="math display">\[R_0 = \frac{\beta_0}{\gamma_0}\]</span></p>
+<p><span class="math display">\[R_t = \frac{\beta_t}{\gamma_t}\]</span> Korzystając z faktu, że wraz z
+malejącą w czasie liczbą osób podatnych na zakażenie (<span class="math inline">\(S\)</span>) wzrastają
+liczby osób zakażonych (<span class="math inline">\(I\)</span>) i wyzdrowiałych/zmarłych (<span class="math inline">\(R\)</span>), zakłada
+się, że współczynnik <span class="math inline">\(\gamma\)</span> jest stały, a <span class="math inline">\(\beta\)</span> zmienia się w czasie
+i wynosi:</p>
+<p><span class="math display">\[\beta_t = \beta_0 \cdot \frac{S_{t-1}}{N}\]</span> Wtedy równanie (4.2)
+sprowadza się do:
+<span class="math display">\[I_t = I_{t-1} - I_{t-1} \cdot \beta_t - I_{t-1} \cdot \gamma\]</span> A to
+(4.7) z kolei po przekształceniach zapisać można jako:
+<span class="math display">\[\beta_t - \gamma = \frac{I_t - I_{t-1}}{I_{t-1}}\]</span> Finalnie,
+korzystając z własności wiążącej efektywny współczynnik reprodukcji
+wirusa <span class="math inline">\(R(t\)</span>) ze współczynnikami <span class="math inline">\(\beta\)</span> i <span class="math inline">\(\gamma\)</span>, tzn.:
+<span class="math display">\[R(t) = \frac{\beta(t)}{\gamma}\]</span> Równanie (4.8) sprowadzić można do
+postaci:</p>
+<p><span class="math display">\[R(t) = \frac{1}{\gamma} \cdot \frac{I_t - I_{t-1}}{I_{t-1}} + 1\]</span>
+Dodatkowo, aby obliczyć <span class="math inline">\(I_t\)</span> i <span class="math inline">\(I_{t-1}\)</span> można przekształcić równanie
+(4.7) do równoważnej postaci:</p>
+<p><span class="math display">\[I_t = I_{t-1} + (I_t - I_{t-1}) - I_{t-1} \cdot \gamma\]</span></p>
+<p><span class="math display">\[I_t = (1 - \gamma) \cdot I_{t-1} + (I_t - I_{t-1})\]</span></p>
+<p>Odwrotność parametru <span class="math inline">\(\gamma\)</span>, tzn. <span class="math inline">\(\gamma^{-1}\)</span> jest czasem zakażenia
+<span class="math inline">\(\tau\)</span>. Arroyo Marioli i in. <span class="citation">(<a href="#ref-arroyo_marioli_tracking_2020" role="doc-biblioref">Arroyo Marioli et al., 2020</a>)</span> założyli,
+że <span class="math inline">\(\tau = 7\)</span>, co daje <span class="math inline">\(\gamma = \frac{1}{\tau} = \frac{1}{7}\)</span> – taka
+też wartość została przyjęta w metodyce obliczeń. Finalnie, mając serię
+danych o nowych zakażeniach i sumarycznej liczbie zgonów i bazując na
+ograniczonej liczbie parametrów, z użyciem iteracyjnego obliczania <span class="math inline">\(I_t\)</span>
+określonego równaniem (4.12), można obliczyć współczynnik wzrostu
+zakażeń, czyli czynnik <span class="math inline">\(\frac{I_t - I_{t-1}}{I_{t-1}}\)</span> równania (4.10),
+a finalnie <span class="math inline">\(R(t)\)</span>.</p>
+</div>
+<div id="epiestim" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> EpiEstim</h3>
+<p>Metoda szacowania <span class="math inline">\(R(t)\)</span> opracowana w 2013 r. przez Cori i in.
+<span class="citation">(<a href="#ref-cori_epiestim_2021" role="doc-biblioref">Cori, 2021</a>)</span> zakłada, że każdego zakażonego osobnika populacji
+scharakteryzować można “profilem zakaźności” (ang. “infectivity
+profile”) określonym przez nieznaną funkcję rozkładu prawdopodobieństwa
+<span class="math inline">\(w_s\)</span>; niezależnym od czasu kalendarzowego <span class="math inline">\(t\)</span>, ale zależnym od czasu,
+jaki upłynął od zakażenia do chwili wystąpienia pierwszych objawów
+<span class="citation">(<a href="#ref-cori_new_2013" role="doc-biblioref">Cori et al., 2013</a>)</span>. Wówczas oszacowanie chwilowego współczynnika
+reprodukcji wirusa sprowadza się do równania (4.13):</p>
+<p><span class="math display">\[I_t = R_t \sum_{s = 1}^t I_{t-s} w_s\]</span> gdzie:</p>
+<ul>
+<li><p><span class="math inline">\(I_t\)</span> = liczba nowych zakażeń w czasie <span class="math inline">\(t\)</span>,</p></li>
+<li><p><span class="math inline">\(R_t\)</span> = chwilowy współczynnik reprodukcji wirusa w czasie <span class="math inline">\(t\)</span>,</p></li>
+<li><p><span class="math inline">\(\sum_{s = 1}^t I_{t-s} w_s\)</span> = suma zakażeń do czasu <span class="math inline">\(t-s\)</span> ważona
+funkcją <span class="math inline">\(w_s\)</span>.</p></li>
+</ul>
+<p>Nieznana funkcja <span class="math inline">\(w_s\)</span> jest aproksymowana na podstawie rozkładu
+przedziału seryjnego <span class="math inline">\(SI\)</span> (ang. “serial interval”), który określa czas
+od chwili zakażenia do wystąpienia pierwszych objawów chorobowych u
+osób, które przekazują wirusa i tych, które zostają zakażone; metoda
+Cori i in. pozwala na ustalenie niepewności co do zakładanego rozkładu
+<span class="math inline">\(SI\)</span>, jak i jego parametryzacji – wówczas określony jest parametrami
+<span class="math inline">\(\mu_{SI}\)</span> i <span class="math inline">\(\sigma_{SI}\)</span>. W swej metodyce Marioli i in.
+<span class="citation">(<a href="#ref-arroyo_marioli_tracking_2020" role="doc-biblioref">Arroyo Marioli et al., 2020</a>)</span> założyli, że <span class="math inline">\(SI\)</span> dla SARS-CoV-2 opisać
+można rozkładem Gamma z parametrami odpowiednio <span class="math inline">\(\mu_{SI} = 5.2\)</span> i
+<span class="math inline">\(\sigma_{SI} = 5.1\)</span> z uwzględnieniem 7-dniowego okna – takie też
+założenie co do <span class="math inline">\(SI\)</span> zostało przyjęte w niniejszej pracy.</p>
+</div>
+<div id="porównanie-metod" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Porównanie metod</h3>
+<p>Wyestymowane z użyciem metod filtra Kalmana i z pakietu EpiEstim w R
+współczynniki <span class="math inline">\(R(t)\)</span> zostały porównane z użyciem różnych metod
+statystycznych i metryk. Zweryfikowano zarówno zbieżność danych
+codziennych współczynników <span class="math inline">\(R(t)\)</span> z filtra Kalmana, jak i uśrednionych w
+oknie 7-dniowym ze względu na uwzględnianie 7-dniowego okna interwału
+seryjnego przez narzędzie Cori i in. Współczynnik korelacji liniowej <span class="math inline">\(r\)</span>
+Pearsona oraz test dla współczynnika korelacji posłużyły do sprawdzenia,
+czy dane tworzą układ liniowy. Skorzystano również z korelacji <span class="math inline">\(\tau\)</span>
+Kendalla w celu określenia ogólnej monotoniczności pomiędzy parami
+oszacowanych współczynników <span class="math inline">\(R(t)\)</span>. Wyznaczono bezwzględne wartości
+reszt, czyli różnice pomiędzy współczynnikami <span class="math inline">\(R(t)\)</span> uzyskanymi z
+użyciem obu metod – dla danych codziennych, jak i uśrednionych w oknie
+7-dniowym dla filtra Kalmana. Wykreślone zostały rozkłady tychże reszt,
+jak i wyznaczone zostały klasyczne miary położenia: pierwszy, drugi
+(mediana) i trzeci kwartyl, a także oszacowany został współczynnik
+asymetrii <span class="math inline">\(A_S\)</span>. Dla każdego kraju obliczony został średni błąd
+bezwzględny (<span class="math inline">\(MAE\)</span>, z ang. “mean absolute error”) wedle poniższego
+równania:</p>
+<p><span class="math display">\[MAE = \frac{\sum_{i=1}^n |b_i - k_i|}{n}\]</span> gdzie:</p>
+<ul>
+<li><p><span class="math inline">\(b_i =\)</span> <span class="math inline">\(i\)</span>-ty współczynnik <span class="math inline">\(R(t)\)</span> oszacowany z użyciem pakietu
+EpiEstim w R,</p></li>
+<li><p><span class="math inline">\(k_i\)</span> = <span class="math inline">\(i\)</span>-ty współczynnik <span class="math inline">\(R(t)\)</span> oszacowany z użyciem filtru
+Kalmana,</p></li>
+<li><p>n = liczba dni o kompletnych parach oszacowanych współczynników
+<span class="math inline">\(R(t)\)</span> obiema metodami.</p></li>
+</ul>
+<p>Dodatkowo, kierując się podstawową interpretacją współczynnika <span class="math inline">\(R(t)\)</span> o
+stabilizacji epidemii, jeśli współczynnik ten wynosi mniej niż 1, i
+rozwoju jej przebiegu dla <span class="math inline">\(R(t)\)</span> większego od 1, sprawdzone zostało, czy
+każda para współczynników <span class="math inline">\(b_i\)</span> i <span class="math inline">\(k_i\)</span> (dla filtra Kalmana z danych
+codziennych i uśrednionych w oknie 7-dniowym) jest zgodna co do wartości
+względem powyższej interpretacji, tzn. czy spełniony jest warunek
+<span class="math inline">\((k_i \wedge b_i &lt; 1) \vee (k_i \wedge b_i \geqslant 1)\)</span>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-arroyo_marioli_tracking_2020" class="csl-entry">
+Arroyo Marioli, F., Bullano, F., Kucinskas, S., &amp; Rondón-Moreno, C. (2020). <em>Tracking <span>R</span> of <span>COVID</span>-19: <span>A</span> <span>New</span> <span>Real</span>-<span>Time</span> <span>Estimation</span> <span>Using</span> the <span>Kalman</span> <span>Filter</span></em>. Social Science Research Network. <a href="https://papers.ssrn.com/abstract=3581633">https://papers.ssrn.com/abstract=3581633</a>
+</div>
+<div id="ref-chang_shiny_2021" class="csl-entry">
+Chang, W., Cheng, J., Allaire, J. J., Sievert, C., Schloerke, B., Xie, Y., Allen, J., McPherson, J., Dipert, A., &amp; Borges, B. (2021). <em>Shiny: <span>Web</span> <span>Application</span> <span>Framework</span> for <span>R</span></em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>
+</div>
+<div id="ref-chang_shinydashboard_2018" class="csl-entry">
+Chang, W., &amp; Ribeiro, B. B. (2018). <em>Shinydashboard: <span>Create</span> <span>Dashboards</span> with ’<span>Shiny</span>’</em>. <a href="https://CRAN.R-project.org/package=shinydashboard">https://CRAN.R-project.org/package=shinydashboard</a>
+</div>
+<div id="ref-cori_epiestim_2021" class="csl-entry">
+Cori, A. (2021). <em><span>EpiEstim</span>: <span>Estimate</span> <span>Time</span> <span>Varying</span> <span>Reproduction</span> <span>Numbers</span> from <span>Epidemic</span> <span>Curves</span></em>. <a href="https://CRAN.R-project.org/package=EpiEstim">https://CRAN.R-project.org/package=EpiEstim</a>
+</div>
+<div id="ref-cori_new_2013" class="csl-entry">
+Cori, A., Ferguson, N. M., Fraser, C., &amp; Cauchemez, S. (2013). A <span>New</span> <span>Framework</span> and <span>Software</span> to <span>Estimate</span> <span>Time</span>-<span>Varying</span> <span>Reproduction</span> <span>Numbers</span> <span>During</span> <span>Epidemics</span>. <em>American Journal of Epidemiology</em>, <em>178</em>(9), 1505–1512. <a href="https://doi.org/10.1093/aje/kwt133">https://doi.org/10.1093/aje/kwt133</a>
+</div>
+<div id="ref-dinno_dunntest_2017" class="csl-entry">
+Dinno, A. (2017). <em>Dunn.test: <span>Dunn</span>’s <span>Test</span> of <span>Multiple</span> <span>Comparisons</span> <span>Using</span> <span>Rank</span> <span>Sums</span></em>. <a href="https://CRAN.R-project.org/package=dunn.test">https://CRAN.R-project.org/package=dunn.test</a>
+</div>
+<div id="ref-gapinski_szacowanie_2020" class="csl-entry">
+Gapiński, A. (2020). Szacowanie parametru <span>R</span>(t) dla <span>COVID</span>-19 w <span>Polsce</span> na podstawie modelu <span>SIR</span>. In <em>Google Docs</em>. <a href="https://bit.ly/covid19-Rt-doc">https://bit.ly/covid19-Rt-doc</a>
+</div>
+<div id="ref-google_google_2021" class="csl-entry">
+Google. (2021). Google <span>Trends</span>. In <em>Google Trends</em>. <a href="https://trends.google.com/trends/">https://trends.google.com/trends/</a>
+</div>
+<div id="ref-musikanimal_pageviews_2021" class="csl-entry">
+MusikAnimal, Kaldari, &amp; Marcel Ruinz Forns. (2021). <em>Pageviews</em>. <a href="https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog">https://pageviews.toolforge.org/?project=en.wikipedia.org&amp;platform=all-access&amp;agent=user&amp;redirects=0&amp;range=latest-20&amp;pages=Cat|Dog</a>
+</div>
+<div id="ref-r_core_team_r_2021" class="csl-entry">
+R Core Team. (2021). <em>R: <span>A</span> <span>Language</span> and <span>Environment</span> for <span>Statistical</span> <span>Computing</span></em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+</div>
+<div id="ref-richardson_beautiful_2007" class="csl-entry">
+Richardson, L. (2007). Beautiful soup documentation. <em>April</em>.
+</div>
+<div id="ref-hannah_ritchie_coronavirus_2020" class="csl-entry">
+Ritchie, H., Ortiz-Ospina, E., Beltekian, D., Mathieu, E., Hasell, J., Macdonald, B., Giattino, C., Appel, C., Rodés-Guirao, L., &amp; Roser, M. (2020). Coronavirus <span>Pandemic</span> (<span>COVID</span>-19). <em>Our World in Data</em>.
+</div>
+<div id="ref-rogalski_dane_2021" class="csl-entry">
+Rogalski, M. (2021). Dane zebrane na podstawie raportów podawanych przez <span>Ministerstwo</span> <span>Zdrowia</span>, danych z <span>WSSE</span>, <span>PSSE</span>, <span>Urzędów</span> <span>Wojewódzkich</span>, oraz tych uzyskanych w prośbach o dostęp do informacji publicznej. In <em>Google Docs</em>. <a href="https://bit.ly/covid19-poland">bit.ly/covid19-poland</a>
+</div>
+<div id="ref-rossum_python_2009" class="csl-entry">
+Rossum, V., Guido, D., &amp; L, F. (2009). <em>Python 3 <span>Reference</span> <span>Manual</span></em>. CreateSpace.
+</div>
+<div id="ref-rstudio_team_rstudio_2021" class="csl-entry">
+RStudio Team. (2021). <em><span>RStudio</span>: <span>Integrated</span> <span>Development</span> <span>Environment</span> for <span>R</span></em>. RStudio, PBC. <a href="http://www.rstudio.com/">http://www.rstudio.com/</a>
+</div>
+<div id="ref-silge_tidytext_2016" class="csl-entry">
+Silge, J., &amp; Robinson, D. (2016). Tidytext: <span>Text</span> <span>Mining</span> and <span>Analysis</span> <span>Using</span> <span>Tidy</span> <span>Data</span> <span>Principles</span> in <span>R</span>. <em>JOSS</em>, <em>1</em>(3). <a href="https://doi.org/10.21105/joss.00037">https://doi.org/10.21105/joss.00037</a>
+</div>
+<div id="ref-wayscript_inc_wayscript_2021" class="csl-entry">
+WayScript, Inc. (2021). <span>WayScript</span>. In <em>WayScript</em>. <a href="https://wayscript.com/">https://wayscript.com/</a>
+</div>
+<div id="ref-wei_r_2021" class="csl-entry">
+Wei, T., &amp; Simko, V. (2021). <em>R package "corrplot": <span>Visualization</span> of a <span>Correlation</span> <span>Matrix</span></em>. <a href="https://github.com/taiyun/corrplot">https://github.com/taiyun/corrplot</a>
+</div>
+<div id="ref-worldometersinfo_covid-19_2021" class="csl-entry">
+Worldometers.info. (2021). <em><span>COVID</span>-19 <span>CORONAVIRUS</span> <span>PANDEMIC</span></em>. <a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="3-chapter03.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-chapter05.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

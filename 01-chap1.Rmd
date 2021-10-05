@@ -1,0 +1,91 @@
+# Wstęp {#chapter01}
+
+
+## Wprowadzenie
+
+W roku 2020 ówczesne problemy świata w skali makro i problemy, z jakimi
+zmagały się społeczności krajów w skali mikro, zostały spotęgowane za
+sprawą nowego szczepu koronawirusa z roku 2019, który szybko przyciągnął
+na siebie zainteresowanie mediów całego świata, stając się jednym z
+najczęściej wyszukiwanych i popularnych tematów w Internecie. Przyczynił
+się on do znacznej zmiany stylu życia wielu osób: wprowadzone przez
+kraje świata ograniczenia w poruszaniu się w przestrzeni publicznej,
+izolacje i ogólny dystans społeczny przełożyły się na spadek kondycji
+psychicznej [@torales_outbreak_2020]. Istotnie wzrosła aktywność
+użytkowników mediów społecznościowych, m.in. serwisu Facebook, który
+odnotował ponad 50% wzrost ogólnej liczby wiadomości wysyłanych w
+krajach, które najbardziej ucierpiały z powodu COVID-19
+[@taylor_covid-19_2020].
+
+Zważywszy więc na powyższe, istnieje duża potrzeba analizy danych
+związanych z COVID-19; przede wszystkim danych epidemicznych, których
+przybywa z dnia na dzień. Właściwa i podjęta w odpowiednim czasie
+interwencja może znacznie przyczynić się do zmiany przebiegu sytuacji
+epidemicznej na danym obszarze, a weryfikacja danych historycznych
+związanych z epidemiami i pandemiami, które miały miejsce na świecie w
+przeszłości, może wspomóc proces podjęcia odpowiednich decyzji.
+
+
+## Cel pracy
+
+Głównym celem niniejszej pracy była analiza sytuacji epidemicznej
+związanej z chorobą COVID-19 w roku 2020 w różnych krajach świata w
+konspekcie kluczowych miar i narzędzi używanych w dziedzinie
+epidemiologii, jak i automatyzacja pobierania danych epidemiologicznych
+i ich późniejsza wizualizacja. Dodatkowo za cel postawiono analizę
+zgodności wyników uzyskanych z użyciem różnych narzędzi
+epidemiologicznych.
+
+
+## Zawartość merytoryczna
+
+Praca podzielona została na 6 rozdziałów, z czego 3 pierwsze stanowią
+wprowadzenie do tematyki związanej z wirusem SARS-CoV-2 i wywoływaną
+przez niego chorobą COVID-19, czwarty opisuje cel przeprowadzonych
+analiz w szczególe, użyte techniki i narzędzia badawcze, piąty zawiera
+analizę danych związanych z COVID-19, a szósty podsumowuje uzyskane
+wyniki.
+
+W rozdziale 2. *Epidemiologia jako nauka o przyczynowości zdarzeń*
+scharakteryzowana zostanie epidemiologia *per se*, jej wyzwania, jakim
+musi podołać w celu minimalizacji skutków szerzącego się zagrożenia
+epidemicznego, ich przewidywania i monitorowania sytuacji epidemicznej
+na obszarach dotkniętych epidemią. Opisane zostaną charakterystyczne
+miary epidemiologiczne używane do określania zjawisk związanych z
+procesami rozprzestrzeniania się czynników chorobowych.
+
+Rozdział 3 *Pandemia COVID-19* wprowadzi do tematyki związanej z
+pandemią COVID-19 w roku 2020 na świecie z naciskiem na ogólną
+charakterystykę wirusa SARS-CoV-2, wywoływaną przez niego chorobę
+COVID-19, jak i podjęte przez polski rząd obostrzenia mające na celu
+zahamowanie transmisji wirusa w populacji. Opisane zostaną różne,
+popularne i rekomendowane przez badaczy sposoby ograniczenia transmisji
+wirusa.
+
+W rozdziale 4. szczegółowo scharakteryzowany zostanie cel badań wraz z
+jego podziałem na poszczególne etapy, hipotezy i narzędzia badawcze.
+Opisane zostaną matematyczne podstawy użytych metod do estymacji
+chwilowego współczynnika reprodukcji wirusa $R(t)$.
+
+W rozdziale 5. *Analiza danych związanych z COVID-19* uwaga poświęcona
+zostanie analizie danych zachorowań na COVID-19 dla 3 krajów z najwyższą
+sumaryczną liczbą zakażeń w roku 2020 (Stany Zjednoczone, Brazylia,
+Indie), Szwecji, Polski i krajów z nią graniczących. Oprócz analizy
+przebiegu epidemii w krajach i pomiędzy krajami zbadana zostanie
+popularność haseł i artykułów związanych z koronawirusem w Internecie:
+przede wszystkim w kontekście wyszukiwarki Google, internetowej
+encyklopedii Wikipedii, jak i bazy artykułów z dziedziny medycznej
+PubMed. W analizie przebiegu epidemii nacisk położony zostanie na Polskę
+i jej województwa; również dla Polski zostanie określony stan pacjentów,
+którzy doświadczyli niepożądanych odczynów poszczepiennych (NOP-y) w
+wyniku aplikcji szczepionki przeciwko COVID-19. Zaprezentowane zostaną
+wyniki estymacji chwilowego współczynnika reprodukcji wirusa $R(t)$
+uzyskane z użyciem metod filtra Kalmana i EpiEstim w R, porównana
+również zostanie ich zgodność. Finalnie spektrum analiz zakończy
+przedstawienie metodyki wizualizacji danych własnoręcznie pozyskanych za
+pomocą napisanego w języu Python skryptu z witryny Worldometer w
+programie Kibana.
+
+W rozdziale 6. *Analiza wyników, wnioski i dyskusja* zawarte zostaną
+podsumowanie uzyskanych wyników i płynące z przeprowadzanych analiz
+wnioski.
