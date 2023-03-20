@@ -1,1 +1,3 @@
+# Analysis of COVID-19 incidence data and visualization using the ”web-scraping” method"
+
 The project of digitizing my thesis crowning my Bachelor's degree in bioinformatics at Wroclaw University of Enviromental and Life Sciences: ["Analysis of COVID-19 incidence data and visualization using the ”web-scraping” method"](https://kamilpytlak.github.io/my-thesis-2021/) (click on the title to go to its digital version). The paper was originally written in LaTeX, and for the purposes of this project converted to Markdown format using the Pandoc converter. The page template was created using the [thesisdown](https://github.com/ismayc/thesisdown) package in R based on [bookdown](https://github.com/rstudio/bookdown).
